@@ -7,12 +7,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-object ViewItem_RetrofitHelper
+object RetrofitHelper
 {
-    private val viewItem_retrofit: Retrofit
+    private val retrofit: Retrofit
     init {
         val builder = Retrofit.Builder()
-            .baseUrl("https://private-656e5-viewitem.apiary-mock.com/")
+            .baseUrl("https://private-5aa170-toyexchange.apiary-mock.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
 
@@ -26,6 +26,6 @@ object ViewItem_RetrofitHelper
             .writeTimeout(1, TimeUnit.MINUTES)
             .build()
 
-        viewItem_retrofit = builder.client(OkHttpClient()).build()
+        retrofit = builder.client(OkHttpClient()).build()
     }
 }
