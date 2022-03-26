@@ -26,15 +26,25 @@ fun BrowseItemsScreen(navController: NavController, viewModel:AllToysViewModel){
 
     var toyList = viewModel.allToys
 
-    LazyColumn(state = lazyState,
-        modifier = Modifier.fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally){
+    if (toyList.isNotEmpty())
+    {
+        LazyColumn(state = lazyState,
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally){
 
-        if (toyList.isNotEmpty())
-        {
-            itemsIndexed(toyList) { _, item ->
-                ToyCard(toy = item)
+                itemsIndexed(toyList) { _, item ->
+                    ToyCard(toy = item)
+                }
             }
+    }
+    else {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text("Loading", style = MaterialTheme.typography.h3)
+
         }
     }
 }
