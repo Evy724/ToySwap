@@ -10,6 +10,6 @@ sealed class NetConstants {
         /**
          * Base URL for our APIs
          */
-        val BASE_URL = "https://private-9fd8f6-toyexchange.apiary-mock.com/"
+        const val BASE_URL = "https://private-9fd8f6-toyexchange.apiary-mock.com/"
     }
 }

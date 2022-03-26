@@ -43,10 +43,9 @@ class AllToysViewModel(): ViewModel() {
         viewModelScope.launch {
 
             //call the loading function from the repository and save to a variable
-            var response = toyRepo.fetchAllToys()
 
             //Check for type of response
-            when (response) {
+            when (val response = toyRepo.fetchAllToys()) {
 
                 //When the response was Successful, Log it and store the retrieved
                 //toys into our toy list

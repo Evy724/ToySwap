@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.revature.project2.view.BrowseItemsScreen
+import com.revature.project2.view.composables.BrowseItemsScreen
 import com.revature.project2.viewmodel.AllToysViewModel
 
 /**
