@@ -5,6 +5,8 @@ package com.revature.project2.view.nav
  */
 sealed class NavScreens(val route:String) {
 
+    object LoginScreen:NavScreens("LoginScreen")
     object BrowseItemsScreen:NavScreens("BrowseItemsScreen")
-    object PostedItemListScreen:NavScreens("PostednItemListScreen")
+    object PostedItemListScreen:NavScreens("PostedItemListScreen")
+    object RegisterScreen:NavScreens("RegisterScreen")
 }
