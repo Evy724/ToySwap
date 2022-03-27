@@ -9,6 +9,7 @@ import com.revature.project2.view.composables.Login
 import com.revature.project2.view.composables.PostedItemsScreen
 import com.revature.project2.view.composables.Register
 import com.revature.project2.viewmodel.AllToysViewModel
+import com.revature.project2.viewmodel.LoginViewModel
 import com.revature.project2.viewmodel.UserToysViewModel
 
 /**
@@ -29,6 +30,7 @@ fun startNav(){
 
     val allToysViewModel = AllToysViewModel()
     val userToysViewModel = UserToysViewModel()
+    val loginViewModel = LoginViewModel()
 
     NavHost(navController = navController,
         startDestination = NavScreens.LoginScreen.route){
@@ -42,7 +44,7 @@ fun startNav(){
         }
         
         composable(NavScreens.LoginScreen.route){
-            Login(navController = navController)
+            Login(navController = navController,loginViewModel)
         }
         
         composable(NavScreens.RegisterScreen.route){
