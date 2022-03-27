@@ -181,6 +181,8 @@ fun AcceptTradeScreen()
                 }
             }
         }
+
+        // Insert bottom bar
     }
 }
 

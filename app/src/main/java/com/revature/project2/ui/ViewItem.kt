@@ -67,5 +67,7 @@ fun ViewItemScreen()
                 fontSize = 30.sp
             )
         }
+
+        // Insert bottom bar
     }
 }
