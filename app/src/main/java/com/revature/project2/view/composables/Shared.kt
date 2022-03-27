@@ -16,8 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
 import com.revature.project2.model.api.alltoys.ToyItem
+import com.revature.project2.view.nav.NavScreens
 
 
 /**
@@ -74,7 +76,7 @@ fun ToyCard(toy: ToyItem){
  * button functionality not created yet
  */
 @Composable
-fun BottomBar(){
+fun BottomBar(navController: NavController){
     
     val selectedIndex = rememberSaveable { mutableStateOf(0) }
     BottomNavigation(
@@ -84,7 +86,10 @@ fun BottomBar(){
         BottomNavigationItem(
             selected = selectedIndex.value == 0,
             onClick = {
-                selectedIndex.value = 0 },
+
+                selectedIndex.value = 0
+                navController.navigate(NavScreens.BrowseItemsScreen.route)
+            },
             icon = { Icon(
                 imageVector = Icons.Default.Search,
                 contentDescription = "")},
@@ -94,7 +99,10 @@ fun BottomBar(){
         BottomNavigationItem(
             selected = selectedIndex.value == 1,
             onClick = {
-                selectedIndex.value = 1 },
+
+                selectedIndex.value = 1
+                navController.navigate(NavScreens.PostedItemListScreen.route)
+            },
             icon = { Icon(
                 imageVector = Icons.Default.Add,
                 contentDescription = "")},

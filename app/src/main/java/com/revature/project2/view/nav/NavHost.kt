@@ -5,7 +5,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.revature.project2.view.composables.BrowseItemsScreen
+import com.revature.project2.view.composables.PostedItemsScreen
 import com.revature.project2.viewmodel.AllToysViewModel
+import com.revature.project2.viewmodel.UserToysViewModel
 
 /**
  * Starts navigation for the app
@@ -24,12 +26,17 @@ fun startNav(){
     val navController = rememberNavController()
 
     val allToysViewModel = AllToysViewModel()
+    val userToysViewModel = UserToysViewModel()
 
     NavHost(navController = navController,
         startDestination = NavScreens.BrowseItemsScreen.route){
 
         composable(NavScreens.BrowseItemsScreen.route){
             BrowseItemsScreen(navController,allToysViewModel)
+        }
+
+        composable(NavScreens.PostedItemListScreen.route){
+            PostedItemsScreen(navController,userToysViewModel)
         }
 
         //Add composable navigation here

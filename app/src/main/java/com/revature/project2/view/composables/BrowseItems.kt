@@ -52,5 +52,5 @@ fun BrowseItemsScreen(navController: NavController, viewModel:AllToysViewModel){
                 }
             }
         },
-        bottomBar = { BottomBar() })
+        bottomBar = { BottomBar(navController) })
 }
