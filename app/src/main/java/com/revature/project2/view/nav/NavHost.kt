@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.revature.project2.ui.jc.tradeFinalizeScreen
+import com.revature.project2.ui.jc.tradeProposalScreen
 import com.revature.project2.ui.AcceptTradeScreen
 import com.revature.project2.ui.ViewItemScreen
 import com.revature.project2.view.composables.BrowseItemsScreen
@@ -51,6 +53,12 @@ fun startNav(){
         
         composable(NavScreens.RegisterScreen.route){
             Register(navController = navController)
+        }
+        composable(NavScreens.TradeProposalScreen.route){
+            tradeProposalScreen(navController = navController, userToysViewModel = userToysViewModel)
+        }
+        composable(NavScreens.FinalizeTradeScreen.route){
+            tradeFinalizeScreen(navController)
         }
 
         //Add composable navigation here
