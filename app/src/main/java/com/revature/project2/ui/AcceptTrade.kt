@@ -85,12 +85,12 @@ fun AcceptTradeScreen()
                         alignment = Alignment.BottomCenter
                     )
 
-                    Spacer(modifier = Modifier.height(110.dp))
+                    Spacer(modifier = Modifier.height(100.dp))
 
                     // What you are trading box
                     Surface(
                         modifier = Modifier
-                            .height(50.dp)
+                            .height(70.dp)
                             .width(100.dp),
                         border = BorderStroke(
                             width = 2.dp,
@@ -101,6 +101,7 @@ fun AcceptTradeScreen()
                         Text(
                             text = "What you \nare trading\n->",
                             textAlign = TextAlign.Center,
+                            fontSize = 17.sp
                         )
                     }
 
@@ -149,7 +150,7 @@ fun AcceptTradeScreen()
                     // What the other user is trading box
                     Surface(
                         modifier = Modifier
-                            .height(165.dp)
+                            .height(100.dp)
                             .width(100.dp),
                         border = BorderStroke(
                             width = 2.dp,
@@ -160,10 +161,11 @@ fun AcceptTradeScreen()
                         Text(
                             text = "What the \nother user \nis trading \n<-",
                             textAlign = TextAlign.Center,
+                            fontSize = 17.sp
                         )
                     }
 
-                    Spacer(modifier = Modifier.height(10.dp))
+                    Spacer(modifier = Modifier.height(70.dp))
 
                     // Up arrow
                     Image(
