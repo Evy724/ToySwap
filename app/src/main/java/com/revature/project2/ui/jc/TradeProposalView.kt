@@ -5,6 +5,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 
 import androidx.compose.runtime.Composable
@@ -47,6 +48,11 @@ fun tradeProposalScreen()
         Card(modifier = Modifier.fillMaxWidth(), border = BorderStroke(3.dp, Color.Black)) {
             Text(text = "MY TOYS ", textAlign= TextAlign.Center)
         }
+//        LazyColumn(){
+//            items(){
+//
+//            }
+//        }
     }
 }
 
