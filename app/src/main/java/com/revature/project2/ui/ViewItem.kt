@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,24 +41,31 @@ fun ViewItemScreen()
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = "My Melody Funko Pop",
-            fontSize = 30.sp
+            text = "My Melody Pop! Vinyl Figure",
+            fontSize = 30.sp,
+            textAlign = TextAlign.Center
         )
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
         // Toy image
         Image(
             painter = painterResource(id = R.drawable.my_melody_funko_pop_in_box),
             contentDescription = "Toy image",
-            Modifier.size(150.dp)
+            Modifier.size(250.dp)
         )
 
         Spacer(modifier = Modifier.height(20.dp))
         
         Text(
-            text = "Description of toy",
-            fontSize = 20.sp
+            text = "It's the adorable and quirky My Melody, in even more adorable and quirky Pop! Vinyl form!" +
+                    "\n" +
+                    "\nSporting her adorable face and pink hood with flower this super-cute Hello Kitty Sanrio Badtz Maru Pop! Vinyl Figure is a must have for all fans of Sanrio or just fans of Pop! Vinyl Figures in general!" +
+                    "\n" +
+                    "\nMeasures about 3 3/4-inches tall. Ages 5 and up. ",
+            fontSize = 17.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(horizontal = 15.dp)
         )
 
         Spacer(modifier = Modifier.height(20.dp))
@@ -66,7 +74,7 @@ fun ViewItemScreen()
         {
             Text(
                 text = "Request Trade",
-                fontSize = 30.sp
+                fontSize = 25.sp
             )
         }
 
