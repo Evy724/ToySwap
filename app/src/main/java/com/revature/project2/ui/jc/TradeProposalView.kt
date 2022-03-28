@@ -6,6 +6,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 
 import androidx.compose.runtime.Composable
@@ -16,12 +18,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.revature.project2.Greeting
+import androidx.navigation.NavController
+import com.google.accompanist.coil.rememberCoilPainter
+
 import com.revature.project2.R
+import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.ui.theme.Project2Theme
+import com.revature.project2.view.composables.ToyCard
+import com.revature.project2.view.composables.ToyCardWithButton
+import com.revature.project2.view.nav.NavScreens
+import com.revature.project2.viewmodel.AllToysViewModel
+import com.revature.project2.viewmodel.UserToysViewModel
 
 @Composable
-fun tradeProposalScreen()
+fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToysViewModel,toy:ToyItem)
 {
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         TopAppBar() {
@@ -32,7 +42,7 @@ fun tradeProposalScreen()
             Text(text = "Average response time: ", textAlign= TextAlign.Center)
         }
         Spacer(modifier = Modifier.height(20.dp))
-        Image(painter = painterResource(id = R.drawable.lego), contentDescription = "",
+        Image(painter = rememberCoilPainter(request = toy.sImagePath), contentDescription = "",
             modifier = Modifier
                 .width(150.dp)
                 .height(150.dp)
@@ -48,11 +58,19 @@ fun tradeProposalScreen()
         Card(modifier = Modifier.fillMaxWidth(), border = BorderStroke(3.dp, Color.Black)) {
             Text(text = "MY TOYS ", textAlign= TextAlign.Center)
         }
-//        LazyColumn(){
-//            items(){
-//
-//            }
-//        }
+        val lazyState = rememberLazyListState()
+        val toyList = userToysViewModel.userToys
+
+        LazyColumn(
+            state = lazyState,
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+
+            itemsIndexed(toyList) { _, item ->
+                ToyCardWithButton(toy = item,"Trade",{navController.navigate(NavScreens.FinalizeTradeScreen.route)})
+            }
+        }
     }
 }
 
@@ -65,7 +83,8 @@ fun preview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
-            tradeProposalScreen()
+//            val navController=NavController
+//            tradeProposalScreen()
 
         }
     }

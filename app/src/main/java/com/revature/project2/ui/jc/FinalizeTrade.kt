@@ -20,12 +20,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.revature.project2.Greeting
+import androidx.navigation.NavController
 import com.revature.project2.R
 import com.revature.project2.ui.theme.Project2Theme
 
 @Composable
-fun tradeFinalizeScreen()
+fun tradeFinalizeScreen(navController: NavController)
 {
     var message by rememberSaveable{ mutableStateOf("")}
     Column() {
@@ -95,7 +95,7 @@ fun previewFT() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colors.background
         ) {
-            tradeFinalizeScreen()
+//            tradeFinalizeScreen()
 
         }
     }

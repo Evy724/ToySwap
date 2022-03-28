@@ -121,3 +121,50 @@ fun BottomBar(navController: NavController){
 
     }
 }
+
+
+@Composable
+fun ToyCardWithButton(toy: ToyItem,buttonText:String, onClick:()->Unit){
+
+    Card(modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth()
+        .height(100.dp)
+        .wrapContentHeight()
+        .clickable { },
+        shape = MaterialTheme.shapes.medium,
+        elevation = 5.dp,
+        backgroundColor = MaterialTheme.colors.surface){
+
+        Row(verticalAlignment = Alignment.Top) {
+
+            Image(painter = rememberCoilPainter(
+                request = toy.sImagePath),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(100.dp)
+                    .padding(5.dp),
+                contentScale = ContentScale.Fit)
+
+            Spacer(Modifier.size(5.dp))
+
+            Column( modifier = Modifier
+                .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally) {
+
+                Text(toy.sName,
+                    style = MaterialTheme.typography.h5,
+                    textAlign = TextAlign.Center)
+
+                Spacer(Modifier.size(2.dp))
+
+                Text(text = toy.sDescription,
+                    style = MaterialTheme.typography.body1)
+            }
+            Button(onClick = onClick) {
+                Text(text = buttonText)
+            }
+        }
+
+    }
+}
