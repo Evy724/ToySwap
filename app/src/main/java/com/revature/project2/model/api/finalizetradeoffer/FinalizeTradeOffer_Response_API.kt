@@ -1,4 +1,4 @@
-package com.revature.project2.network
+package com.revature.project2.model.api.finalizetradeoffer
 
 import com.google.gson.annotations.SerializedName
 

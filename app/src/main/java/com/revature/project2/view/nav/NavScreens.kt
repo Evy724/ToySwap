@@ -9,4 +9,6 @@ sealed class NavScreens(val route:String) {
     object BrowseItemsScreen:NavScreens("BrowseItemsScreen")
     object PostedItemListScreen:NavScreens("PostedItemListScreen")
     object RegisterScreen:NavScreens("RegisterScreen")
+    object ViewItemScreen:NavScreens("ViewItemScreen")
+    object AcceptTradeScreen:NavScreens("AcceptTradeScreen")
 }

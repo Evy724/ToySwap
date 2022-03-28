@@ -39,7 +39,7 @@ fun PostedItemsScreen(navController: NavController,userToysViewModel: UserToysVi
                     ) {
 
                         itemsIndexed(toyList) { _, item ->
-                            ToyCard(toy = item)
+                            ToyCard(navController = navController,toy = item)
                         }
                     }
 
