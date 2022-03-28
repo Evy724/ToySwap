@@ -28,14 +28,16 @@ import com.revature.project2.view.nav.NavScreens
  * button functionality not created yet
  */
 @Composable
-fun ToyCard(toy: ToyItem){
+fun ToyCard(navController:NavController, toy: ToyItem){
 
     Card(modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()
         .height(100.dp)
         .wrapContentHeight()
-        .clickable { },
+        .clickable {
+                   navController.navigate(NavScreens.ViewItemScreen.route)
+        },
         shape = MaterialTheme.shapes.medium,
         elevation = 5.dp,
         backgroundColor = MaterialTheme.colors.surface){

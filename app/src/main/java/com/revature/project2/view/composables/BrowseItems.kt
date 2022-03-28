@@ -37,7 +37,7 @@ fun BrowseItemsScreen(navController: NavController, viewModel:AllToysViewModel){
                     horizontalAlignment = Alignment.CenterHorizontally){
 
                     itemsIndexed(toyList) { _, item ->
-                        ToyCard(toy = item)
+                        ToyCard(navController = navController,toy = item)
                     }
                 }
             }

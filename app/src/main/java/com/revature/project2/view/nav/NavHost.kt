@@ -6,6 +6,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.revature.project2.ui.jc.tradeFinalizeScreen
 import com.revature.project2.ui.jc.tradeProposalScreen
+import com.revature.project2.ui.AcceptTradeScreen
+import com.revature.project2.ui.ViewItemScreen
 import com.revature.project2.view.composables.BrowseItemsScreen
 import com.revature.project2.view.composables.Login
 import com.revature.project2.view.composables.PostedItemsScreen
@@ -30,9 +32,9 @@ import com.revature.project2.viewmodel.UserToysViewModel
 fun startNav(){
     val navController = rememberNavController()
 
-    val allToysViewModel = AllToysViewModel()
-    val userToysViewModel = UserToysViewModel()
-    val loginViewModel = LoginViewModel()
+    val allToysViewModel by lazy { AllToysViewModel() }
+    val userToysViewModel by lazy { UserToysViewModel()}
+    val loginViewModel by lazy { LoginViewModel() }
 
     NavHost(navController = navController,
         startDestination = NavScreens.LoginScreen.route){
@@ -60,5 +62,13 @@ fun startNav(){
         }
 
         //Add composable navigation here
+
+        composable(NavScreens.ViewItemScreen.route) {
+            ViewItemScreen()
+        }
+
+        composable(NavScreens.AcceptTradeScreen.route){
+            AcceptTradeScreen()
+        }
     }
 }

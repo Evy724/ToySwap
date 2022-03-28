@@ -11,4 +11,7 @@ sealed class NavScreens(val route:String) {
     object RegisterScreen:NavScreens("RegisterScreen")
     object TradeProposalScreen:NavScreens("TradeProposalScreen")
     object FinalizeTradeScreen:NavScreens("FinalizeTradeScreen")
+    object ViewItemScreen:NavScreens("ViewItemScreen")
+    object AcceptTradeScreen:NavScreens("AcceptTradeScreen")
+
 }
