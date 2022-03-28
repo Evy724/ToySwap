@@ -3,7 +3,9 @@ package com.revature.project2.view
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,9 +25,16 @@ import com.revature.project2.R
 @Composable
 fun ProfileScreen() {
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    val scrollState = rememberScrollState()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(state = scrollState)
+    ) {
         ProfileSection()
         CurrentlyPostedItems()
+        UserReviews()
     }
 }
 //Populates the ProfileScreen column with the user's profile picture as well as their ProfileInfo
@@ -164,6 +173,36 @@ fun CurrentlyPostedItems() {
 //        ) {
 //            itemsIndexed(toyList) { _, item ->
 //                ToyCard(toy = item)
+//            }
+//        }
+    }
+}
+@Composable
+fun UserReviews() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+
+    ) {
+        Spacer(modifier = Modifier.height(10.dp))
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "User Reviews",
+                fontWeight = FontWeight.Bold,
+                fontSize = 30.sp
+            )
+        }
+        //Implementation of Ryan's LazyColumn list of ReviewCards
+//        LazyColumn(
+//            modifier = Modifier.fillMaxWidth(),
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+//            itemsIndexed(reviewList) { _, item ->
+//                ReviewCard(review = item)
 //            }
 //        }
     }
