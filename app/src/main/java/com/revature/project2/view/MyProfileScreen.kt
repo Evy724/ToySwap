@@ -23,7 +23,7 @@ import com.revature.project2.R
 //Creates the column for the entire page and populates with profile features
 @Preview(showBackground = true)
 @Composable
-fun ProfileScreen() {
+fun MyProfileScreen() {
 
     val scrollState = rememberScrollState()
     Column(
@@ -31,14 +31,14 @@ fun ProfileScreen() {
             .fillMaxSize()
             .verticalScroll(state = scrollState)
     ) {
-        ProfileSection()
-        CurrentlyPostedItems()
-        UserReviews()
+        MyProfileSection()
+        MyPostHistory()
+        MyUserReviews()
     }
 }
 //Populates the ProfileScreen column with the user's profile picture as well as their ProfileInfo
 @Composable
-fun ProfileSection(modifier: Modifier = Modifier) {
+fun MyProfileSection(modifier: Modifier = Modifier) {
 
     Column(modifier = modifier.fillMaxWidth()) {
         Spacer(modifier = Modifier.height(20.dp))
@@ -48,16 +48,16 @@ fun ProfileSection(modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .padding(horizontal = 40.dp, vertical = 20.dp)
         ) {
-            RoundImage(
+            MyRoundImage(
                 image = painterResource(R.drawable.selfie),
                 modifier = Modifier
                     .size(100.dp)
                     .weight(3f)
             )
             Spacer(modifier = Modifier.width(16.dp))
-            StatSection(modifier = Modifier.weight(7f))
+            MyStatSection(modifier = Modifier.weight(7f))
         }
-        ProfileDescription(
+        MyProfileDescription(
             name = "Evan Jones",
             email = "evan687@revature.net",
             phoneNumber = "(123) 456 789"
@@ -66,7 +66,7 @@ fun ProfileSection(modifier: Modifier = Modifier) {
 }
 //Creates a round profile picture for the user
 @Composable
-fun RoundImage(image: Painter, modifier: Modifier = Modifier) {
+fun MyRoundImage(image: Painter, modifier: Modifier = Modifier) {
 
     Image(
         painter = image,
@@ -84,20 +84,20 @@ fun RoundImage(image: Painter, modifier: Modifier = Modifier) {
 }
 //Populates the Row with ProfileStats
 @Composable
-fun StatSection(modifier: Modifier = Modifier) {
+fun MyStatSection(modifier: Modifier = Modifier) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceAround,
         modifier = modifier
     ) {
-        ProfileStat(numberText = "10", text = "Posts")
-        ProfileStat(numberText = "15", text = "Trades")
-        ProfileStat(numberText = "8.5/10", text = "Rating")
+        MyProfileStat(numberText = "10", text = "Posts")
+        MyProfileStat(numberText = "15", text = "Trades")
+        MyProfileStat(numberText = "8.5/10", text = "Rating")
     }
 }
 //Creates the Profile Stat (hard coded for now)
 @Composable
-fun ProfileStat(
+fun MyProfileStat(
     numberText: String,
     text: String,
     modifier: Modifier = Modifier
@@ -118,7 +118,7 @@ fun ProfileStat(
 }
 //Populates the user's Profile Description
 @Composable
-fun ProfileDescription(name: String, email: String, phoneNumber: String) {
+fun MyProfileDescription(name: String, email: String, phoneNumber: String) {
     val letterSpacing = 0.5.sp
     val lineHeight = 20.sp
     Column(
@@ -148,7 +148,7 @@ fun ProfileDescription(name: String, email: String, phoneNumber: String) {
 }
 //Displays the account's currently posted items
 @Composable
-fun CurrentlyPostedItems() {
+fun MyPostHistory() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -160,7 +160,7 @@ fun CurrentlyPostedItems() {
             contentAlignment = Alignment.Center
         ) {
             Text(
-                text = "Currently Posted Items",
+                text = "Post History",
                 fontWeight = FontWeight.Bold,
                 fontSize = 30.sp
             )
@@ -177,7 +177,7 @@ fun CurrentlyPostedItems() {
     }
 }
 @Composable
-fun UserReviews() {
+fun MyUserReviews() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
