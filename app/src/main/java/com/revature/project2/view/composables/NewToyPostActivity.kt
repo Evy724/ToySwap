@@ -25,6 +25,7 @@ Scaffold(bottomBar = {BottomBar(navController)}) {
         inputToyName()
         toyDescription()
         ageOfToy()
+        postToy()
     }
 }
 

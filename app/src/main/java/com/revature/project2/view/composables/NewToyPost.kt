@@ -74,7 +74,7 @@ fun ageOfToy() {
 }
 
 @Composable
-fun sendNewToyPost() {
+fun postToy() {
     Button(modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()
