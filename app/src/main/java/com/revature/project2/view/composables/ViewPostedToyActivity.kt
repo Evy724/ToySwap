@@ -8,11 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 
-@Preview
+
 @Composable
-fun ViewPostedToyActivity() {
-    Scaffold(bottomBar = { BottomBar() }) {
+fun viewPostedToyScreen(navController: NavController) {
+    Scaffold(bottomBar = { BottomBar(navController) }) {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
@@ -22,6 +23,8 @@ fun ViewPostedToyActivity() {
 
             screenTitlePostedToy()
             postedToyDescription()
+            seeTradeRequestsOnItem()
+            removePost()
 
         }
     }

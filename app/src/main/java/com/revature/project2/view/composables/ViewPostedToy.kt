@@ -1,7 +1,11 @@
 package com.revature.project2.view.composables
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.*
@@ -44,25 +48,43 @@ fun postedToyDescription() {
     )
 }
 
-//@Composable
-//fun sendNewToyPost() {
-//    Button(modifier = Modifier
-//        .padding(10.dp)
-//        .fillMaxWidth()
-//        .height(100.dp)
-//        .wrapContentHeight(),
-//        shape = RoundedCornerShape(25),
-//        onClick = { println("Intent to img upload prompt") })
-//}
+@Composable
+fun seeTradeRequestsOnItem() {
+    Button(modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth()
+        .height(100.dp)
+        .wrapContentHeight(),
+        shape = RoundedCornerShape(25),
+        onClick = { /*TODO*/ })
 
-//@Composable
-//fun sendNewToyPost() {
-//    Button(modifier = Modifier
-//        .padding(10.dp)
-//        .fillMaxWidth()
-//        .height(100.dp)
-//        .wrapContentHeight(),
-//        shape = RoundedCornerShape(25),
-//        onClick = { println("Intent to img upload prompt") })
-//}
+
+    {
+        Text(
+            text = "Trade Offers",
+            fontSize = 15.sp,
+            textAlign = TextAlign.Center
+        )
+    }
+}
+
+@Composable
+fun removePost() {
+    Button(modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth()
+        .height(100.dp)
+        .wrapContentHeight(),
+        shape = RoundedCornerShape(25),
+        onClick = { /*TODO*/ })
+
+
+    {
+        Text(
+            text = "Remove Post",
+            fontSize = 15.sp,
+            textAlign = TextAlign.Center
+        )
+    }
+}
 

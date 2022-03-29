@@ -8,10 +8,7 @@ import com.revature.project2.ui.jc.tradeFinalizeScreen
 import com.revature.project2.ui.jc.tradeProposalScreen
 import com.revature.project2.ui.AcceptTradeScreen
 import com.revature.project2.ui.ViewItemScreen
-import com.revature.project2.view.composables.BrowseItemsScreen
-import com.revature.project2.view.composables.Login
-import com.revature.project2.view.composables.PostedItemsScreen
-import com.revature.project2.view.composables.Register
+import com.revature.project2.view.composables.*
 import com.revature.project2.viewmodel.AllToysViewModel
 import com.revature.project2.viewmodel.LoginViewModel
 import com.revature.project2.viewmodel.UserToysViewModel
@@ -29,35 +26,40 @@ import com.revature.project2.viewmodel.UserToysViewModel
  * route + /{Int} possible
  */
 @Composable
-fun startNav(){
+fun startNav() {
     val navController = rememberNavController()
 
     val allToysViewModel by lazy { AllToysViewModel() }
-    val userToysViewModel by lazy { UserToysViewModel()}
+    val userToysViewModel by lazy { UserToysViewModel() }
     val loginViewModel by lazy { LoginViewModel() }
 
-    NavHost(navController = navController,
-        startDestination = NavScreens.LoginScreen.route){
+    NavHost(
+        navController = navController,
+        startDestination = NavScreens.LoginScreen.route
+    ) {
 
-        composable(NavScreens.BrowseItemsScreen.route){
-            BrowseItemsScreen(navController,allToysViewModel)
+        composable(NavScreens.BrowseItemsScreen.route) {
+            BrowseItemsScreen(navController, allToysViewModel)
         }
 
-        composable(NavScreens.PostedItemListScreen.route){
-            PostedItemsScreen(navController,userToysViewModel)
+        composable(NavScreens.PostedItemListScreen.route) {
+            PostedItemsScreen(navController, userToysViewModel)
         }
-        
-        composable(NavScreens.LoginScreen.route){
-            Login(navController = navController,loginViewModel)
+
+        composable(NavScreens.LoginScreen.route) {
+            Login(navController = navController, loginViewModel)
         }
-        
-        composable(NavScreens.RegisterScreen.route){
+
+        composable(NavScreens.RegisterScreen.route) {
             Register(navController = navController)
         }
-        composable(NavScreens.TradeProposalScreen.route){
-            tradeProposalScreen(navController = navController, userToysViewModel = userToysViewModel)
+        composable(NavScreens.TradeProposalScreen.route) {
+            tradeProposalScreen(
+                navController = navController,
+                userToysViewModel = userToysViewModel
+            )
         }
-        composable(NavScreens.FinalizeTradeScreen.route){
+        composable(NavScreens.FinalizeTradeScreen.route) {
             tradeFinalizeScreen(navController)
         }
 
@@ -67,8 +69,14 @@ fun startNav(){
             ViewItemScreen()
         }
 
-        composable(NavScreens.AcceptTradeScreen.route){
+        composable(NavScreens.AcceptTradeScreen.route) {
             AcceptTradeScreen()
+        }
+        composable(NavScreens.NewToyPostScreen.route) {
+            newToyPostScreen(navController)
+        }
+        composable(NavScreens.ViewPostedToyScreen.route) {
+            viewPostedToyScreen(navController)
         }
     }
 }

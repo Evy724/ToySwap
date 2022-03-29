@@ -73,13 +73,20 @@ fun ageOfToy() {
     )
 }
 
-//@Composable
-//fun sendNewToyPost() {
-//    Button(modifier = Modifier
-//        .padding(10.dp)
-//        .fillMaxWidth()
-//        .height(100.dp)
-//        .wrapContentHeight(),
-//        shape = RoundedCornerShape(25),
-//        onClick = { println("Intent to img upload prompt") })
-//}
+@Composable
+fun sendNewToyPost() {
+    Button(modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth()
+        .height(100.dp)
+        .wrapContentHeight(),
+        shape = RoundedCornerShape(25),
+        onClick = { /*TODO*/ })
+    {
+        Text(
+            text = "Post Toy",
+            fontSize = 15.sp,
+            textAlign = TextAlign.Center
+        )
+    }
+}
