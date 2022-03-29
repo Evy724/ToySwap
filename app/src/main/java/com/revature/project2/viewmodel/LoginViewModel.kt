@@ -2,6 +2,7 @@ package com.revature.project2.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,7 +15,8 @@ import java.lang.Exception
 class LoginViewModel():ViewModel() {
 
     private val loginRequestLiveData = MutableLiveData<Boolean>()
-    var requestToken = mutableStateOf(value=false)
+    //var requestToken = mutableStateOf(value=false)
+    var requestToken:LiveData<Boolean> = loginRequestLiveData
 
     fun login(username:String, password:String){
         viewModelScope.launch(Dispatchers.IO) {
@@ -31,15 +33,16 @@ class LoginViewModel():ViewModel() {
                 if (responseService.isSuccessful){
                     responseService.body()?.let { token ->
                         Log.d("Login Success", "Response Token: $token")
-                        requestToken.value = true
+                        loginRequestLiveData.postValue(true)
                     }
                 } else {
                     responseService.errorBody()?.let { error ->
+                        loginRequestLiveData.postValue(false)
                         Log.d("Login Error", "Response: $error")
                         error.close()
                     }
                 }
-                loginRequestLiveData.postValue(responseService.isSuccessful)
+                //loginRequestLiveData.postValue(responseService.isSuccessful)
 
             } catch (e:Exception) {
                 Log.d("Network Exception","Exception: $e")

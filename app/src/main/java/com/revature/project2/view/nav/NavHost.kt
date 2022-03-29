@@ -1,9 +1,11 @@
 package com.revature.project2.view.nav
 
+import android.app.Application
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.revature.project2.MainActivity
 import com.revature.project2.ui.jc.tradeFinalizeScreen
 import com.revature.project2.ui.jc.tradeProposalScreen
 import com.revature.project2.ui.AcceptTradeScreen
@@ -29,7 +31,7 @@ import com.revature.project2.viewmodel.UserToysViewModel
  * route + /{Int} possible
  */
 @Composable
-fun startNav(){
+fun StartNav(app:MainActivity){
     val navController = rememberNavController()
 
     val allToysViewModel by lazy { AllToysViewModel() }
@@ -48,14 +50,16 @@ fun startNav(){
         }
         
         composable(NavScreens.LoginScreen.route){
-            Login(navController = navController,loginViewModel)
+            Login(navController = navController,loginViewModel, app)
         }
         
         composable(NavScreens.RegisterScreen.route){
             Register(navController = navController)
         }
         composable(NavScreens.TradeProposalScreen.route){
-            tradeProposalScreen(navController = navController, userToysViewModel = userToysViewModel)
+            tradeProposalScreen(navController = navController,
+                userToysViewModel = userToysViewModel,
+                allToysViewModel.allToys.first())
         }
         composable(NavScreens.FinalizeTradeScreen.route){
             tradeFinalizeScreen(navController)

@@ -1,5 +1,6 @@
 package com.revature.project2.view.composables
 
+import android.app.Application
 import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,15 +16,36 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Observer
 import androidx.navigation.NavController
+import com.revature.project2.MainActivity
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.LoginViewModel
 
 @Composable
-fun Login(navController: NavController, loginViewModel: LoginViewModel){
+fun Login(navController: NavController,
+          loginViewModel: LoginViewModel,
+          app:MainActivity){
 
     val scaffoldState = rememberScaffoldState()
     val context = LocalContext.current
+    var loginButtonText by rememberSaveable { mutableStateOf("Login") }
+    var bEnabled  by rememberSaveable { mutableStateOf(true) }
+    val loginObserver = Observer<Boolean> { bSuccess ->
+            if (bSuccess) {
+
+                navController.navigate(NavScreens.BrowseItemsScreen.route)
+            }
+            else {
+                Toast.makeText(
+                    context,
+                    "Invalid Login",
+                    Toast.LENGTH_LONG).show()
+                loginButtonText = "Login"
+                bEnabled = true
+            }
+        }
+    loginViewModel.requestToken.observe(app,loginObserver)
 
     Scaffold (
         scaffoldState = scaffoldState,
@@ -61,24 +83,18 @@ fun Login(navController: NavController, loginViewModel: LoginViewModel){
 
                 Spacer(modifier = Modifier.size(30.dp))
 
-                Button(
+
+                Button(enabled = bEnabled,
                     onClick = {
                         loginViewModel.login(sName,sPass)
-                        if ( loginViewModel.requestToken.value) {
-
-                              navController.navigate(NavScreens.BrowseItemsScreen.route)
-                        } else {
-                            Toast.makeText(
-                                context,
-                                "Invalid Login",
-                                Toast.LENGTH_LONG)
-                        }
+                                loginButtonText = "Loading"
+                                bEnabled = false
                     },
                     modifier = Modifier
                         .padding(5.dp)
                         .fillMaxWidth(.5f)) {
 
-                    Text("Login")
+                    Text(loginButtonText)
 
                 }
 
