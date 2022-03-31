@@ -32,8 +32,8 @@ class UserToysRepository(val toyServiceApi: ToysApiService) {
 
             val toyList = toyServiceApi.getUserToys(
                 RequestUserToys(
-                "posterid",
-                "0")
+                    "posterid",
+                    "0")
             ).results
 
             Log.d("UserToys", "Success " + toyList.size)
