@@ -24,6 +24,7 @@ import com.google.accompanist.coil.rememberCoilPainter
 import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.ui.theme.Project2Theme
+import com.revature.project2.view.composables.BottomBar
 import com.revature.project2.view.composables.ToyCard
 import com.revature.project2.view.composables.ToyCardWithButton
 import com.revature.project2.view.nav.NavScreens
@@ -31,7 +32,7 @@ import com.revature.project2.viewmodel.AllToysViewModel
 import com.revature.project2.viewmodel.UserToysViewModel
 
 @Composable
-fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToysViewModel,toy:ToyItem)
+fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToysViewModel,toyid:Int,toyImage:String)
 {
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         TopAppBar() {
@@ -42,7 +43,7 @@ fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToy
             Text(text = "Average response time: ", textAlign= TextAlign.Center)
         }
         Spacer(modifier = Modifier.height(20.dp))
-        Image(painter = rememberCoilPainter(request = toy.sImagePath), contentDescription = "",
+        Image(painter = rememberCoilPainter(request = toyImage), contentDescription = "",
             modifier = Modifier
                 .width(150.dp)
                 .height(150.dp)
@@ -71,6 +72,7 @@ fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToy
                 ToyCardWithButton(toy = item,"Trade",{navController.navigate(NavScreens.FinalizeTradeScreen.route)})
             }
         }
+        BottomBar(navController = navController)
     }
 }
 
