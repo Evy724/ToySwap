@@ -35,16 +35,17 @@ interface ToysApiService {
     suspend fun getLoginAuth(@Body LoginRequest:LoginRequest)
             : Response<token>
 
-    @POST("finalizeTradeOffer_success_msg")
-    suspend fun getFinalizeTradeOffer_Request_API(
+    @POST("finalizeTradeOffer")
+    suspend fun getFinalizeTradeOffer(
         @Body finalizeTradeOffer_Request_API: FinalizeTradeOffer_Request_API
     ):
             Response<FinalizeTradeOffer_Response_API>
 
-    @POST("viewItemRequestTrade_success_msg")
-    suspend fun getViewItem_Request_API(
+    @POST("viewItem")
+    suspend fun getViewItem(
         @Body viewItem_Request_API: ViewItem_Request_API
     ):
             Response<ViewItem_Response_API>
+
 
 }

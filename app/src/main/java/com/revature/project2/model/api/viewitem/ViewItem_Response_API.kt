@@ -8,6 +8,6 @@ data class ViewItem_Response_API
     @SerializedName("viewItemRequestTrade_success_msg")
     val viewItemRequestTrade_success_msg: String,
 
-    @SerializedName("toys")
+    @SerializedName("viewItemToy")
     var result: ToyItem
     )
