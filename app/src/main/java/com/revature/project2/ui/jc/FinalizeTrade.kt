@@ -21,13 +21,18 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.google.accompanist.coil.rememberCoilPainter
 import com.revature.project2.R
+import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.ui.theme.Project2Theme
+import com.revature.project2.view.composables.BottomBar
+import com.revature.project2.view.nav.NavScreens
 
 @Composable
-fun tradeFinalizeScreen(navController: NavController)
+fun tradeFinalizeScreen(navController: NavController, myToyID: Int, theirToyID:Int,myImage:String,theirImage:String)
 {
     var message by rememberSaveable{ mutableStateOf("")}
+    var finalMessage=""
     Column() {
         TopAppBar() {
             Text(text = "Finalize Trade")
@@ -36,7 +41,7 @@ fun tradeFinalizeScreen(navController: NavController)
             item {
                 Spacer(modifier = Modifier.height(20.dp))
                 Image(
-                    painter = painterResource(id = R.drawable.lego), contentDescription = "",
+                    painter = rememberCoilPainter(request = theirImage), contentDescription = "",
                     modifier = Modifier
                         .width(200.dp)
                         .height(200.dp)
@@ -45,7 +50,7 @@ fun tradeFinalizeScreen(navController: NavController)
                 Spacer(modifier = Modifier.height(20.dp))
                 Row(horizontalArrangement = Arrangement.Center) {
                     Image(
-                        painter = painterResource(id = R.drawable._4603),
+                        painter = rememberCoilPainter(request = myImage),
                         contentDescription = "",
                         modifier = Modifier.size(70.dp)
                     )
@@ -72,8 +77,14 @@ fun tradeFinalizeScreen(navController: NavController)
                         message = it
                     }, placeholder = { Text(text = "Send message to user here") })
                 }
+
+
                 Spacer(modifier = Modifier.height(20.dp))
-                Button(onClick = { /*TODO*/ }) {
+                Button(onClick = {
+                    finalMessage=message
+
+                    navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
+                }) {
                     Text(text = "Send")
                 }
                 Spacer(modifier = Modifier.height(200.dp))
@@ -81,6 +92,8 @@ fun tradeFinalizeScreen(navController: NavController)
             }
 
         }
+        BottomBar(navController = navController)
+
     }
 
 

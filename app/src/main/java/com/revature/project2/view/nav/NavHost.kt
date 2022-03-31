@@ -1,9 +1,13 @@
 package com.revature.project2.view.nav
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavArgument
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.ui.jc.tradeFinalizeScreen
 import com.revature.project2.ui.jc.tradeProposalScreen
 import com.revature.project2.ui.AcceptTradeScreen
@@ -36,6 +40,7 @@ fun startNav(){
     val userToysViewModel by lazy { UserToysViewModel()}
     val loginViewModel by lazy { LoginViewModel() }
 
+
     NavHost(navController = navController,
         startDestination = NavScreens.LoginScreen.route){
 
@@ -54,12 +59,55 @@ fun startNav(){
         composable(NavScreens.RegisterScreen.route){
             Register(navController = navController)
         }
-        composable(NavScreens.TradeProposalScreen.route){
-            tradeProposalScreen(navController = navController, userToysViewModel = userToysViewModel)
+        composable(NavScreens.TradeProposalScreen.route+"/{toyid}/{toyImage}",
+        arguments = listOf(
+            navArgument("toyid"){
+                type= NavType.IntType
+            },
+            navArgument("toyImage"){
+                type= NavType.StringType
+            }
+        )
+        ){
+            var toyid=it.arguments?.getInt("toyid")?:0
+            var toyImage=it.arguments?.getString("toyImage")?:""
+
+            tradeProposalScreen(navController,userToysViewModel,toyid,toyImage)
         }
-        composable(NavScreens.FinalizeTradeScreen.route){
-            tradeFinalizeScreen(navController)
+
+        composable(NavScreens.FinalizeTradeScreen.route+"/{myToyID}/{theirToyID}/{myImage}/{theirImage}",
+        arguments = listOf(
+            navArgument("myToyID"){
+                type= NavType.IntType
+            },
+            navArgument("theirToyID"){
+                type= NavType.IntType
+            },
+            navArgument("myImage")
+            {
+                type= NavType.StringType
+            },
+            navArgument("theirImage")
+            {
+                type= NavType.StringType
+            }
+        )
+        ){
+            var myToyID=it.arguments?.getInt("myToyID")?:0
+            var theirToyID=it.arguments?.getInt("theirToyID")?:0
+            var myImage=it.arguments?.getString("myImage")?:""
+            var theirImage=it.arguments?.getString("theirImage")?:""
+
+            tradeFinalizeScreen(
+                navController = navController,
+                myToyID = myToyID ,
+                theirToyID =theirToyID ,
+                myImage = myImage,
+                theirImage = theirImage
+            )
+
         }
+
 
         //Add composable navigation here
 
