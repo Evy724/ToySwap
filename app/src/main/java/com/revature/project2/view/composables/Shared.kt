@@ -36,7 +36,7 @@ fun ToyCard(navController:NavController, toy: ToyItem){
         .height(100.dp)
         .wrapContentHeight()
         .clickable {
-                   navController.navigate(NavScreens.ViewItemScreen.route)
+            navController.navigate(NavScreens.ViewItemScreen.route)
         },
         shape = MaterialTheme.shapes.medium,
         elevation = 5.dp,
