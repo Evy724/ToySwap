@@ -44,11 +44,17 @@ fun ScreenTitle() {
 }
 @Composable
 fun ChangeProfilePictureSection() {
-    RoundImage(
-        image = painterResource(R.drawable.selfie),
+    Box(
         modifier = Modifier
-            .size(100.dp)
-    )
+            .fillMaxWidth()
+            .padding(10.dp),
+        contentAlignment = Alignment.TopCenter) {
+        RoundImage(
+            image = painterResource(R.drawable.selfie),
+            modifier = Modifier
+                .size(100.dp)
+        )
+    }
     Spacer(modifier = Modifier.width(16.dp))
 }
 @Composable
