@@ -1,15 +1,18 @@
 package com.revature.project2.view.composables
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
+import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.view.nav.NavScreens
 
@@ -28,7 +32,7 @@ import com.revature.project2.view.nav.NavScreens
  * button functionality not created yet
  */
 @Composable
-fun ToyCard(navController:NavController, toy: ToyItem){
+fun ToyCard(toy: ToyItem, onClick: () -> Unit){
 
     Card(modifier = Modifier
         .padding(10.dp)
@@ -36,7 +40,7 @@ fun ToyCard(navController:NavController, toy: ToyItem){
         .height(100.dp)
         .wrapContentHeight()
         .clickable {
-            navController.navigate(NavScreens.ViewItemScreen.route)
+            onClick()
         },
         shape = MaterialTheme.shapes.medium,
         elevation = 5.dp,
@@ -45,12 +49,13 @@ fun ToyCard(navController:NavController, toy: ToyItem){
         Row(verticalAlignment = Alignment.Top) {
 
             Image(painter = rememberCoilPainter(
-                request = toy.sImagePath),
+                request = toy.sImagePath,),
                 contentDescription = null,
                 modifier = Modifier
                     .size(100.dp)
                     .padding(5.dp),
-                contentScale = ContentScale.Fit)
+                contentScale = ContentScale.Fit
+            )
 
             Spacer(Modifier.size(5.dp))
 

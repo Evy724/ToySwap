@@ -2,6 +2,8 @@ package com.revature.project2.model.api
 
 import com.revature.project2.model.api.alltoys.AllToyResponse
 import com.revature.project2.model.api.alltoys.RequestAllToys
+import com.revature.project2.model.api.allusers.AllUsersRequest
+import com.revature.project2.model.api.allusers.AllUsersResponse
 import com.revature.project2.model.api.login.LoginRequest
 import com.revature.project2.model.api.login.token
 import com.revature.project2.model.api.usertoys.RequestUserToys
@@ -33,7 +35,7 @@ interface ToysApiService {
 
     @POST("login")
     suspend fun getLoginAuth(@Body LoginRequest:LoginRequest)
-            : Response<token>
+    : Response<token>
 
     @POST("finalizeTradeOffer")
     suspend fun getFinalizeTradeOffer(
@@ -47,5 +49,8 @@ interface ToysApiService {
     ):
             Response<ViewItem_Response_API>
 
+    @POST("users")
+    suspend fun getUsers(@Body AllUsersRequest: AllUsersRequest)
+            : AllUsersResponse
 
 }

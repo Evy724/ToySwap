@@ -13,7 +13,7 @@ data class ToyItem(
     val sName:String,
     @SerializedName("description")
     val sDescription:String,
-    @SerializedName("posterId")
+    @SerializedName("posterid")
     val posterId:Int,
     @SerializedName("img")
     val sImagePath:String
