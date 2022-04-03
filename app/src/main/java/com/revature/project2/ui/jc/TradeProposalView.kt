@@ -14,12 +14,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
+import com.revature.project2.MainActivity
 
 import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
@@ -31,8 +34,12 @@ import com.revature.project2.viewmodel.AllToysViewModel
 import com.revature.project2.viewmodel.UserToysViewModel
 
 @Composable
-fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToysViewModel,toy:ToyItem)
+fun tradeProposalScreen(navController: NavController,toy:ToyItem)
 {
+    val context = LocalContext.current
+    val userToysViewModel =
+        ViewModelProvider(context as MainActivity).get(UserToysViewModel::class.java)
+
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
         TopAppBar() {
             Text(text = "Trade Proposal")

@@ -1,11 +1,13 @@
 package com.revature.project2.view.nav
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.revature.project2.MainActivity
+import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.ui.jc.tradeFinalizeScreen
 import com.revature.project2.ui.jc.tradeProposalScreen
 import com.revature.project2.ui.AcceptTradeScreen
@@ -33,24 +35,27 @@ import com.revature.project2.viewmodel.UserToysViewModel
 @Composable
 fun StartNav(app:MainActivity){
     val navController = rememberNavController()
+    Log.d("Nav","Start Nav called")
 
-    val allToysViewModel by lazy { AllToysViewModel() }
-    val userToysViewModel by lazy { UserToysViewModel()}
-    val loginViewModel by lazy { LoginViewModel() }
+    //val allToysViewModel by lazy { AllToysViewModel() }
+    //val userToysViewModel by lazy { UserToysViewModel()}
+    //val loginViewModel by lazy { LoginViewModel() }
 
     NavHost(navController = navController,
         startDestination = NavScreens.LoginScreen.route){
 
+        Log.d("Nav","NavHost")
+
         composable(NavScreens.BrowseItemsScreen.route){
-            BrowseItemsScreen(navController,allToysViewModel)
+            BrowseItemsScreen(navController)
         }
 
         composable(NavScreens.PostedItemListScreen.route){
-            PostedItemsScreen(navController,userToysViewModel)
+            PostedItemsScreen(navController)
         }
         
         composable(NavScreens.LoginScreen.route){
-            Login(navController = navController,loginViewModel, app)
+            Login(navController = navController)
         }
         
         composable(NavScreens.RegisterScreen.route){
@@ -58,8 +63,8 @@ fun StartNav(app:MainActivity){
         }
         composable(NavScreens.TradeProposalScreen.route){
             tradeProposalScreen(navController = navController,
-                userToysViewModel = userToysViewModel,
-                allToysViewModel.allToys.first())
+                ToyItem(0,"tom","tom:",0,"")
+            )
         }
         composable(NavScreens.FinalizeTradeScreen.route){
             tradeFinalizeScreen(navController)
