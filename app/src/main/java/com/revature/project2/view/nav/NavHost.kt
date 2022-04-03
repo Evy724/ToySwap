@@ -1,13 +1,16 @@
 package com.revature.project2.view.nav
 
+import android.app.Application
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavArgument
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
+import com.revature.project2.MainActivity
 import com.revature.project2.model.api.alltoys.ToyItem
+import androidx.navigation.navArgument
 import com.revature.project2.ui.jc.tradeFinalizeScreen
 import com.revature.project2.ui.jc.tradeProposalScreen
 import com.revature.project2.ui.AcceptTradeScreen
@@ -33,27 +36,26 @@ import com.revature.project2.viewmodel.UserToysViewModel
  * route + /{Int} possible
  */
 @Composable
-fun startNav(){
+fun StartNav(app:MainActivity){
     val navController = rememberNavController()
 
-    val allToysViewModel by lazy { AllToysViewModel() }
+    //val allToysViewModel by lazy { AllToysViewModel() }
     val userToysViewModel by lazy { UserToysViewModel()}
-    val loginViewModel by lazy { LoginViewModel() }
-
+    //val loginViewModel by lazy { LoginViewModel() }
 
     NavHost(navController = navController,
         startDestination = NavScreens.LoginScreen.route){
 
         composable(NavScreens.BrowseItemsScreen.route){
-            BrowseItemsScreen(navController,allToysViewModel)
+            BrowseItemsScreen(navController)
         }
 
         composable(NavScreens.PostedItemListScreen.route){
-            PostedItemsScreen(navController,userToysViewModel)
+            PostedItemsScreen(navController)
         }
         
         composable(NavScreens.LoginScreen.route){
-            Login(navController = navController,loginViewModel)
+            Login(navController = navController)
         }
         
         composable(NavScreens.RegisterScreen.route){
@@ -107,7 +109,6 @@ fun startNav(){
             )
 
         }
-
 
         //Add composable navigation here
 
