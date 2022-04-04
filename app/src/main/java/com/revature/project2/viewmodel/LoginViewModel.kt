@@ -46,7 +46,7 @@ class LoginViewModel():ViewModel() {
 
         allUsers.forEach {
             Log.d("Login Screen", "User: ${it.sName} - ${it.sPass}")
-            if (sName.equals(it.sName) && sPass.equals(it.sPass)) {
+            if (sName.equals(it.sUserName) && sPass.equals(it.sPass)) {
                 user = it
 
             }

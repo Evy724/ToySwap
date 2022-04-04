@@ -15,4 +15,8 @@ sealed class NavScreens(val route:String) {
     object AcceptTradeScreen:NavScreens("AcceptTradeScreen")
     object NewToyPostScreen:NavScreens("NewToyPostScreen")
     object ViewPostedToyScreen:NavScreens("NewToyPostScreen")
+    object MyProfileScreen:NavScreens("MyProfileScreen")
+    object ProfileScreen:NavScreens("ProfileScreen")
+    object EditProfileScreen:NavScreens("EditProfileScreen")
+
 }

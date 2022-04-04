@@ -59,7 +59,6 @@ fun LoginBody(navController: NavController){
     var sPass by rememberSaveable { mutableStateOf("") }
     val loginViewModel = ViewModelProvider(context as MainActivity).get(LoginViewModel::class.java)
 
-
     val userList = loginViewModel.allUsers
 
     if (userList.isNotEmpty()){

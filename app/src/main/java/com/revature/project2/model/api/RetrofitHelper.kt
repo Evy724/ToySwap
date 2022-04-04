@@ -59,4 +59,17 @@ object RetrofitHelper {
     fun getAllToysService():ToysApiService{
         return retrofit.create(ToysApiService::class.java)
     }
+
+    /**
+     * Retrieves the Profile service API
+     */
+    fun getProfileService(): ToysApiService {
+        return retrofit.create(ToysApiService::class.java)
+    }
+    fun getHistoryService(): ToysApiService {
+        return retrofit.create(ToysApiService::class.java)
+    }
+    fun getReviewsService(): ToysApiService {
+        return retrofit.create(ToysApiService::class.java)
+    }
 }
