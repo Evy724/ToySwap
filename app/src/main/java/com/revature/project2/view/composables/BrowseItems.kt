@@ -18,6 +18,7 @@ import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.AllToysViewModel
 import com.revature.project2.viewmodel.LoginViewModel
+import com.revature.project2.viewmodel.ToyItemViewModel
 
 /**
  * Browse Items screen using scaffold
@@ -49,6 +50,7 @@ fun BrowseItemsScreen(navController: NavController)
 @Composable
 fun BrowseItemsBody(navController: NavController, toyList:List<ToyItem>)
 {
+    val context = LocalContext.current
     val lazyState = rememberLazyListState()
 
     if (toyList.isNotEmpty())
@@ -65,7 +67,9 @@ fun BrowseItemsBody(navController: NavController, toyList:List<ToyItem>)
             items(toyList){ toy->
                 Log.d("Browse Screen","Lazy Column call")
                 ToyCard(toy = toy){
-                    navController.navigate(NavScreens.ViewItemScreen.route+"/${toy.id}/${toy.sName}/${toy.sImagePath}/")
+                    val viewVM = ViewModelProvider(context as MainActivity).get(ToyItemViewModel::class.java)
+                    viewVM.toy = toy
+                    navController.navigate(NavScreens.ViewItemScreen.route)
                 }
             }
         }

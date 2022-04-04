@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavArgument
+import androidx.navigation.NavDeepLinkSaveStateControl
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -114,38 +115,7 @@ fun StartNav(app:MainActivity){
         }
 
         // View Item Screen
-
-        composable(NavScreens.ViewItemScreen.route+"/{toyid}/{toyName}/{toyImage}/",
-            arguments = listOf(
-                navArgument("toyid")
-                {
-                    type= NavType.IntType
-                },
-
-                navArgument("toyName")
-                {
-                    type = NavType.StringType
-                },
-
-                navArgument("toyImage")
-                {
-                    type= NavType.StringType
-                },
-            )
-        )
-        {
-            var toyid = it.arguments?.getInt("toyid") ?: 0
-            var toyName = it.arguments?.getString("toyName") ?: ""
-            var toyImage = it.arguments?.getString("toyImage") ?: ""
-
-            ViewItemScreen(
-                navController = navController,
-                toyid = toyid,
-                toyName = toyName,
-                toyImage = toyImage
-            )
-        }
-
+        composable(NavScreens.ViewItemScreen.route){ViewItemScreen(navController = navController)}
 
         composable(NavScreens.AcceptTradeScreen.route){
             AcceptTradeScreen(navController = navController)
