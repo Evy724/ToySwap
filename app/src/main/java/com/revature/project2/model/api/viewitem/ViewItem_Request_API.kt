@@ -4,10 +4,10 @@ import com.google.gson.annotations.SerializedName
 
 data class ViewItem_Request_API (
 
-    @SerializedName("viewItem_toy_id")
-    val viewItem_toy_id: Int,
+    @SerializedName("posterid")
+    val posterid:String,
 
-    @SerializedName("viewItem_toy_type")
-    val viewItem_toy_type: String
+    @SerializedName("toyid")
+    val toyid: Int,
 
     )

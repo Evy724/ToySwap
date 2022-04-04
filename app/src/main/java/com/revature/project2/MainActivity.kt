@@ -1,6 +1,7 @@
 package com.revature.project2
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -8,13 +9,16 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import com.revature.project2.ui.theme.Project2Theme
+import com.revature.project2.view.nav.StartNav
 
-import com.revature.project2.view.nav.startNav
 
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val app = this
+
         setContent {
             Project2Theme {
                 // A surface container using the 'background' color from the theme
@@ -22,9 +26,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    Log.d("MainActivity","Main activity Set Content")
 
                     //Start our app's navigation
-                    startNav()
+                    StartNav(app)
 
                 }
             }
