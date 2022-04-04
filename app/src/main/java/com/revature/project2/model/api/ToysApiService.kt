@@ -7,6 +7,8 @@ import com.revature.project2.model.api.login.token
 import com.revature.project2.model.api.usertoys.RequestUserToys
 import com.revature.project2.model.api.finalizetradeoffer.FinalizeTradeOffer_Request_API
 import com.revature.project2.model.api.finalizetradeoffer.FinalizeTradeOffer_Response_API
+import com.revature.project2.model.api.finalizetradeoffer.SendTrade_Request_API
+import com.revature.project2.model.api.finalizetradeoffer.SendTrade_Response_API
 import com.revature.project2.model.api.viewitem.ViewItem_Request_API
 import com.revature.project2.model.api.viewitem.ViewItem_Response_API
 import retrofit2.Response
@@ -47,5 +49,9 @@ interface ToysApiService {
     ):
             Response<ViewItem_Response_API>
 
-
+    @POST("SendTrade")
+    suspend fun getSendTradeOffer_msg(
+        @Body sendTradeRequestApi: SendTrade_Request_API
+    ):
+            Response<SendTrade_Response_API>
 }

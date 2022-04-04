@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,12 +35,15 @@ import com.revature.project2.viewmodel.UserToysViewModel
 @Composable
 fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToysViewModel,toyid:Int,toyImage:String)
 {
-    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Top) {
         TopAppBar() {
             Text(text = "Trade Proposal")
         }
+    }
+    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Bottom) {
+
         Spacer(modifier = Modifier.height(20.dp))
-        Card(modifier = Modifier.width(250.dp), border = BorderStroke(3.dp, Color.Black)) {
+        Card(modifier = Modifier.width(250.dp), border = BorderStroke(1.dp, Color.Black),elevation = 10.dp) {
             Text(text = "Average response time: ", textAlign= TextAlign.Center)
         }
         Spacer(modifier = Modifier.height(20.dp))
@@ -47,7 +51,7 @@ fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToy
             modifier = Modifier
                 .width(150.dp)
                 .height(150.dp)
-                .border(width = 3.dp, color = Color.Black))
+                .border(width = 1.dp, color = Color.Black))
         Spacer(modifier = Modifier.height(50.dp))
         Row(horizontalArrangement = Arrangement.Center) {
             Image(painter = painterResource(id = R.drawable._4603), contentDescription = "",modifier = Modifier.size(70.dp))
@@ -56,7 +60,7 @@ fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToy
 
         }
         Spacer(modifier = Modifier.height(20.dp))
-        Card(modifier = Modifier.fillMaxWidth(), border = BorderStroke(3.dp, Color.Black)) {
+        Card(modifier = Modifier.fillMaxWidth(), border = BorderStroke(1.dp, Color.Black), elevation = 10.dp) {
             Text(text = "MY TOYS ", textAlign= TextAlign.Center)
         }
         val lazyState = rememberLazyListState()
@@ -69,7 +73,13 @@ fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToy
         ) {
 
             itemsIndexed(toyList) { _, item ->
-                ToyCardWithButton(toy = item,"Trade",{navController.navigate(NavScreens.FinalizeTradeScreen.route)})
+                ToyCardWithButton(toy = item,"Trade") {
+                    navController
+                        .navigate(
+                            NavScreens.FinalizeTradeScreen
+                                .route + "/${item.id}/${toyid}/${item.sImagePath}/${toyImage}"
+                        )
+                }
             }
         }
         BottomBar(navController = navController)
@@ -80,14 +90,8 @@ fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToy
 @Preview
 fun preview() {
     Project2Theme {
-        // A surface container using the 'background' color from the theme
-        Surface(
-            modifier = Modifier.fillMaxSize(),
-            color = MaterialTheme.colors.background
-        ) {
-//            val navController=NavController
-//            tradeProposalScreen()
-
-        }
+        val context= LocalContext.current
+        val navController=NavController(context)
+        tradeProposalScreen(navController = navController,UserToysViewModel(),1,"R.drawable.lego")
     }
 }
