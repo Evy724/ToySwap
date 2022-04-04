@@ -1,4 +1,4 @@
-package com.revature.project2.view
+package com.revature.project2.view.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
