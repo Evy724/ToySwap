@@ -4,87 +4,103 @@ import android.view.View
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
+import com.google.accompanist.coil.rememberCoilPainter
+import com.revature.project2.MainActivity
 import com.revature.project2.R
+import com.revature.project2.model.api.alltoys.ToyItem
+import com.revature.project2.view.composables.BottomBar
+import com.revature.project2.view.nav.NavScreens
+import com.revature.project2.viewmodel.ToyItemViewModel
+import android.content.Context as Context
 
 @Composable
-fun ViewItemScreen()
+fun ViewItemScreen(
+    navController: NavController,
+
+)
 {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .background(
-                MaterialTheme.colors.surface,
-                RectangleShape
-            )
-    )
+    val context = LocalContext.current
+    val viewVM = ViewModelProvider(context as MainActivity).get(ToyItemViewModel::class.java)
+    val scaffoldState = rememberScaffoldState()
+    Scaffold(scaffoldState = scaffoldState, topBar =
     {
-        // View item top app bar
         TopAppBar(
-            title = { Text(text = "View Item")},
+            title = { Text(text = "View Item") },
             backgroundColor = MaterialTheme.colors.secondary
         )
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        Text(
-            text = "My Melody Pop! Vinyl Figure",
-            fontSize = 30.sp,
-            textAlign = TextAlign.Center
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        // Toy image
-        Image(
-            painter = painterResource(id = R.drawable.my_melody_funko_pop_in_box),
-            contentDescription = "Toy image",
-            Modifier.size(250.dp)
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
-        
-        Text(
-            text = "It's the adorable and quirky My Melody, in even more adorable and quirky Pop! Vinyl form!" +
-                    "\n" +
-                    "\nSporting her adorable face and pink hood with flower this super-cute Hello Kitty Sanrio Badtz Maru Pop! Vinyl Figure is a must have for all fans of Sanrio or just fans of Pop! Vinyl Figures in general!" +
-                    "\n" +
-                    "\nMeasures about 3 3/4-inches tall. Ages 5 and up. ",
-            fontSize = 17.sp,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 15.dp)
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
-        
-        Button(onClick = { /*TODO*/ })
+    },
+        content =
         {
-            Text(
-                text = "Request Trade",
-                fontSize = 25.sp
+            Column(horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .background(
+                        MaterialTheme.colors.surface,
+                        RectangleShape
+                    )
             )
-        }
+            {
+                Spacer(modifier = Modifier.height(20.dp))
 
-        // Insert bottom bar
-    }
+                Text(
+//                    text = "My Melody Pop! Vinyl Figure",
+                    viewVM.toy!!.sName,
+                    fontSize = 30.sp,
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                // Toy image
+                Image(
+//                    painter = painterResource(id = R.drawable.my_melody_funko_pop_in_box),
+                    painter = rememberCoilPainter(request = viewVM.toy!!.sImagePath,),
+                    contentDescription = null,
+                    Modifier.size(250.dp)
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+                Text(
+                    text = viewVM.toy!!.sDescription,
+                    fontSize = 17.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 15.dp)
+                )
+                Spacer(modifier = Modifier.height(20.dp))
+
+                // To trade proposal screen
+                Button(
+                    onClick = {
+//                        navController.navigate(NavScreens.TradeProposalScreen.route)
+                    }
+                )
+                {
+                    Text(
+                        text = "Request Trade",
+                        fontSize = 25.sp
+                    )
+                }
+            }
+        },
+        bottomBar = {BottomBar(navController = navController)}
+    )
 }
 
-@Preview
-@Composable
-fun PreviewViewItemScreen()
-{
-    ViewItemScreen()
-}
+//@Preview
+//@Composable
+//fun PreviewViewItemScreen()
+//{
+//    ViewItemScreen(NavController(context = Context))
+//}

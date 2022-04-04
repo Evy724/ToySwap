@@ -16,7 +16,8 @@ import kotlinx.coroutines.launch
 /**
  * View Model for use when using all toys in the server
  */
-class AllToysViewModel(): ViewModel() {
+class AllToysViewModel(): ViewModel()
+{
 
     //Get the service that handles loading of all toys
     private val toyService = RetrofitHelper.getAllToysService()

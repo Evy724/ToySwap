@@ -1,13 +1,13 @@
 package com.revature.project2.view.composables
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
+import android.util.Log
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,22 +20,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import com.revature.project2.MainActivity
 import com.revature.project2.R
+import com.revature.project2.model.api.user.Review
 import com.revature.project2.model.api.user.User
-import com.revature.project2.viewmodel.HistoryViewModel
-import com.revature.project2.viewmodel.ProfileViewModel
-import com.revature.project2.viewmodel.ReviewViewModel
-import com.revature.project2.viewmodel.UserToysViewModel
+import com.revature.project2.view.nav.NavScreens
+import com.revature.project2.viewmodel.*
 
 //Creates the column for the entire page and populates with profile features
 @Composable
 fun MyProfileScreen(
-    navController: NavController,
-    userToysViewModel: UserToysViewModel,
-    profileViewModel: ProfileViewModel,
-    historyViewModel: HistoryViewModel,
-    reviewViewModel: ReviewViewModel
+    navController: NavController
 ) {
     val scaffoldState = rememberScaffoldState(
         rememberDrawerState(DrawerValue.Closed)
@@ -46,19 +43,28 @@ fun MyProfileScreen(
             backgroundColor = MaterialTheme.colors.secondary) },
         content = {
 
-            val scrollState = rememberScrollState()
+            val scrollState = rememberLazyListState()
 
-            Column(
+            LazyColumn(
+                state = scrollState,
                 modifier = Modifier
                     .fillMaxSize()
-                    .verticalScroll(state = scrollState)
+                    .padding(bottom = 50.dp),
+//                    .verticalScroll(state = scrollState)
             ) {
-                MyProfileSection()
-                MyPostHistory()
-                MyUserReviews()
+                item{
+                    MyProfileSection()
+                }
+                item{
+                    MyPostHistory()
+                }
+                item {
+                    MyUserReviews()
+                }
             }
+        },
             bottomBar = { BottomBar(navController) }
-        })
+        )
 }
 //Populates the ProfileScreen column with the user's profile picture as well as their ProfileInfo
 @Composable
@@ -82,10 +88,13 @@ fun MyProfileSection(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.width(16.dp))
             MyStatSection(modifier = Modifier.weight(7f))
         }
-        val profileViewModel = ProfileViewModel()
+
+        //val profileViewModel = ProfileViewModel()
+        val profileViewModel = ViewModelProvider(context as MainActivity).get(ProfileViewModel::class.java)
+        val browseViewModel = ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
         MyProfileDescription(
-            name = "${profileViewModel.first_name} "+"${profileViewModel.last_name}",
-            email = "${profileViewModel.email}",
+            name = "${browseViewModel.currentUser!!.sName} ",
+            email = "${browseViewModel.currentUser!!.sEmail}",
             phoneNumber = "(123) 456 789"
         )
     }
@@ -191,16 +200,26 @@ fun MyPostHistory() {
                 fontSize = 30.sp
             )
         }
+        val context = LocalContext.current
         //Implementation of Ryan's LazyColumn list of ToyCards
+        val userToysViewModel = ViewModelProvider(context as MainActivity).get(UserToysViewModel::class.java)
         val toyList = userToysViewModel.userToys
-        LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            itemsIndexed(toyList) { _, item ->
-                ToyCard(toy = item)
+
+        toyList.forEach { toy->
+            ToyCard(toy = toy) {
+                //Clicked code
             }
         }
+//        LazyColumn(
+//            modifier = Modifier.fillMaxWidth(),
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+//            itemsIndexed(toyList) { _, item ->
+//                ToyCard(toy = item){
+//                    //What happens when clicked?
+//                }
+//            }
+//        }
     }
 }
 @Composable
@@ -222,15 +241,76 @@ fun MyUserReviews() {
                 fontSize = 30.sp
             )
         }
+        val context = LocalContext.current
+        val reviewViewModel = ViewModelProvider(context as MainActivity).get(ReviewViewModel::class.java)
+        val browseViewModel = ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
         //Implementation of Ryan's LazyColumn list of ReviewCards
-        val reviewList = reviewViewModel.getReviews
-        LazyColumn(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            itemsIndexed(reviewList) { _, item ->
-                ReviewCard(review = item)
-            }
+        reviewViewModel.getReviews(User(browseViewModel.currentUser!!.nUserId))
+        var reviewList:List<Review> = reviewViewModel.userReviews
+
+        //Dummy reviewlist
+        reviewList = listOf(
+
+            Review(
+                review_id = 0,
+                user = User(0),
+                description = "good",
+                rating = 4
+            ),
+            Review(
+                review_id = 1,
+                user = User(1),
+                description = "poor",
+                rating = 2
+            )
+        )
+
+        reviewList.forEach { review ->
+                //dummy code
+                Card(
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .clickable {
+
+                        },
+                    shape = MaterialTheme.shapes.medium,
+                    elevation = 5.dp,
+                    backgroundColor = MaterialTheme.colors.surface
+                ) {
+                    Row(){
+                        Text(text = " User Rating: ${review.rating}", style = MaterialTheme.typography.h3)
+                    }
+                }
+
         }
+//        LazyColumn(
+//            modifier = Modifier.fillMaxWidth(),
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+//            items(reviewList) { review ->
+//                //ReviewCard(review)
+//
+//                //dummy code
+//                Card(
+//                    modifier = Modifier
+//                        .padding(10.dp)
+//                        .fillMaxWidth()
+//                        .height(100.dp)
+//                        .wrapContentHeight()
+//                        .clickable {
+//
+//                        },
+//                    shape = MaterialTheme.shapes.medium,
+//                    elevation = 5.dp,
+//                    backgroundColor = MaterialTheme.colors.surface
+//                ) {
+//                    Row(){
+//                        Text(text = " User Rating: ${review.rating}")
+//                    }
+//                }
+//            }
+//        }
     }
 }

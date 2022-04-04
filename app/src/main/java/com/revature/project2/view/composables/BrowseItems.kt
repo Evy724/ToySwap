@@ -18,6 +18,7 @@ import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.AllToysViewModel
 import com.revature.project2.viewmodel.LoginViewModel
+import com.revature.project2.viewmodel.ToyItemViewModel
 
 /**
  * Browse Items screen using scaffold
@@ -25,7 +26,8 @@ import com.revature.project2.viewmodel.LoginViewModel
  * Uses ToyCard and BottomBar from shared file
  */
 @Composable
-fun BrowseItemsScreen(navController: NavController){
+fun BrowseItemsScreen(navController: NavController)
+{
 
     val context = LocalContext.current
     val browseViewModel = ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
@@ -34,22 +36,22 @@ fun BrowseItemsScreen(navController: NavController){
 
     Scaffold(//scaffoldState = scaffoldState,
         topBar = { TopAppBar( title = {Text("Browse Items: ")},
-        backgroundColor = MaterialTheme.colors.secondary) },
-        content = {
-
-        BrowseItemsBody(navController, browseViewModel.allToys )
+            backgroundColor = MaterialTheme.colors.secondary) },
+        content =
+        {
+            BrowseItemsBody(navController, browseViewModel.allToys )
         },
-        bottomBar = {
-
-        BottomBar(navController)
+        bottomBar =
+        {
+            BottomBar(navController)
         }
     )
 }
 @Composable
-fun BrowseItemsBody(navController: NavController, toyList:List<ToyItem>){
-
+fun BrowseItemsBody(navController: NavController, toyList:List<ToyItem>)
+{
+    val context = LocalContext.current
     val lazyState = rememberLazyListState()
-
 
     if (toyList.isNotEmpty())
     {
@@ -59,22 +61,27 @@ fun BrowseItemsBody(navController: NavController, toyList:List<ToyItem>){
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 50.dp),
-            horizontalAlignment = Alignment.CenterHorizontally){
+            horizontalAlignment = Alignment.CenterHorizontally)
+        {
 
             items(toyList){ toy->
                 Log.d("Browse Screen","Lazy Column call")
                 ToyCard(toy = toy){
+                    val viewVM = ViewModelProvider(context as MainActivity).get(ToyItemViewModel::class.java)
+                    viewVM.toy = toy
                     navController.navigate(NavScreens.ViewItemScreen.route)
                 }
             }
         }
     }
-    else {
+    else
+    {
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
-        ) {
+        )
+        {
             Text("Loading", style = MaterialTheme.typography.h3)
             Log.d("Browse Screen","Loading Screen")
 

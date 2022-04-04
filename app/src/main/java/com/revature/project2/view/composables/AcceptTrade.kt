@@ -1,5 +1,6 @@
 package com.revature.project2.ui
 
+import android.content.Context
 import android.hardware.camera2.CameraConstrainedHighSpeedCaptureSession
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -19,217 +20,221 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.revature.project2.R
+import com.revature.project2.view.composables.BottomBar
 
 @Composable
-fun AcceptTradeScreen()
+fun AcceptTradeScreen(navController: NavController)
 {
-    Column()
+    val scaffoldState = rememberScaffoldState()
+    Scaffold(scaffoldState = scaffoldState, topBar =
     {
-        // Accept trade offer top app bar
         TopAppBar(
-            title = { Text(text = "Accept Trade Offer") },
-            backgroundColor = MaterialTheme.colors.secondary,
+            title = { Text(text = "View Item") },
+            backgroundColor = MaterialTheme.colors.secondary
         )
-
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top,
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    MaterialTheme.colors.surface,
-                    RectangleShape
-                )
-        )
+    },
+        content =
         {
-            Spacer(modifier = Modifier.height(20.dp))
-
-            Text(
-                text = "Somebody wants to\ntrade with you!",
-                fontSize = 25.sp,
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Text(
-                text = "Proposed Trade:",
-                fontSize = 25.sp,
-                textAlign = TextAlign.Center
-            )
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Row(
-                modifier =
-                Modifier.padding(5.dp),
-                verticalAlignment = Alignment.Top,
-                horizontalArrangement = Arrangement.Center,
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        MaterialTheme.colors.surface,
+                        RectangleShape
+                    )
             )
             {
+                Spacer(modifier = Modifier.height(20.dp))
 
-                // Left column
-                Column(
-                    modifier = Modifier.padding(5.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                Text(
+                    text = "Somebody wants to\ntrade with you!",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(modifier = Modifier.height(15.dp))
+
+                Text(
+                    text = "Proposed Trade:",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Row(
+                    modifier =
+                    Modifier.padding(5.dp),
+                    verticalAlignment = Alignment.Top,
+                    horizontalArrangement = Arrangement.Center,
                 )
                 {
 
-                    Spacer(modifier = Modifier.height(40.dp))
-                    // Down arrow
-                    Image(
-                        painter = painterResource(id = R.drawable.down_arrow),
-                        contentDescription = "Down arrow",
-                        modifier = Modifier.size(70.dp),
-                        alignment = Alignment.BottomCenter
-                    )
-
-                    Spacer(modifier = Modifier.height(100.dp))
-
-                    // What you are trading box
-                    Surface(
-                        modifier = Modifier
-                            .height(70.dp)
-                            .width(100.dp),
-                        border = BorderStroke(
-                            width = 2.dp,
-                            color = Color.White
-                        )
+                    // Left column
+                    Column(
+                        modifier = Modifier.padding(5.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
                     )
                     {
-                        Text(
-                            text = "What you \nare trading\n->",
-                            textAlign = TextAlign.Center,
-                            fontSize = 17.sp
+
+                        Spacer(modifier = Modifier.height(40.dp))
+                        // Down arrow
+                        Image(
+                            painter = painterResource(id = R.drawable.down_arrow),
+                            contentDescription = "Down arrow",
+                            modifier = Modifier.size(70.dp),
+                            alignment = Alignment.BottomCenter
                         )
+
+                        Spacer(modifier = Modifier.height(100.dp))
+
+                        // What you are trading box
+                        Surface(
+                            modifier = Modifier
+                                .height(70.dp)
+                                .width(100.dp),
+                            border = BorderStroke(
+                                width = 2.dp,
+                                color = Color.White
+                            )
+                        )
+                        {
+                            Text(
+                                text = "What you \nare trading\n->",
+                                textAlign = TextAlign.Center,
+                                fontSize = 17.sp
+                            )
+                        }
+
+
+                        Spacer(modifier = Modifier.height(64.dp))
                     }
 
-
-                    Spacer(modifier = Modifier.height(64.dp))
-                }
-
-                // Middle column
-                Column(
-                    modifier = Modifier.padding(5.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                )
-                {
-
-                    // Toy pic for what the other user is trading
-                    Surface()
+                    // Middle column
+                    Column(
+                        modifier = Modifier.padding(5.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    )
                     {
+
+                        // Toy pic for what the other user is trading
+                        Surface()
+                        {
+                            Image(
+                                painter = painterResource(id = R.drawable.pokemon_legends_arceus_nintendo_switch_in_box),
+                                contentDescription = "Toy pic of Pokemon Legends Arceus from other user",
+                                modifier = Modifier.size(150.dp),
+                                alignment = Alignment.TopCenter
+                            )
+                        }
+
+                        // Toy pic for what you are trading
+                        Surface()
+                        {
+                            Image(
+                                painter = painterResource(R.drawable.sleeping_waddle_dee_plushie),
+                                contentDescription = "Toy pic of the sleeping Waddle Dee plushie from you",
+                                modifier = Modifier.size(150.dp),
+                                alignment = Alignment.BottomCenter
+                            )
+                        }
+                    }
+
+                    // Right column
+                    Column(
+                        modifier = Modifier.padding(5.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    )
+                    {
+                        Spacer(modifier = Modifier.height(40.dp))
+
+                        // What the other user is trading box
+                        Surface(
+                            modifier = Modifier
+                                .height(100.dp)
+                                .width(100.dp),
+                            border = BorderStroke(
+                                width = 2.dp,
+                                color = Color.White
+                            )
+                        )
+                        {
+                            Text(
+                                text = "What the \nother user \nis trading \n<-",
+                                textAlign = TextAlign.Center,
+                                fontSize = 17.sp
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(70.dp))
+
+                        // Up arrow
                         Image(
-                            painter = painterResource(id = R.drawable.pokemon_legends_arceus_nintendo_switch_in_box),
-                            contentDescription = "Toy pic of Pokemon Legends Arceus from other user",
-                            modifier = Modifier.size(150.dp),
+                            painter = painterResource(id = R.drawable.up_arrow),
+                            contentDescription = "Up arrow",
+                            modifier = Modifier.size(70.dp),
                             alignment = Alignment.TopCenter
                         )
                     }
-
-                    // Toy pic for what you are trading
-                    Surface()
-                    {
-                        Image(
-                            painter = painterResource(R.drawable.sleeping_waddle_dee_plushie),
-                            contentDescription = "Toy pic of the sleeping Waddle Dee plushie from you",
-                            modifier = Modifier.size(150.dp),
-                            alignment = Alignment.BottomCenter
-                        )
-                    }
                 }
 
-                // Right column
-                Column(
+                Text(
+                    text = "Will you accept this trade?",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                )
+
+                Row(
                     modifier = Modifier.padding(5.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
                 )
                 {
-                    Spacer(modifier = Modifier.height(40.dp))
-
-                    // What the other user is trading box
-                    Surface(
-                        modifier = Modifier
-                            .height(100.dp)
-                            .width(100.dp),
-                        border = BorderStroke(
-                            width = 2.dp,
-                            color = Color.White
-                        )
-                    )
+                    // Left accept button
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally)
                     {
-                        Text(
-                            text = "What the \nother user \nis trading \n<-",
-                            textAlign = TextAlign.Center,
-                            fontSize = 17.sp
-                        )
+                        Button(onClick = { /*TODO*/ })
+                        {
+                            Text(
+                                text = "Accept",
+                                fontSize = 15.sp,
+                                textAlign = TextAlign.Center
+                            )
+                        }
                     }
 
-                    Spacer(modifier = Modifier.height(70.dp))
-
-                    // Up arrow
-                    Image(
-                        painter = painterResource(id = R.drawable.up_arrow),
-                        contentDescription = "Up arrow",
-                        modifier = Modifier.size(70.dp),
-                        alignment = Alignment.TopCenter
+                    // Right decline button
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
                     )
-                }
-            }
-
-            Text(
-                text = "Will you accept this trade?",
-                fontSize = 25.sp,
-                textAlign = TextAlign.Center
-            )
-
-            Row(
-                modifier = Modifier.padding(5.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-            )
-            {
-                // Left accept button
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                )
-                {
-                    Button(onClick = { /*TODO*/ })
                     {
-                        Text(
-                            text = "Accept",
-                            fontSize = 15.sp,
-                            textAlign = TextAlign.Center
-                        )
-                    }
-                }
-
-                // Right decline button
-                Column(
-                    modifier = Modifier.padding(16.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                )
-                {
-                    Button(onClick = { /*TODO*/ })
-                    {
-                        Text(
-                            text = "Decline",
-                            fontSize = 15.sp,
-                            textAlign = TextAlign.Center
-                        )
+                        Button(onClick = { /*TODO*/ })
+                        {
+                            Text(
+                                text = "Decline",
+                                fontSize = 15.sp,
+                                textAlign = TextAlign.Center
+                            )
+                        }
                     }
                 }
             }
-        }
-    // Insert bottom bar
-    }
+        },
+        bottomBar = {BottomBar(navController = navController)}
+    )
 }
 
-@Preview
-@Composable
-fun PreviewAcceptTradeScreen()
-{
-    AcceptTradeScreen()
-}
+//@Preview
+//@Composable
+//fun PreviewAcceptTradeScreen()
+//{
+//    AcceptTradeScreen(navController = NavController(context = Context))
+//}
 

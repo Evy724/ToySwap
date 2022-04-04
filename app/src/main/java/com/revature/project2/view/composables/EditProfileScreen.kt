@@ -60,6 +60,6 @@ fun ChangeProfilePictureSection() {
 }
 @Composable
 fun ChangeCredentialsSection() {
-    TextField(value = , onValueChange = )
+    //TextField(value = , onValueChange = )
 
 }
