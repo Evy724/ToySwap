@@ -99,7 +99,7 @@ fun tradeFinalizeScreen(navController: NavController)
             Button(onClick = {
                 finalMessage=message
                 theirviewModel.getSendTrade_msg("TO-${myviewModel.toy!!.id}-${theirviewModel.theirToy!!.id}",finalMessage)
-                Toast.makeText(context, msgFromTVM,Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Proposal Request Sent",Toast.LENGTH_LONG).show()
 
 
                 navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
