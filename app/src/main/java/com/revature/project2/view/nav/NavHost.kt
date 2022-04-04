@@ -78,23 +78,26 @@ fun StartNav(app:MainActivity){
         }
 
         composable(NavScreens.FinalizeTradeScreen.route+"/{myToyID}/{theirToyID}/{myImage}/{theirImage}",
-        arguments = listOf(
-            navArgument("myToyID"){
-                type= NavType.IntType
-            },
-            navArgument("theirToyID"){
-                type= NavType.IntType
-            },
-            navArgument("myImage")
-            {
-                type= NavType.StringType
-            },
-            navArgument("theirImage")
-            {
-                type= NavType.StringType
-            }
+            arguments = listOf(
+                navArgument("myToyID")
+                {
+                    type= NavType.IntType
+                },
+                navArgument("theirToyID")
+                {
+                    type= NavType.IntType
+                },
+                navArgument("myImage")
+                {
+                    type= NavType.StringType
+                },
+                navArgument("theirImage")
+                {
+                    type= NavType.StringType
+                }
+            )
         )
-        ){
+        {
             var myToyID=it.arguments?.getInt("myToyID")?:0
             var theirToyID=it.arguments?.getInt("theirToyID")?:0
             var myImage=it.arguments?.getString("myImage")?:""
@@ -110,14 +113,42 @@ fun StartNav(app:MainActivity){
 
         }
 
-        //Add composable navigation here
+        // View Item Screen
 
-        composable(NavScreens.ViewItemScreen.route) {
-            ViewItemScreen()
+        composable(NavScreens.ViewItemScreen.route+"/{toyid}/{toyName}/{toyImage}/",
+            arguments = listOf(
+                navArgument("toyid")
+                {
+                    type= NavType.IntType
+                },
+
+                navArgument("toyName")
+                {
+                    type = NavType.StringType
+                },
+
+                navArgument("toyImage")
+                {
+                    type= NavType.StringType
+                },
+            )
+        )
+        {
+            var toyid = it.arguments?.getInt("toyid") ?: 0
+            var toyName = it.arguments?.getString("toyName") ?: ""
+            var toyImage = it.arguments?.getString("toyImage") ?: ""
+
+            ViewItemScreen(
+                navController = navController,
+                toyid = toyid,
+                toyName = toyName,
+                toyImage = toyImage
+            )
         }
 
+
         composable(NavScreens.AcceptTradeScreen.route){
-            AcceptTradeScreen()
+            AcceptTradeScreen(navController = navController)
         }
     }
 }

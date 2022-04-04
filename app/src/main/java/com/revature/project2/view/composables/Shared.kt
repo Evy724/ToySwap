@@ -44,9 +44,11 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit){
         },
         shape = MaterialTheme.shapes.medium,
         elevation = 5.dp,
-        backgroundColor = MaterialTheme.colors.surface){
+        backgroundColor = MaterialTheme.colors.surface)
+    {
 
-        Row(verticalAlignment = Alignment.Top) {
+        Row(verticalAlignment = Alignment.Top)
+        {
 
             Image(painter = rememberCoilPainter(
                 request = toy.sImagePath,),
@@ -61,7 +63,8 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit){
 
             Column( modifier = Modifier
                 .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally) {
+                horizontalAlignment = Alignment.CenterHorizontally)
+            {
 
                 Text(toy.sName,
                     style = MaterialTheme.typography.h5,
@@ -101,7 +104,7 @@ fun BottomBar(navController: NavController){
                 imageVector = Icons.Default.Search,
                 contentDescription = "")},
             label = {Text("Browse")}
-            )
+        )
 
         BottomNavigationItem(
             selected = selectedIndex.value == 1,

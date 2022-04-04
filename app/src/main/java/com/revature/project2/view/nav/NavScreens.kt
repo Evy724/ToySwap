@@ -3,8 +3,8 @@ package com.revature.project2.view.nav
 /**
  * List of screens in the app and their route (function name as string)
  */
-sealed class NavScreens(val route:String) {
-
+sealed class NavScreens(val route:String)
+{
     object LoginScreen:NavScreens("LoginScreen")
     object BrowseItemsScreen:NavScreens("BrowseItemsScreen")
     object PostedItemListScreen:NavScreens("PostedItemListScreen")
@@ -13,5 +13,4 @@ sealed class NavScreens(val route:String) {
     object FinalizeTradeScreen:NavScreens("FinalizeTradeScreen")
     object ViewItemScreen:NavScreens("ViewItemScreen")
     object AcceptTradeScreen:NavScreens("AcceptTradeScreen")
-
 }
