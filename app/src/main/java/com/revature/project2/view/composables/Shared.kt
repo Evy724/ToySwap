@@ -134,6 +134,23 @@ fun BottomBar(navController: NavController){
     }
 }
 
+@Composable
+fun ToyScaffold(sTitle:String,navController: NavController,  content:@Composable () -> Unit){
+
+    Scaffold(
+        topBar = { TopAppBar( title = {Text(sTitle)},
+            backgroundColor = MaterialTheme.colors.secondary) },
+        content =
+        {
+            content()
+        },
+        bottomBar =
+        {
+            BottomBar(navController)
+        }
+    )
+
+}
 
 @Composable
 fun ToyCardWithButton(toy: ToyItem,buttonText:String, onClick:()->Unit){

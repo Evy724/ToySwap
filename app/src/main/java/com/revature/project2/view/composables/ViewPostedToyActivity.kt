@@ -11,22 +11,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 
 
-@Composable
-fun viewPostedToyScreen(navController: NavController) {
-    Scaffold(bottomBar = { BottomBar(navController) }) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        )
-        {
-
-            screenTitlePostedToy()
-            postedToyDescription()
-            seeTradeRequestsOnItem()
-            removePost()
-
-        }
-    }
-}
+//@Composable
+//fun viewPostedToyScreen(navController: NavController) {
+//    Scaffold(bottomBar = { BottomBar(navController) }) {
+//        Column(
+//            modifier = Modifier.fillMaxSize(),
+//            verticalArrangement = Arrangement.Center,
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        )
+//        {
+//
+//            screenTitlePostedToy()
+//            postedToyDescription()
+//            seeTradeRequestsOnItem()
+//            removePost()
+//
+//        }
+//    }
+//}
 
