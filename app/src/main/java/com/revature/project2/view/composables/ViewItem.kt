@@ -36,13 +36,15 @@ fun ViewItemScreen(
     val context = LocalContext.current
     val viewVM = ViewModelProvider(context as MainActivity).get(ToyItemViewModel::class.java)
     val scaffoldState = rememberScaffoldState()
-    Scaffold(scaffoldState = scaffoldState, topBar =
-    {
-        TopAppBar(
-            title = { Text(text = "View Item") },
-            backgroundColor = MaterialTheme.colors.secondary
-        )
-    },
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar =
+        {
+            TopAppBar(
+                title = { Text(text = "View Item") },
+                backgroundColor = MaterialTheme.colors.secondary
+            )
+        },
         content =
         {
             Column(horizontalAlignment = Alignment.CenterHorizontally,
