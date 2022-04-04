@@ -11,6 +11,8 @@ import androidx.compose.ui.Modifier
 import com.revature.project2.ui.theme.Project2Theme
 import com.revature.project2.view.nav.StartNav
 
+//import com.revature.project2.view.nav.StartNav
+
 
 
 class MainActivity : ComponentActivity() {
@@ -28,7 +30,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     Log.d("MainActivity","Main activity Set Content")
 
-                    //Start our app's navigation
+//                    Start our app's navigation
                     StartNav(app)
 
                 }

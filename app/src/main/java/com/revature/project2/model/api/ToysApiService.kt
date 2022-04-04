@@ -16,6 +16,9 @@ import com.revature.project2.model.api.user.Profile
 import com.revature.project2.model.api.user.Review
 import com.revature.project2.model.api.user.User
 import com.revature.project2.model.api.usertoys.RequestUserToys
+
+import com.revature.project2.model.api.finalizetradeoffer.SendTrade_Request_API
+import com.revature.project2.model.api.finalizetradeoffer.SendTrade_Response_API
 import com.revature.project2.model.api.viewitem.ViewItem_Request_API
 import com.revature.project2.model.api.viewitem.ViewItem_Response_API
 import retrofit2.Response
@@ -56,6 +59,11 @@ interface ToysApiService {
     ):
             Response<ViewItem_Response_API>
 
+    @POST("SendTrade")
+    suspend fun getSendTradeOffer_msg(
+        @Body sendTradeRequestApi: SendTrade_Request_API
+    ):
+            Response<SendTrade_Response_API>
 
     /**
      * Retrieves the user's profile from the server

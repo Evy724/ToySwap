@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
 import com.revature.project2.MainActivity
+
 import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.view.composables.BottomBar
@@ -83,7 +84,7 @@ fun ViewItemScreen(
                 // To trade proposal screen
                 Button(
                     onClick = {
-//                        navController.navigate(NavScreens.TradeProposalScreen.route)
+                        navController.navigate(NavScreens.TradeProposalScreen.route)
                     }
                 )
                 {
