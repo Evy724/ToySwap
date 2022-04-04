@@ -33,19 +33,23 @@ fun BrowseItemsScreen(navController: NavController)
     val browseViewModel = ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
 
     Log.d("Browse Screen", "Browse Screen Start")
+    ToyScaffold(sTitle = "Browse Items", navController = navController) {
 
-    Scaffold(//scaffoldState = scaffoldState,
-        topBar = { TopAppBar( title = {Text("Browse Items: ")},
-            backgroundColor = MaterialTheme.colors.secondary) },
-        content =
-        {
-            BrowseItemsBody(navController, browseViewModel.allToys )
-        },
-        bottomBar =
-        {
-            BottomBar(navController)
-        }
-    )
+        BrowseItemsBody(navController, browseViewModel.allToys )
+    }
+
+//    Scaffold(//scaffoldState = scaffoldState,
+//        topBar = { TopAppBar( title = {Text("Browse Items: ")},
+//            backgroundColor = MaterialTheme.colors.secondary) },
+//        content =
+//        {
+//            BrowseItemsBody(navController, browseViewModel.allToys )
+//        },
+//        bottomBar =
+//        {
+//            BottomBar(navController)
+//        }
+//    )
 }
 @Composable
 fun BrowseItemsBody(navController: NavController, toyList:List<ToyItem>)
