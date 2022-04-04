@@ -47,19 +47,20 @@ fun ViewItemScreen(
         },
         content =
         {
-            Column(horizontalAlignment = Alignment.CenterHorizontally,
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .background(
                         MaterialTheme.colors.surface,
                         RectangleShape
                     )
+                    .fillMaxWidth()
             )
             {
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Text(
-//                    text = "My Melody Pop! Vinyl Figure",
                     viewVM.toy!!.sName,
                     fontSize = 30.sp,
                     textAlign = TextAlign.Center
@@ -69,7 +70,6 @@ fun ViewItemScreen(
 
                 // Toy image
                 Image(
-//                    painter = painterResource(id = R.drawable.my_melody_funko_pop_in_box),
                     painter = rememberCoilPainter(request = viewVM.toy!!.sImagePath,),
                     contentDescription = null,
                     Modifier.size(250.dp)
@@ -85,7 +85,8 @@ fun ViewItemScreen(
 
                 // To trade proposal screen
                 Button(
-                    onClick = {
+                    onClick =
+                    {
                         navController.navigate(NavScreens.TradeProposalScreen.route)
                     }
                 )
@@ -101,9 +102,3 @@ fun ViewItemScreen(
     )
 }
 
-//@Preview
-//@Composable
-//fun PreviewViewItemScreen()
-//{
-//    ViewItemScreen(NavController(context = Context))
-//}
