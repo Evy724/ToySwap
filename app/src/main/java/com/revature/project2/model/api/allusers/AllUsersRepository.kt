@@ -25,7 +25,7 @@ class AllUsersRepository(val apiService: ToysApiService) {
             Result.Success(userList)
 
         }catch (e:Exception){
-            Log.d("User Repository", "Users Loading Failed")
+            Log.d("User Repository", "Users Loading Failed - ${e.message}")
             Result.Failure(e)
 
         }

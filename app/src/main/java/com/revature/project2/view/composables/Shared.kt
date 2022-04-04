@@ -119,7 +119,9 @@ fun BottomBar(navController: NavController){
         BottomNavigationItem(
             selected = selectedIndex.value == 2,
             onClick = {
-                selectedIndex.value = 2 },
+                selectedIndex.value = 2
+                navController.navigate(NavScreens.ProfileScreen.route)
+            },
             icon = { Icon(
                 imageVector = Icons.Default.Person,
                 contentDescription = "")},
