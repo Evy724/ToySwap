@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import com.revature.project2.MainActivity
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.AllToysViewModel
+import com.revature.project2.viewmodel.ToyItemViewModel
 import com.revature.project2.viewmodel.UserToysViewModel
 
 @Composable
@@ -24,8 +25,16 @@ fun PostedItemsScreen(navController: NavController){
 
     val scaffoldState = rememberScaffoldState()
     val context = LocalContext.current
+
     val userToysViewModel =
         ViewModelProvider(context as MainActivity).get(UserToysViewModel::class.java)
+
+    userToysViewModel.getUserOffers()
+
+    val itemViewModel =
+        ViewModelProvider(context).get(ToyItemViewModel::class.java)
+
+    val offerlist = userToysViewModel.userTradeOffers
 
     Scaffold(scaffoldState = scaffoldState,
         topBar = { TopAppBar( title = { Text("Posted Items: ") },
@@ -61,12 +70,19 @@ fun PostedItemsScreen(navController: NavController){
                     ) {
 
                         itemsIndexed(toyList) { _, item ->
-                            ToyCard(toy = item){
+
+                            var bNotice = false
+                            offerlist.forEach {
+                                if (item.id == it.nUserToyId)
+                                    bNotice = true
+                            }
+
+                            ToyCard(toy = item, bNotification = bNotice){
+                                itemViewModel.toy = item
                                 navController.navigate(NavScreens.ViewItemScreen.route)
                             }
                         }
                     }
-
                 } else {
 
                     Column(
@@ -77,20 +93,6 @@ fun PostedItemsScreen(navController: NavController){
                         Text("Loading", style = MaterialTheme.typography.h3)
                     }
                 }
-//
-//                Spacer(Modifier.size(40.dp))
-//                Button(modifier =
-//                Modifier
-//                    .padding(5.dp)
-//                    .fillMaxWidth(.5f),
-//                    onClick = {
-//
-//                    }) {
-//                    Text(text = "Post Toy")
-//
-//                }
-                
-                
             }
         },
         bottomBar = {BottomBar(navController = navController)}

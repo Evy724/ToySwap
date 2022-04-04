@@ -19,6 +19,8 @@ import com.revature.project2.model.api.usertoys.RequestUserToys
 
 import com.revature.project2.model.api.finalizetradeoffer.SendTrade_Request_API
 import com.revature.project2.model.api.finalizetradeoffer.SendTrade_Response_API
+import com.revature.project2.model.api.tradeoffers.RequestUserOffers
+import com.revature.project2.model.api.tradeoffers.ResponseUserOffers
 import com.revature.project2.model.api.viewitem.ViewItem_Request_API
 import com.revature.project2.model.api.viewitem.ViewItem_Response_API
 import retrofit2.Response
@@ -80,5 +82,9 @@ interface ToysApiService {
     @POST("users")
     suspend fun getUsers(@Body AllUsersRequest: AllUsersRequest)
             : AllUsersResponse
+
+    @POST("pendingoffers")
+    suspend fun getUserOffers(@Body RequestUserOffers: RequestUserOffers)
+            : ResponseUserOffers
 
 }

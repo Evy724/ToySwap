@@ -28,6 +28,8 @@ import com.revature.project2.model.api.allusers.User
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.AllToysViewModel
 import com.revature.project2.viewmodel.LoginViewModel
+import com.revature.project2.viewmodel.UserToysViewModel
+import com.revature.project2.viewmodel.UserToysViewModelFactory
 
 @Composable
 fun Login(navController: NavController
@@ -60,6 +62,9 @@ fun LoginBody(navController: NavController){
     val loginViewModel = ViewModelProvider(context as MainActivity).get(LoginViewModel::class.java)
 
     val userList = loginViewModel.allUsers
+
+    var postUserVMFactory:UserToysViewModelFactory
+
 
     if (userList.isNotEmpty()){
         loginButtonText = "Log In:"
@@ -110,8 +115,12 @@ fun LoginBody(navController: NavController){
                 var user:User? = loginViewModel.existingUserCheck(sName,sPass)
                 if (user != null){
 
+                    postUserVMFactory = UserToysViewModelFactory(user)
+
                     val browseVM =
                         ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
+                    val userVM =
+                        ViewModelProvider(context,postUserVMFactory).get(UserToysViewModel::class.java)
                     browseVM.currentUser = user
                     Log.d("Login Screen","Current User Set")
 

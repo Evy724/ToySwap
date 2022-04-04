@@ -32,11 +32,11 @@ import com.revature.project2.view.nav.NavScreens
  * button functionality not created yet
  */
 @Composable
-fun ToyCard(toy: ToyItem, onClick: () -> Unit){
+fun ToyCard(toy: ToyItem, bNotification:Boolean = false, onClick: () -> Unit){
 
     Card(modifier = Modifier
         .padding(10.dp)
-        .fillMaxWidth(.8f)
+        .fillMaxWidth()
         .height(150.dp)
         .wrapContentHeight()
         .clickable {
@@ -61,8 +61,7 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit){
 
             Spacer(Modifier.size(5.dp))
 
-            Column( modifier = Modifier
-                .fillMaxWidth(),
+            Column(
                 horizontalAlignment = Alignment.Start)
             {
                 Spacer(Modifier.size(10.dp))
@@ -75,6 +74,22 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit){
                 Text(text = "Added By: ${toy.posterId}",
                     style = MaterialTheme.typography.body1)
             }
+
+            if (bNotification)
+            {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(50.dp)
+                    )
+                }
+            }
+
         }
 
     }
