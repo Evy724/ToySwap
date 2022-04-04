@@ -1,6 +1,8 @@
 package com.revature.project2.view.nav
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavArgument
+import androidx.navigation.NavDeepLinkSaveStateControl
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -102,14 +104,11 @@ fun StartNav(app:MainActivity){
 
         }
 
-        //Add composable navigation here
-
-        composable(NavScreens.ViewItemScreen.route) {
-            ViewItemScreen()
-        }
+        // View Item Screen
+        composable(NavScreens.ViewItemScreen.route){ViewItemScreen(navController = navController)}
 
         composable(NavScreens.AcceptTradeScreen.route){
-            AcceptTradeScreen()
+            AcceptTradeScreen(navController = navController)
         }
         composable(NavScreens.ProfileScreen.route){
             MyProfileScreen(navController = navController)
