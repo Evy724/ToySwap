@@ -36,8 +36,8 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit){
 
     Card(modifier = Modifier
         .padding(10.dp)
-        .fillMaxWidth()
-        .height(100.dp)
+        .fillMaxWidth(.8f)
+        .height(150.dp)
         .wrapContentHeight()
         .clickable {
             onClick()
@@ -54,7 +54,7 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit){
                 request = toy.sImagePath,),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(100.dp)
+                    .size(150.dp)
                     .padding(5.dp),
                 contentScale = ContentScale.Fit
             )
@@ -63,16 +63,16 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit){
 
             Column( modifier = Modifier
                 .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally)
+                horizontalAlignment = Alignment.Start)
             {
+                Spacer(Modifier.size(10.dp))
 
                 Text(toy.sName,
-                    style = MaterialTheme.typography.h5,
-                    textAlign = TextAlign.Center)
+                    style = MaterialTheme.typography.h5)
 
-                Spacer(Modifier.size(2.dp))
+                Spacer(Modifier.size(50.dp))
 
-                Text(text = toy.sDescription,
+                Text(text = "Added By: ${toy.posterId}",
                     style = MaterialTheme.typography.body1)
             }
         }
