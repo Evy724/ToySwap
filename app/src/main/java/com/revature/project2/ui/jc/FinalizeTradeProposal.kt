@@ -23,23 +23,28 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
+import com.revature.project2.MainActivity
 import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.ui.theme.Project2Theme
 import com.revature.project2.view.composables.BottomBar
 import com.revature.project2.view.nav.NavScreens
+import com.revature.project2.viewmodel.ToyItemViewModel
 import com.revature.project2.viewmodel.TradeViewModel
 import com.revature.project2.viewmodel.UserToysViewModel
 import com.revature.project2.viewmodel.msgFromTVM
 
 @Composable
-fun tradeFinalizeScreen(navController: NavController, myToyID: Int, theirToyID:Int,myImage:String,theirImage:String)
+fun tradeFinalizeScreen(navController: NavController)
 {
-     val viewModel= TradeViewModel()
-    var message by rememberSaveable{ mutableStateOf("")}
     val context= LocalContext.current
+    val theirviewModel=  ViewModelProvider(context as MainActivity).get(TradeViewModel::class.java)
+    val myviewModel=  ViewModelProvider(context as MainActivity).get(ToyItemViewModel::class.java)
+    var message by rememberSaveable{ mutableStateOf("")}
+
 
     var finalMessage=""
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top) {
@@ -52,7 +57,7 @@ fun tradeFinalizeScreen(navController: NavController, myToyID: Int, theirToyID:I
 
             Spacer(modifier = Modifier.height(20.dp))
             Image(
-                painter = rememberCoilPainter(request = theirImage), contentDescription = "",
+                painter = rememberCoilPainter(request = theirviewModel.theirToy!!.sImagePath), contentDescription = "",
                 modifier = Modifier
                     .width(150.dp)
                     .height(150.dp)
@@ -75,7 +80,7 @@ fun tradeFinalizeScreen(navController: NavController, myToyID: Int, theirToyID:I
             }
             Spacer(modifier = Modifier.height(50.dp))
             Image(
-                painter = rememberCoilPainter(request = myImage), contentDescription = "",
+                painter = rememberCoilPainter(request = myviewModel.toy!!.sImagePath), contentDescription = "",
                 modifier = Modifier
                     .width(150.dp)
                     .height(150.dp)
@@ -93,7 +98,7 @@ fun tradeFinalizeScreen(navController: NavController, myToyID: Int, theirToyID:I
             Spacer(modifier = Modifier.height(20.dp))
             Button(onClick = {
                 finalMessage=message
-                viewModel.getSendTrade_msg("TO-${myToyID}-${theirToyID}",finalMessage)
+                theirviewModel.getSendTrade_msg("TO-${myviewModel.toy!!.id}-${theirviewModel.theirToy!!.id}",finalMessage)
                 Toast.makeText(context, msgFromTVM,Toast.LENGTH_LONG).show()
 
 
@@ -122,7 +127,7 @@ fun previewFT() {
         // A surface container using the 'background' color from the theme
         val context= LocalContext.current
         val navController=NavController(context)
-        tradeFinalizeScreen(navController = navController,1,1,"","")
+        tradeFinalizeScreen(navController = navController)
     }
 }
 

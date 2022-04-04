@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.revature.project2.model.api.RetrofitHelper
 import com.revature.project2.model.api.ToysApiService
+import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.model.api.alltoys.Trade_msg
 import com.revature.project2.model.api.finalizetradeoffer.SendTrade_Request_API
 import com.revature.project2.model.api.finalizetradeoffer.SendTrade_Response_API
@@ -15,6 +16,7 @@ import kotlinx.coroutines.launch
 import java.lang.Exception
 var msgFromTVM:String=""
 class TradeViewModel: ViewModel(){
+    var theirToy:ToyItem?=null
 
     fun getSendTrade_msg(_tradeRequestID:String,_tradeRequest_msg:String){
         viewModelScope.launch(Dispatchers.IO) {

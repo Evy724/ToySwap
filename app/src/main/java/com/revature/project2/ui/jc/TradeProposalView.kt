@@ -19,8 +19,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
+import com.revature.project2.MainActivity
 
 import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
@@ -30,11 +32,16 @@ import com.revature.project2.view.composables.ToyCard
 import com.revature.project2.view.composables.ToyCardWithButton
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.AllToysViewModel
+import com.revature.project2.viewmodel.ToyItemViewModel
+import com.revature.project2.viewmodel.TradeViewModel
 import com.revature.project2.viewmodel.UserToysViewModel
 
 @Composable
-fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToysViewModel,toyid:Int,toyImage:String)
+fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToysViewModel)
 {
+    val context = LocalContext.current
+    val viewModel=  ViewModelProvider(context as MainActivity).get(TradeViewModel::class.java)
+    val viewVM = ViewModelProvider(context as MainActivity).get(ToyItemViewModel::class.java)
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Top) {
         TopAppBar() {
             Text(text = "Trade Proposal")
@@ -47,7 +54,7 @@ fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToy
             Text(text = "Average response time: ", textAlign= TextAlign.Center)
         }
         Spacer(modifier = Modifier.height(20.dp))
-        Image(painter = rememberCoilPainter(request = toyImage), contentDescription = "",
+        Image(painter = rememberCoilPainter(request = viewVM.toy!!.sImagePath), contentDescription = "",
             modifier = Modifier
                 .width(150.dp)
                 .height(150.dp)
@@ -73,11 +80,12 @@ fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToy
         ) {
 
             itemsIndexed(toyList) { _, item ->
-                ToyCardWithButton(toy = item,"Trade") {
+                ToyCard(toy = item){
+                    viewModel.theirToy=item
                     navController
                         .navigate(
                             NavScreens.FinalizeTradeScreen
-                                .route + "/${item.id}/${toyid}/${item.sImagePath}/${toyImage}"
+                                .route
                         )
                 }
             }
@@ -92,6 +100,6 @@ fun preview() {
     Project2Theme {
         val context= LocalContext.current
         val navController=NavController(context)
-        tradeProposalScreen(navController = navController,UserToysViewModel(),1,"R.drawable.lego")
+        tradeProposalScreen(navController = navController,UserToysViewModel())
     }
 }
