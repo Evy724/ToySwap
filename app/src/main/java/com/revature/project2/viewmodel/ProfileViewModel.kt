@@ -35,4 +35,26 @@ class ProfileViewModel: ViewModel() {
             }
         }
     }
+    fun getFirstName(profile: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val profileService = RetrofitHelper.getProfileService()
+                val responseService = profileService.getProfile(profile)
+
+                if (responseService.isSuccessful) {
+                    responseService.body()?.let { first_name ->
+                        Log.d("first_name", "Response first_name $first_name")
+                    }
+                } else {
+                    responseService.errorBody()?.let { error ->
+                        Log.d("first_name", "Response first_name $error")
+                        error.close()
+                    }
+                }
+                getProfileRequestLiveData.postValue(responseService.isSuccessful)
+            } catch (e: Exception) {
+                Log.d("first_name", "Exception in Networking $e")
+            }
+        }
+    }
 }

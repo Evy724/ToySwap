@@ -1,7 +1,8 @@
-package com.revature.project2.view
+package com.revature.project2.view.composables
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -59,6 +60,6 @@ fun ChangeProfilePictureSection() {
 }
 @Composable
 fun ChangeCredentialsSection() {
-
+    TextField(value = , onValueChange = )
 
 }

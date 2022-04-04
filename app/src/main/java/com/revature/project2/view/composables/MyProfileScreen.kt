@@ -1,45 +1,70 @@
-package com.revature.project2.view
+package com.revature.project2.view.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.revature.project2.R
+import com.revature.project2.model.api.user.User
+import com.revature.project2.viewmodel.HistoryViewModel
+import com.revature.project2.viewmodel.ProfileViewModel
+import com.revature.project2.viewmodel.ReviewViewModel
+import com.revature.project2.viewmodel.UserToysViewModel
 
 //Creates the column for the entire page and populates with profile features
-@Preview(showBackground = true)
 @Composable
-fun MyProfileScreen() {
+fun MyProfileScreen(
+    navController: NavController,
+    userToysViewModel: UserToysViewModel,
+    profileViewModel: ProfileViewModel,
+    historyViewModel: HistoryViewModel,
+    reviewViewModel: ReviewViewModel
+) {
+    val scaffoldState = rememberScaffoldState(
+        rememberDrawerState(DrawerValue.Closed)
+    )
 
-    val scrollState = rememberScrollState()
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .verticalScroll(state = scrollState)
-    ) {
-        MyProfileSection()
-        MyPostHistory()
-        MyUserReviews()
-    }
+    Scaffold(scaffoldState = scaffoldState,
+        topBar = { TopAppBar( title = {Text("My Profile: ")},
+            backgroundColor = MaterialTheme.colors.secondary) },
+        content = {
+
+            val scrollState = rememberScrollState()
+
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(state = scrollState)
+            ) {
+                MyProfileSection()
+                MyPostHistory()
+                MyUserReviews()
+            }
+            bottomBar = { BottomBar(navController) }
+        })
 }
 //Populates the ProfileScreen column with the user's profile picture as well as their ProfileInfo
 @Composable
 fun MyProfileSection(modifier: Modifier = Modifier) {
 
+    val context = LocalContext.current
     Column(modifier = modifier.fillMaxWidth()) {
         Spacer(modifier = Modifier.height(20.dp))
         Row(
@@ -57,9 +82,10 @@ fun MyProfileSection(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.width(16.dp))
             MyStatSection(modifier = Modifier.weight(7f))
         }
+        val profileViewModel = ProfileViewModel()
         MyProfileDescription(
-            name = "Evan Jones",
-            email = "evan687@revature.net",
+            name = "${profileViewModel.first_name} "+"${profileViewModel.last_name}",
+            email = "${profileViewModel.email}",
             phoneNumber = "(123) 456 789"
         )
     }
@@ -166,14 +192,15 @@ fun MyPostHistory() {
             )
         }
         //Implementation of Ryan's LazyColumn list of ToyCards
-//        LazyColumn(
-//            modifier = Modifier.fillMaxWidth(),
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
-//            itemsIndexed(toyList) { _, item ->
-//                ToyCard(toy = item)
-//            }
-//        }
+        val toyList = userToysViewModel.userToys
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            itemsIndexed(toyList) { _, item ->
+                ToyCard(toy = item)
+            }
+        }
     }
 }
 @Composable
@@ -196,13 +223,14 @@ fun MyUserReviews() {
             )
         }
         //Implementation of Ryan's LazyColumn list of ReviewCards
-//        LazyColumn(
-//            modifier = Modifier.fillMaxWidth(),
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
-//            itemsIndexed(reviewList) { _, item ->
-//                ReviewCard(review = item)
-//            }
-//        }
+        val reviewList = reviewViewModel.getReviews
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            itemsIndexed(reviewList) { _, item ->
+                ReviewCard(review = item)
+            }
+        }
     }
 }
