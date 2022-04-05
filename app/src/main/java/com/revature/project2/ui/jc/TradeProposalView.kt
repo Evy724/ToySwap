@@ -28,6 +28,7 @@ import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.ui.theme.Project2Theme
 import com.revature.project2.view.composables.BottomBar
+import com.revature.project2.view.composables.Header
 import com.revature.project2.view.composables.ToyCard
 import com.revature.project2.view.composables.ToyCardWithButton
 import com.revature.project2.view.nav.NavScreens
@@ -42,10 +43,9 @@ fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToy
     val context = LocalContext.current
     val viewModel=  ViewModelProvider(context as MainActivity).get(TradeViewModel::class.java)
     val viewVM = ViewModelProvider(context as MainActivity).get(ToyItemViewModel::class.java)
-    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Top) {
-        TopAppBar() {
-            Text(text = "Trade Proposal")
-        }
+    Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Top)
+    {
+        Header(text = "Trade Proposal")
     }
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Bottom) {
 

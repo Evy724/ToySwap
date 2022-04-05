@@ -23,6 +23,7 @@ import com.revature.project2.MainActivity
 import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.view.composables.BottomBar
+import com.revature.project2.view.composables.Header
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.ToyItemViewModel
 import android.content.Context as Context
@@ -38,13 +39,6 @@ fun ViewItemScreen(
     val scaffoldState = rememberScaffoldState()
     Scaffold(
         scaffoldState = scaffoldState,
-        topBar =
-        {
-            TopAppBar(
-                title = { Text(text = "View Item") },
-                backgroundColor = MaterialTheme.colors.secondary
-            )
-        },
         content =
         {
             Column(
@@ -58,6 +52,8 @@ fun ViewItemScreen(
                     .fillMaxWidth()
             )
             {
+                Header(text = "View Item")
+
                 Spacer(modifier = Modifier.height(20.dp))
 
                 Text(

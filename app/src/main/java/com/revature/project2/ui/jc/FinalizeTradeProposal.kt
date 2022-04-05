@@ -31,6 +31,7 @@ import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.ui.theme.Project2Theme
 import com.revature.project2.view.composables.BottomBar
+import com.revature.project2.view.composables.Header
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.ToyItemViewModel
 import com.revature.project2.viewmodel.TradeViewModel
@@ -47,20 +48,18 @@ fun tradeFinalizeScreen(navController: NavController)
 
 
     var finalMessage=""
-    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top) {
-        TopAppBar() {
-            Text(text = "Finalize Trade")
-        }
-    }
+//    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top)
 
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Bottom) {
 
-            Spacer(modifier = Modifier.height(20.dp))
-            Image(
+        Header(text = "Finalize Trade")
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        Image(
                 painter = rememberCoilPainter(request = theirviewModel.theirToy!!.sImagePath), contentDescription = "",
                 modifier = Modifier
-                    .width(150.dp)
-                    .height(150.dp)
+                    .size(100.dp)
                     .border(width = 1.dp, color = Color.Black)
             )
             Spacer(modifier = Modifier.height(50.dp))
@@ -82,8 +81,7 @@ fun tradeFinalizeScreen(navController: NavController)
             Image(
                 painter = rememberCoilPainter(request = myviewModel.toy!!.sImagePath), contentDescription = "",
                 modifier = Modifier
-                    .width(150.dp)
-                    .height(150.dp)
+                    .size(100.dp)
                     .border(width = 1.dp, color = Color.Black)
             )
             Spacer(modifier = Modifier.height(50.dp))

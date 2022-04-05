@@ -2,6 +2,7 @@ package com.revature.project2.view.composables
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -16,16 +17,53 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
 import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
+import com.revature.project2.ui.theme.*
 import com.revature.project2.view.nav.NavScreens
 
+// Header for all screens
+@Composable
+fun Header(
+    text: String,
+    modifier: Modifier = Modifier
+)
+{
+    Text(
+        text = text,
+        modifier = modifier
+            .fillMaxWidth()
+            .background(
+                Brush.horizontalGradient(
+                    colors = listOf(
+                        MediumDarkRed,
+                        PinkishRed
+                    )
+                )
+            )
+            .semantics { heading() }
+            .padding(horizontal = 16.dp, vertical = 8.dp),
+        color = MaterialTheme.colors.surface,
+        style = Project2Typography.h6
+    )
 
+    Spacer(modifier = Modifier.height(10.dp))
+}
+
+@Composable
+fun MainToyPosterImage()
+{
+    Image(painter = painterResource(id = R.drawable.), contentDescription = "Main toy poster for whole app")
+}
 /**
  * Toy Display card
  *
@@ -86,12 +124,23 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit){
  * button functionality not created yet
  */
 @Composable
-fun BottomBar(navController: NavController){
+fun BottomBar(navController: NavController)
+{
     
     val selectedIndex = rememberSaveable { mutableStateOf(0) }
     BottomNavigation(
         elevation = 5.dp,
-        backgroundColor = MaterialTheme.colors.secondary) {
+//        backgroundColor = MaterialTheme.colors.secondary,
+//        modifier = Modifier.background(
+//            Brush.horizontalGradient(
+//                colors = listOf(
+//                    TealGreen,
+//                    Teal200
+//                )
+//            )
+//        )
+    )
+    {
         
         BottomNavigationItem(
             selected = selectedIndex.value == 0,

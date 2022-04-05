@@ -20,10 +20,9 @@ fun Register(navController: NavController){
 
     Scaffold (
         scaffoldState = scaffoldState,
-        topBar = { TopAppBar( title = { Text("Register: ") },
-            backgroundColor = MaterialTheme.colors.secondary) },
-        content = {
-
+        content =
+        {
+            Header(text = "Register")
             Column(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally

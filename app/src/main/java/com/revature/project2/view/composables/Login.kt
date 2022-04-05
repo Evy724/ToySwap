@@ -3,6 +3,8 @@ package com.revature.project2.view.composables
 import android.app.Application
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -14,8 +16,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.heading
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
@@ -23,8 +30,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.revature.project2.MainActivity
+import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.model.api.allusers.User
+import com.revature.project2.ui.theme.Project2Theme
+import com.revature.project2.ui.theme.Project2Typography
+import com.revature.project2.ui.theme.Teal200
+import com.revature.project2.ui.theme.TealGreen
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.AllToysViewModel
 import com.revature.project2.viewmodel.LoginViewModel
@@ -39,18 +51,18 @@ fun Login(navController: NavController
 
     Scaffold (
         scaffoldState = scaffoldState,
-        topBar = { TopAppBar( title = { Text("Log in: ") },
-            backgroundColor = MaterialTheme.colors.secondary) },
-        content = {
+        content =
+        {
+            Header(text = "Log in")
             LoginBody(
                 navController = navController
             )
         }
     )
 }
-
 @Composable
-fun LoginBody(navController: NavController){
+fun LoginBody(navController: NavController)
+{
 
     val context = LocalContext.current
     var loginButtonText by rememberSaveable { mutableStateOf("Loading") }
@@ -71,14 +83,18 @@ fun LoginBody(navController: NavController){
 
     Column(
         modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+        horizontalAlignment = Alignment.CenterHorizontally,
+
+    )
+    {
 
         Spacer(Modifier.size(60.dp))
 
         Text(
             text ="Toys R' Swapped",
-            style = MaterialTheme.typography.h3)
+//            style = Project2Typography.h3
+            style = MaterialTheme.typography.h3
+        )
 
         Spacer(Modifier.size(60.dp))
 
@@ -98,7 +114,8 @@ fun LoginBody(navController: NavController){
         Spacer(modifier = Modifier.size(30.dp))
 
 
-        Button(enabled = bEnabled,
+        Button(
+            enabled = bEnabled,
             onClick = {
                 Log.d("Login Screen","Login Button Clicked")
 
@@ -131,7 +148,9 @@ fun LoginBody(navController: NavController){
 //                                loginButtonText = "Login"
 //                                bEnabled = true
 //                            }
-                } else{
+                }
+                else
+                {
 
                     //If it doesnt, reset the Screen
                     Toast.makeText(
@@ -164,7 +183,7 @@ fun LoginBody(navController: NavController){
 
                     navController.navigate(NavScreens.RegisterScreen.route)
                 },
-            style = MaterialTheme.typography.body1
+            style = Project2Typography.body2
         )
     }
 

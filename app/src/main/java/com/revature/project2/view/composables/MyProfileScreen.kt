@@ -39,32 +39,44 @@ fun MyProfileScreen(
     )
 
     Scaffold(scaffoldState = scaffoldState,
-        topBar = { TopAppBar( title = {Text("My Profile: ")},
-            backgroundColor = MaterialTheme.colors.secondary) },
-        content = {
 
-            val scrollState = rememberLazyListState()
+        content =
+        {
 
-            LazyColumn(
-                state = scrollState,
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(bottom = 50.dp),
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            )
+            {
+                Header(text = "My Profile")
+
+                val scrollState = rememberLazyListState()
+
+                LazyColumn(
+                    state = scrollState,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(bottom = 50.dp),
 //                    .verticalScroll(state = scrollState)
-            ) {
-                item{
-                    MyProfileSection()
-                }
-                item{
-                    MyPostHistory()
-                }
-                item {
-                    MyUserReviews()
+                )
+                {
+                    item()
+                    {
+                        MyProfileSection()
+                    }
+                    item()
+                    {
+                        MyPostHistory()
+                    }
+                    item()
+                    {
+                        MyUserReviews()
+                    }
                 }
             }
         },
-            bottomBar = { BottomBar(navController) }
-        )
+        bottomBar = { BottomBar(navController) }
+    )
 }
 //Populates the ProfileScreen column with the user's profile picture as well as their ProfileInfo
 @Composable

@@ -23,20 +23,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.revature.project2.R
 import com.revature.project2.view.composables.BottomBar
+import com.revature.project2.view.composables.Header
 
 @Composable
 fun AcceptTradeScreen(navController: NavController)
 {
     val scaffoldState = rememberScaffoldState()
-    Scaffold(scaffoldState = scaffoldState, topBar =
-    {
-        TopAppBar(
-            title = { Text(text = "View Item") },
-            backgroundColor = MaterialTheme.colors.secondary
-        )
-    },
+    Scaffold(
+        scaffoldState = scaffoldState,
         content =
         {
+            Header(text = "Accept Trade")
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top,

@@ -23,14 +23,16 @@ import com.revature.project2.R
 //Creates the column for the entire page and populates with profile features
 @Preview(showBackground = true)
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen()
+{
 
     val scrollState = rememberScrollState()
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(state = scrollState)
-    ) {
+    )
+    {
         ProfileSection()
         CurrentlyPostedItems()
         UserReviews()
@@ -40,14 +42,16 @@ fun ProfileScreen() {
 @Composable
 fun ProfileSection(modifier: Modifier = Modifier) {
 
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(modifier = modifier.fillMaxWidth())
+    {
         Spacer(modifier = Modifier.height(20.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 40.dp, vertical = 20.dp)
-        ) {
+        )
+        {
             RoundImage(
                 image = painterResource(R.drawable.selfie),
                 modifier = Modifier
@@ -148,7 +152,8 @@ fun ProfileDescription(name: String, email: String, phoneNumber: String) {
 }
 //Displays the account's currently posted items
 @Composable
-fun CurrentlyPostedItems() {
+fun CurrentlyPostedItems()
+{
     Column(
         modifier = Modifier
             .fillMaxWidth()

@@ -20,35 +20,40 @@ import com.revature.project2.viewmodel.AllToysViewModel
 import com.revature.project2.viewmodel.UserToysViewModel
 
 @Composable
-fun PostedItemsScreen(navController: NavController){
+fun PostedItemsScreen(navController: NavController)
+{
 
     val scaffoldState = rememberScaffoldState()
     val context = LocalContext.current
     val userToysViewModel =
         ViewModelProvider(context as MainActivity).get(UserToysViewModel::class.java)
 
-    Scaffold(scaffoldState = scaffoldState,
-        topBar = { TopAppBar( title = { Text("Posted Items: ") },
-            backgroundColor = MaterialTheme.colors.secondary) },
-        floatingActionButton = {
-           FloatingActionButton(onClick = {
+    Scaffold(
+        scaffoldState = scaffoldState,
 
-           }) {
-               Icon(Icons.Filled.Add,"")
+//        floatingActionButton =
+//        {
+//            FloatingActionButton(onClick =
+//            {
+//
+//            }
+//            )
+//            {
+//                Icon(Icons.Filled.Add,"")
+//            }
+//        },
+        content =
+        {
 
-           }
-        },
-        content = {
-            
             Column(
                 modifier = Modifier
                     .fillMaxHeight(.7f),
                 horizontalAlignment = Alignment.CenterHorizontally)
             {
 
-                if (userToysViewModel.userToys.isNotEmpty()) {
-
-
+                Header(text = "Posted Items")
+                if (userToysViewModel.userToys.isNotEmpty())
+                {
                     val lazyState = rememberLazyListState()
                     val toyList = userToysViewModel.userToys
 
@@ -58,7 +63,8 @@ fun PostedItemsScreen(navController: NavController){
                             .fillMaxWidth()
                             .padding(bottom = 50.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
+                    )
+                    {
 
                         itemsIndexed(toyList) { _, item ->
                             ToyCard(toy = item){
@@ -67,7 +73,9 @@ fun PostedItemsScreen(navController: NavController){
                         }
                     }
 
-                } else {
+                }
+                else
+                {
 
                     Column(
                         modifier = Modifier.fillMaxSize(),
