@@ -16,4 +16,6 @@
     <color name="tealgreen">#43C5A8</color>
     <color name="mediumdarkred">#D1544B</color>
     <color name="transparent">#0000ffff</color>
+    <color name="pastelpurple">#EAD6EE</color>
+    <color name="purplevariant">#B57EDC</color>
 </resources>

@@ -11,11 +11,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.materialIcon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -41,27 +43,47 @@ fun Header(
     modifier: Modifier = Modifier
 )
 {
-    Text(
-        text = text,
-        textAlign = TextAlign.Left,
-        modifier = modifier
-            .fillMaxWidth()
-            .height(50.dp)
-            .background(
-                Brush.horizontalGradient(
-                    colors = listOf(
-                        TealGreen,
-                        Teal200
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    )
+    {
+
+        Surface(
+            color = Color.Transparent,
+            modifier = Modifier
+                .semantics { heading() }
+                .fillMaxWidth()
+                .height(70.dp)
+                .background(
+                    Brush.horizontalGradient(
+                        colors = listOf(
+                            BluishGreen,
+                            Teal200
+                        )
                     )
                 )
+        )
+        {
+            Image(
+                painter = painterResource(id = R.drawable.toy_swap_logo),
+                contentDescription = "Toy Swap Logo",
+                alignment = Alignment.CenterStart,
+                modifier = Modifier.padding(horizontal = 20.dp)
             )
-            .semantics { heading() }
-            .padding(
-                horizontal = 16.dp
-            ),
-        color = MaterialTheme.colors.surface,
-        style = Project2Typography.h6
-    )
+
+
+            Text(
+                text = text,
+                fontSize = 25.sp,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colors.surface,
+                style = Project2Typography.h6,
+                modifier = Modifier.absolutePadding(left = 100.dp, top = 10.dp)
+            )
+        }
+
+    }
+
 }
 
 @Composable
@@ -152,16 +174,18 @@ fun previewUniversalButton()
  * button functionality not created yet
  */
 @Composable
-fun ToyCard(toy: ToyItem, onClick: () -> Unit){
-
-    Card(modifier = Modifier
-        .padding(10.dp)
-        .fillMaxWidth()
-        .height(100.dp)
-        .wrapContentHeight()
-        .clickable {
-            onClick()
-        },
+fun ToyCard(toy: ToyItem, onClick: () -> Unit)
+{
+    Card(
+        modifier = Modifier
+            .padding(10.dp)
+            .fillMaxWidth()
+            .height(100.dp)
+            .wrapContentHeight()
+            .clickable
+            {
+                onClick()
+            },
         shape = MaterialTheme.shapes.medium,
         elevation = 5.dp,
         backgroundColor = MaterialTheme.colors.surface)
@@ -170,34 +194,44 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit){
         Row(verticalAlignment = Alignment.Top)
         {
 
-            Image(painter = rememberCoilPainter(
-                request = toy.sImagePath,),
+            Image(
+                painter = rememberCoilPainter(request = toy.sImagePath,),
                 contentDescription = null,
                 modifier = Modifier
                     .size(100.dp)
-                    .padding(5.dp),
+                    .padding(5.dp)
+                    .clip(shape = RoundedCornerShape(10.dp)),
                 contentScale = ContentScale.Fit
             )
 
             Spacer(Modifier.size(5.dp))
 
-            Column( modifier = Modifier
-                .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally)
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            )
             {
+                Spacer(modifier = Modifier.height(10.dp))
 
                 Text(toy.sName,
                     style = MaterialTheme.typography.h5,
                     textAlign = TextAlign.Center)
 
-                Spacer(Modifier.size(2.dp))
+                Spacer(Modifier.size(5.dp))
 
-                Text(text = toy.sDescription,
-                    style = MaterialTheme.typography.body1)
+                Text(
+                    text = toy.sDescription,
+                    style = MaterialTheme.typography.body1
+                )
             }
         }
 
+
     }
+
+
 }
 
 /**
@@ -267,7 +301,8 @@ fun BottomBar(navController: NavController)
 
 
 @Composable
-fun ToyCardWithButton(toy: ToyItem,buttonText:String, onClick:()->Unit){
+fun ToyCardWithButton(toy: ToyItem,buttonText:String, onClick:()->Unit)
+{
 
     Card(modifier = Modifier
         .padding(10.dp)
