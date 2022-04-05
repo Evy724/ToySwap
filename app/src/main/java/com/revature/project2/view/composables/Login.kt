@@ -1,10 +1,7 @@
 package com.revature.project2.view.composables
 
-import android.app.Application
 import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -14,29 +11,17 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.semantics.heading
-import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Observer
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.revature.project2.MainActivity
-import com.revature.project2.R
-import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.model.api.allusers.User
-import com.revature.project2.ui.theme.Project2Theme
 import com.revature.project2.ui.theme.Project2Typography
-import com.revature.project2.ui.theme.Teal200
-import com.revature.project2.ui.theme.TealGreen
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.AllToysViewModel
 import com.revature.project2.viewmodel.LoginViewModel
@@ -118,7 +103,7 @@ fun LoginBody(navController: NavController)
         Spacer(modifier = Modifier.size(40.dp))
 
 
-        universalButton(
+        universalButton20sp(
             enabled = bEnabled,
             text = loginButtonText,
             onClick =

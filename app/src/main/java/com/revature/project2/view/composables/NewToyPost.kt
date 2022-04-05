@@ -1,23 +1,14 @@
 package com.revature.project2.view.composables
 
-import android.view.RoundedCorner
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Arrangement.Absolute.Center
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.revature.project2.viewmodel.AllToysViewModel
-import java.time.format.TextStyle
+
 
 //@Composable
 //fun postNewToy(){
@@ -82,7 +73,7 @@ fun ageOfToy() {
 @Composable
 fun postToy()
 {
-    universalButton(
+    universalButton20sp(
         enabled = true,
         text = "Post Toy",
         onClick = { /*TODO*/ },
@@ -90,6 +81,6 @@ fun postToy()
             .padding(10.dp)
             .fillMaxWidth()
             .height(100.dp)
-            .wrapContentHeight()
+            .wrapContentHeight(),
     )
 }

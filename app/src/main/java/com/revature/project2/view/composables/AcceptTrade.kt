@@ -1,30 +1,25 @@
 package com.revature.project2.ui
 
-import android.content.Context
-import android.hardware.camera2.CameraConstrainedHighSpeedCaptureSession
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.revature.project2.R
 import com.revature.project2.view.composables.BottomBar
 import com.revature.project2.view.composables.Header
-import com.revature.project2.view.composables.universalButton
+import com.revature.project2.view.composables.universalButton20sp
 
 @Composable
 fun AcceptTradeScreen(navController: NavController)
@@ -197,10 +192,10 @@ fun AcceptTradeScreen(navController: NavController)
                         modifier = Modifier.padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally)
                     {
-                        universalButton(
+                        universalButton20sp(
                             enabled = true,
                             text = "Accept",
-                            onClick = { /*TODO*/ }
+                            onClick = { /*TODO*/ },
                         )
                     }
 
@@ -210,10 +205,10 @@ fun AcceptTradeScreen(navController: NavController)
                         horizontalAlignment = Alignment.CenterHorizontally
                     )
                     {
-                        universalButton(
+                        universalButton20sp(
                             enabled = true,
                             text = "Decline",
-                            onClick = { /*TODO*/ }
+                            onClick = { /*TODO*/ },
                         )
                     }
                 }

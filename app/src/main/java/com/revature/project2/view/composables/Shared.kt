@@ -1,6 +1,5 @@
 package com.revature.project2.view.composables
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -10,19 +9,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.textInputServiceFactory
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.heading
@@ -30,6 +26,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
 import com.revature.project2.R
@@ -53,8 +50,8 @@ fun Header(
             .background(
                 Brush.horizontalGradient(
                     colors = listOf(
-                        MediumDarkRed,
-                        PinkishRed
+                        TealGreen,
+                        Teal200
                     )
                 )
             )
@@ -97,11 +94,11 @@ fun ToySwapLogo()
 }
 
 @Composable
-fun universalButton(
+fun universalButton20sp(
     enabled: Boolean,
     text: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 )
 {
     Button(
@@ -119,7 +116,6 @@ fun universalButton(
             backgroundColor = colorResource(id = R.color.transparent),
         ),
         modifier = Modifier
-            .padding(horizontal = 5.dp)
             .background(
                 brush = Brush.horizontalGradient(
                     listOf(
@@ -134,7 +130,8 @@ fun universalButton(
         Text(
             text = text,
             textAlign = TextAlign.Center,
-            color = Color.White
+            color = Color.White,
+            fontSize = 20.sp
         )
     }
 }
@@ -143,7 +140,11 @@ fun universalButton(
 @Composable
 fun previewUniversalButton()
 {
-    universalButton(text = "wow", onClick = { /*TODO*/ }, enabled = true)
+    universalButton20sp(
+        text = "wow",
+        onClick = { /*TODO*/ },
+        enabled = true,
+    )
 }
 /**
  * Toy Display card

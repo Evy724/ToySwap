@@ -9,7 +9,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.revature.project2.view.nav.NavScreens
 
@@ -68,7 +70,7 @@ fun Register(navController: NavController){
 
                 Spacer(modifier = Modifier.size(10.dp))
 
-                universalButton(
+                universalButton20sp(
                     enabled = true,
                     text = "Register",
                     onClick = {

@@ -1,6 +1,5 @@
 package com.revature.project2.ui
 
-import android.view.View
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,9 +9,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
@@ -20,14 +18,11 @@ import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
 import com.revature.project2.MainActivity
 
-import com.revature.project2.R
-import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.view.composables.BottomBar
 import com.revature.project2.view.composables.Header
-import com.revature.project2.view.composables.universalButton
+import com.revature.project2.view.composables.universalButton20sp
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.ToyItemViewModel
-import android.content.Context as Context
 
 @Composable
 fun ViewItemScreen(
@@ -71,17 +66,20 @@ fun ViewItemScreen(
                     contentDescription = null,
                     Modifier.size(250.dp)
                 )
+
                 Spacer(modifier = Modifier.height(20.dp))
+
                 Text(
                     text = viewVM.toy!!.sDescription,
                     fontSize = 17.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(horizontal = 15.dp)
                 )
+
                 Spacer(modifier = Modifier.height(20.dp))
 
                 // To trade proposal screen
-                universalButton(
+                universalButton20sp(
                     enabled = true,
                     text = "Request Trade",
                     onClick =
