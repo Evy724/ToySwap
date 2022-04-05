@@ -79,7 +79,8 @@ fun PostedItemsScreen(navController: NavController){
 
                             ToyCard(toy = item, bNotification = bNotice){
                                 itemViewModel.toy = item
-                                navController.navigate(NavScreens.ViewItemScreen.route)
+                                navController.navigate((NavScreens.ViewPostedToyScreen.route))
+                                //navController.navigate(NavScreens.ViewItemScreen.route)
                             }
                         }
                     }

@@ -1,10 +1,14 @@
 package com.revature.project2.model.api
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import okhttp3.Dns
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.net.Inet4Address
+import java.net.InetAddress
+import java.net.Proxy
 import java.util.concurrent.TimeUnit
 
 
@@ -18,6 +22,7 @@ object RetrofitHelper {
     private val retrofit: Retrofit
 
     init {
+
 
         /**
          * Create a builder for Retrofit, including the
@@ -44,13 +49,12 @@ object RetrofitHelper {
          * okHttp client using the created interceptor to add logging of timeout to server
          */
         val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .writeTimeout(0, TimeUnit.MILLISECONDS)
-            .writeTimeout(2, TimeUnit.MINUTES)
-            .writeTimeout(1, TimeUnit.MINUTES).build()
+            .dns(DnsSelector())
+            .addInterceptor(loggingInterceptor).build()
 
         // Build our retrofit object using the builder and our okHttp client
         retrofit = builder.client(okHttpClient).build()
+      //  retrofit.
     }
 
     /**
@@ -71,5 +75,11 @@ object RetrofitHelper {
     }
     fun getReviewsService(): ToysApiService {
         return retrofit.create(ToysApiService::class.java)
+    }
+}
+
+class DnsSelector() : Dns {
+    override fun lookup(hostname: String): List<InetAddress> {
+        return Dns.SYSTEM.lookup(hostname).filter { Inet4Address::class.java.isInstance(it) }
     }
 }

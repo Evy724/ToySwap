@@ -75,5 +75,8 @@ fun StartNav(app:MainActivity){
         composable(NavScreens.ProfileScreen.route){
             MyProfileScreen(navController = navController)
         }
+        composable (NavScreens.ViewPostedToyScreen.route){
+            viewPostedToyScreen(navController)
+        }
     }
 }
