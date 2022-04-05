@@ -6,3 +6,11 @@ val Purple200 = Color(0xFFBB86FC)
 val Purple500 = Color(0xFF6200EE)
 val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
+
+// Light Theme Colors
+val PinkishRed = Color(0xFFF16D64)
+val BluishGreen = Color(0xFF3AD4DA)
+val BubblegumPink = Color(0xFFAEF14697)
+val BrightYellow = Color(0xFFF3E03A)
+val DeepRed = Color(0xFFD1392E)
+val TealGreen = Color(0xFF43C5A8)
