@@ -1,5 +1,6 @@
 package com.revature.project2.view.composables
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -11,12 +12,14 @@ import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.revature.project2.R
+import com.revature.project2.view.nav.NavScreens
 
 @Composable
 fun viewPostedToyScreen(navController: NavController) {
@@ -32,8 +35,12 @@ fun viewPostedToyScreen(navController: NavController) {
             postedToyImage()
             screenTitlePostedToy()
             postedToyDescription()
-            seeTradeRequestsOnItem()
-            removePost()
+
+            //Temp if, should check if trades are available for this toy
+            if(true) {
+                seeTradeRequestsOnItem()
+            }
+            removePost(navController)
 
         }
     }
@@ -83,7 +90,11 @@ fun seeTradeRequestsOnItem() {
         .height(100.dp)
         .wrapContentHeight(),
         shape = RoundedCornerShape(25),
-        onClick = { /*TODO*/ })
+        onClick = {
+
+            //Send toy to trade request screen and navigate
+
+        })
 
 
     {
@@ -96,14 +107,26 @@ fun seeTradeRequestsOnItem() {
 }
 
 @Composable
-fun removePost() {
+fun removePost(navController: NavController) {
+
+    val context = LocalContext.current
     Button(modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()
         .height(100.dp)
         .wrapContentHeight(),
         shape = RoundedCornerShape(25),
-        onClick = { /*TODO*/ })
+        onClick = {
+            //Code to remove toy from api here
+
+
+            Toast.makeText(context,"Toy Removed!",Toast.LENGTH_LONG).show()
+            navController.popBackStack(
+                NavScreens.BrowseItemsScreen.route,
+                false
+            )
+
+        })
 
 
     {

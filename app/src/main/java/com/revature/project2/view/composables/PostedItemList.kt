@@ -41,6 +41,7 @@ fun PostedItemsScreen(navController: NavController){
             backgroundColor = MaterialTheme.colors.secondary) },
         floatingActionButton = {
            FloatingActionButton(onClick = {
+               navController.navigate(NavScreens.NewToyPostScreen.route)
 
            }) {
                Icon(Icons.Filled.Add,"")

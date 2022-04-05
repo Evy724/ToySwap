@@ -1,6 +1,7 @@
 package com.revature.project2.view.composables
 
 import android.view.RoundedCorner
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -12,10 +13,14 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.AllToysViewModel
 import java.time.format.TextStyle
 
@@ -31,8 +36,29 @@ import java.time.format.TextStyle
 //        onClick = { println("Intent to img upload prompt") })
 
 @Composable
+fun newToyPostScreen(navController: NavController){
+    Scaffold(bottomBar = {BottomBar(navController)}) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        )
+        {
+
+            screenTitle()
+            inputToyName()
+            toyDescription()
+            ageOfToy()
+            postToy(navController)
+        }
+    }
+
+}
+@Composable
 fun screenTitle() {
-    Text("New Toy Post", fontSize = 40.sp, modifier = Modifier.padding(10.dp).wrapContentHeight(), textAlign = TextAlign.Center)
+    Text("New Toy Post", fontSize = 40.sp, modifier = Modifier
+        .padding(10.dp)
+        .wrapContentHeight(), textAlign = TextAlign.Center)
 }
 
 @Composable
@@ -43,7 +69,9 @@ fun inputToyName() {
         value = text,
         onValueChange = { text = it },
         label = { Text("Toy Name")},
-        modifier = Modifier.padding(10.dp).wrapContentHeight()
+        modifier = Modifier
+            .padding(10.dp)
+            .wrapContentHeight()
     )
 
 }
@@ -69,19 +97,27 @@ fun ageOfToy() {
         value = text,
         onValueChange = { text = it },
         label = { Text("Age of Toy")},
-        modifier = Modifier.padding(10.dp).wrapContentHeight()
+        modifier = Modifier
+            .padding(10.dp)
+            .wrapContentHeight()
     )
 }
 
 @Composable
-fun postToy() {
+fun postToy(navController: NavController) {
+    val context = LocalContext.current
     Button(modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()
         .height(100.dp)
         .wrapContentHeight(),
         shape = RoundedCornerShape(25),
-        onClick = { /*TODO*/ })
+        onClick = {
+            Toast.makeText(context,"Toy has been Posted!",Toast.LENGTH_LONG).show()
+            navController.popBackStack(
+                NavScreens.BrowseItemsScreen.route,false
+            )
+        })
     {
         Text(
             text = "Post Toy",
@@ -89,4 +125,10 @@ fun postToy() {
             textAlign = TextAlign.Center
         )
     }
+}
+@Preview
+@Composable
+fun previewNewToyPost(){
+
+    newToyPostScreen(navController = rememberNavController())
 }

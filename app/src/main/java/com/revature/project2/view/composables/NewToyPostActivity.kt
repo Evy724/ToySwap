@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 
+/*
 
 @Composable
 fun newToyPostScreen(navController: NavController){
@@ -29,4 +30,4 @@ Scaffold(bottomBar = {BottomBar(navController)}) {
     }
 }
 
-}
+}*/

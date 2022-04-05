@@ -49,6 +49,8 @@ object RetrofitHelper {
          * okHttp client using the created interceptor to add logging of timeout to server
          */
         val okHttpClient = OkHttpClient.Builder()
+            .writeTimeout(0,TimeUnit.MILLISECONDS)
+            .writeTimeout(30,TimeUnit.SECONDS)
             .dns(DnsSelector())
             .addInterceptor(loggingInterceptor).build()
 

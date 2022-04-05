@@ -63,11 +63,12 @@ fun StartNav(app:MainActivity){
         ){
             tradeFinalizeScreen(
                 navController = navController)
-
         }
 
         // View Item Screen
-        composable(NavScreens.ViewItemScreen.route){ViewItemScreen(navController = navController)}
+        composable(NavScreens.ViewItemScreen.route){
+            ViewItemScreen(navController = navController)
+        }
 
         composable(NavScreens.AcceptTradeScreen.route){
             AcceptTradeScreen(navController = navController)
@@ -77,6 +78,9 @@ fun StartNav(app:MainActivity){
         }
         composable (NavScreens.ViewPostedToyScreen.route){
             viewPostedToyScreen(navController)
+        }
+        composable(NavScreens.NewToyPostScreen.route){
+            newToyPostScreen(navController = navController)
         }
     }
 }
