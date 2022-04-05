@@ -53,10 +53,18 @@ fun Login(navController: NavController
         scaffoldState = scaffoldState,
         content =
         {
-            Header(text = "Log in")
-            LoginBody(
-                navController = navController
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top
             )
+            {
+                Header(text = "Log in")
+                MainToyPosterImage()
+                LoginBody(
+                    navController = navController
+                )
+            }
+
         }
     )
 }
@@ -88,15 +96,11 @@ fun LoginBody(navController: NavController)
     )
     {
 
-        Spacer(Modifier.size(60.dp))
+        Spacer(Modifier.size(10.dp))
 
-        Text(
-            text ="Toys R' Swapped",
-//            style = Project2Typography.h3
-            style = MaterialTheme.typography.h3
-        )
+        ToySwapLogo()
 
-        Spacer(Modifier.size(60.dp))
+        Spacer(Modifier.size(10.dp))
 
         TextField(
             value = sName,
@@ -111,7 +115,7 @@ fun LoginBody(navController: NavController)
             label = {Text("Password: ")},
             visualTransformation = PasswordVisualTransformation())
 
-        Spacer(modifier = Modifier.size(30.dp))
+        Spacer(modifier = Modifier.size(40.dp))
 
 
         Button(
@@ -173,7 +177,7 @@ fun LoginBody(navController: NavController)
 
         }
 
-        Spacer(modifier = Modifier.size(10.dp))
+        Spacer(modifier = Modifier.size(15.dp))
 
         Text(
             text = "New User? Register",

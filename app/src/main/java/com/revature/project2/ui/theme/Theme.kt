@@ -36,7 +36,8 @@ fun Project2Theme(
     val colors = if (darkTheme)
     {
         DarkColorPalette
-    } else
+    }
+    else
     {
         LightColorPalette
     }

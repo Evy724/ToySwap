@@ -40,8 +40,10 @@ fun Header(
 {
     Text(
         text = text,
+        textAlign = TextAlign.Left,
         modifier = modifier
             .fillMaxWidth()
+            .height(50.dp)
             .background(
                 Brush.horizontalGradient(
                     colors = listOf(
@@ -51,18 +53,41 @@ fun Header(
                 )
             )
             .semantics { heading() }
-            .padding(horizontal = 16.dp, vertical = 8.dp),
+            .padding(
+                horizontal = 16.dp
+            ),
         color = MaterialTheme.colors.surface,
         style = Project2Typography.h6
     )
-
-    Spacer(modifier = Modifier.height(10.dp))
 }
 
 @Composable
 fun MainToyPosterImage()
 {
-    Image(painter = painterResource(id = R.drawable.), contentDescription = "Main toy poster for whole app")
+    Image(
+        painter = painterResource(id = R.drawable.toy_cover_1__1640___550_px_),
+        contentDescription = "Main toy poster for whole app",
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(
+                brush = Brush.sweepGradient(
+                    listOf(
+                        TealGreen,
+                        Teal200
+                    )
+                )
+            )
+
+    )
+}
+
+@Composable
+fun ToySwapLogo()
+{
+    Image(
+        painter = painterResource(id = R.drawable.toy_swap_logo),
+        contentDescription = "Logo for the Toy Swap app",
+    )
 }
 /**
  * Toy Display card
