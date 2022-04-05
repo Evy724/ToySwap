@@ -24,6 +24,7 @@ import androidx.navigation.NavController
 import com.revature.project2.R
 import com.revature.project2.view.composables.BottomBar
 import com.revature.project2.view.composables.Header
+import com.revature.project2.view.composables.universalButton
 
 @Composable
 fun AcceptTradeScreen(navController: NavController)
@@ -196,14 +197,11 @@ fun AcceptTradeScreen(navController: NavController)
                         modifier = Modifier.padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally)
                     {
-                        Button(onClick = { /*TODO*/ })
-                        {
-                            Text(
-                                text = "Accept",
-                                fontSize = 15.sp,
-                                textAlign = TextAlign.Center
-                            )
-                        }
+                        universalButton(
+                            enabled = true,
+                            text = "Accept",
+                            onClick = { /*TODO*/ }
+                        )
                     }
 
                     // Right decline button
@@ -212,14 +210,11 @@ fun AcceptTradeScreen(navController: NavController)
                         horizontalAlignment = Alignment.CenterHorizontally
                     )
                     {
-                        Button(onClick = { /*TODO*/ })
-                        {
-                            Text(
-                                text = "Decline",
-                                fontSize = 15.sp,
-                                textAlign = TextAlign.Center
-                            )
-                        }
+                        universalButton(
+                            enabled = true,
+                            text = "Decline",
+                            onClick = { /*TODO*/ }
+                        )
                     }
                 }
             }

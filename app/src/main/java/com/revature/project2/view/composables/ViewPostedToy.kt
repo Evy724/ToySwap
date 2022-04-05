@@ -31,7 +31,9 @@ fun screenTitlePostedToy() {
     Text(
         "Toy Name",
         fontSize = 40.sp,
-        modifier = Modifier.padding(10.dp).wrapContentHeight(),
+        modifier = Modifier
+            .padding(10.dp)
+            .wrapContentHeight(),
         textAlign = TextAlign.Center
     )
 }
@@ -49,42 +51,29 @@ fun postedToyDescription() {
 }
 
 @Composable
-fun seeTradeRequestsOnItem() {
-    Button(modifier = Modifier
+fun seeTradeRequestsOnItem()
+{
+    universalButton(modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()
         .height(100.dp)
         .wrapContentHeight(),
-        shape = RoundedCornerShape(25),
-        onClick = { /*TODO*/ })
-
-
-    {
-        Text(
-            text = "Trade Offers",
-            fontSize = 15.sp,
-            textAlign = TextAlign.Center
-        )
-    }
+        enabled = true,
+        text ="Trade Offers",
+        onClick = { /*TODO*/ }
+    )
 }
 
 @Composable
-fun removePost() {
-    Button(modifier = Modifier
+fun removePost()
+{
+    universalButton(modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()
         .height(100.dp)
         .wrapContentHeight(),
-        shape = RoundedCornerShape(25),
+        enabled = true,
+        text = "Remove Post",
         onClick = { /*TODO*/ })
-
-
-    {
-        Text(
-            text = "Remove Post",
-            fontSize = 15.sp,
-            textAlign = TextAlign.Center
-        )
-    }
 }
 

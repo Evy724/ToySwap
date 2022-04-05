@@ -58,7 +58,6 @@ fun Login(navController: NavController
                 verticalArrangement = Arrangement.Top
             )
             {
-                Header(text = "Log in")
                 MainToyPosterImage()
                 LoginBody(
                     navController = navController
@@ -81,8 +80,9 @@ fun LoginBody(navController: NavController)
 
     val userList = loginViewModel.allUsers
 
-    if (userList.isNotEmpty()){
-        loginButtonText = "Log In:"
+    if (userList.isNotEmpty())
+    {
+        loginButtonText = "Log In"
         bEnabled = true
         Log.d("Login Screen","All Users Loaded")
     }
@@ -118,9 +118,11 @@ fun LoginBody(navController: NavController)
         Spacer(modifier = Modifier.size(40.dp))
 
 
-        Button(
+        universalButton(
             enabled = bEnabled,
-            onClick = {
+            text = loginButtonText,
+            onClick =
+            {
                 Log.d("Login Screen","Login Button Clicked")
 
                 //Disable button and change text to Loading
@@ -129,7 +131,8 @@ fun LoginBody(navController: NavController)
 
                 //Check if the user exists in our server
                 var user:User? = loginViewModel.existingUserCheck(sName,sPass)
-                if (user != null){
+                if (user != null)
+                {
 
                     val browseVM =
                         ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
@@ -169,13 +172,7 @@ fun LoginBody(navController: NavController)
                 }
 
             },
-            modifier = Modifier
-                .padding(5.dp)
-                .fillMaxWidth(.5f)) {
-
-            Text(loginButtonText)
-
-        }
+        )
 
         Spacer(modifier = Modifier.size(15.dp))
 

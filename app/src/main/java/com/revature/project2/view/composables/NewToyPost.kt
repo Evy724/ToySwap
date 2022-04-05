@@ -32,7 +32,9 @@ import java.time.format.TextStyle
 
 @Composable
 fun screenTitle() {
-    Text("New Toy Post", fontSize = 40.sp, modifier = Modifier.padding(10.dp).wrapContentHeight(), textAlign = TextAlign.Center)
+    Text("New Toy Post", fontSize = 40.sp, modifier = Modifier
+        .padding(10.dp)
+        .wrapContentHeight(), textAlign = TextAlign.Center)
 }
 
 @Composable
@@ -43,7 +45,9 @@ fun inputToyName() {
         value = text,
         onValueChange = { text = it },
         label = { Text("Toy Name")},
-        modifier = Modifier.padding(10.dp).wrapContentHeight()
+        modifier = Modifier
+            .padding(10.dp)
+            .wrapContentHeight()
     )
 
 }
@@ -69,24 +73,23 @@ fun ageOfToy() {
         value = text,
         onValueChange = { text = it },
         label = { Text("Age of Toy")},
-        modifier = Modifier.padding(10.dp).wrapContentHeight()
+        modifier = Modifier
+            .padding(10.dp)
+            .wrapContentHeight()
     )
 }
 
 @Composable
-fun postToy() {
-    Button(modifier = Modifier
-        .padding(10.dp)
-        .fillMaxWidth()
-        .height(100.dp)
-        .wrapContentHeight(),
-        shape = RoundedCornerShape(25),
-        onClick = { /*TODO*/ })
-    {
-        Text(
-            text = "Post Toy",
-            fontSize = 15.sp,
-            textAlign = TextAlign.Center
-        )
-    }
+fun postToy()
+{
+    universalButton(
+        enabled = true,
+        text = "Post Toy",
+        onClick = { /*TODO*/ },
+        modifier = Modifier
+            .padding(10.dp)
+            .fillMaxWidth()
+            .height(100.dp)
+            .wrapContentHeight()
+    )
 }

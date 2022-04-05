@@ -68,19 +68,16 @@ fun Register(navController: NavController){
 
                 Spacer(modifier = Modifier.size(10.dp))
 
-                Button(
+                universalButton(
+                    enabled = true,
+                    text = "Register",
                     onClick = {
                         navController.navigate(NavScreens.LoginScreen.route)
                     },
                     modifier = Modifier
                         .padding(5.dp)
-                        .fillMaxWidth(.5f)) {
-
-                    Text("Register")
-
-                }
-
-
+                        .fillMaxWidth(.5f)
+                )
             }
         }
     )

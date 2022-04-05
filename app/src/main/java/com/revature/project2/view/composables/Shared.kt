@@ -1,10 +1,12 @@
 package com.revature.project2.view.composables
 
 import android.util.Log
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -18,11 +20,15 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.textInputServiceFactory
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
@@ -88,6 +94,56 @@ fun ToySwapLogo()
         painter = painterResource(id = R.drawable.toy_swap_logo),
         contentDescription = "Logo for the Toy Swap app",
     )
+}
+
+@Composable
+fun universalButton(
+    enabled: Boolean,
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+)
+{
+    Button(
+        onClick = onClick,
+        border = BorderStroke(
+            5.dp,
+            brush = Brush.horizontalGradient(
+                listOf(
+                    TealGreen,
+                    Teal200
+                )
+            )
+        ),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = colorResource(id = R.color.transparent),
+        ),
+        modifier = Modifier
+            .padding(horizontal = 5.dp)
+            .background(
+                brush = Brush.horizontalGradient(
+                    listOf(
+                        TealGreen,
+                        Teal200
+                    )
+                ),
+                shape = RoundedCornerShape(5.dp)
+            )
+    )
+    {
+        Text(
+            text = text,
+            textAlign = TextAlign.Center,
+            color = Color.White
+        )
+    }
+}
+
+@Preview
+@Composable
+fun previewUniversalButton()
+{
+    universalButton(text = "wow", onClick = { /*TODO*/ }, enabled = true)
 }
 /**
  * Toy Display card

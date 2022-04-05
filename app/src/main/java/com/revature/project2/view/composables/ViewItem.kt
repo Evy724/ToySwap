@@ -24,6 +24,7 @@ import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.view.composables.BottomBar
 import com.revature.project2.view.composables.Header
+import com.revature.project2.view.composables.universalButton
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.ToyItemViewModel
 import android.content.Context as Context
@@ -80,18 +81,14 @@ fun ViewItemScreen(
                 Spacer(modifier = Modifier.height(20.dp))
 
                 // To trade proposal screen
-                Button(
+                universalButton(
+                    enabled = true,
+                    text = "Request Trade",
                     onClick =
                     {
                         navController.navigate(NavScreens.TradeProposalScreen.route)
-                    }
+                    },
                 )
-                {
-                    Text(
-                        text = "Request Trade",
-                        fontSize = 25.sp
-                    )
-                }
             }
         },
         bottomBar = {BottomBar(navController = navController)}
