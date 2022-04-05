@@ -38,7 +38,7 @@ fun viewPostedToyScreen(navController: NavController) {
 
             //Temp if, should check if trades are available for this toy
             if(true) {
-                seeTradeRequestsOnItem()
+                seeTradeRequestsOnItem(navController)
             }
             removePost(navController)
 
@@ -83,7 +83,7 @@ fun postedToyDescription() {
 }
 
 @Composable
-fun seeTradeRequestsOnItem() {
+fun seeTradeRequestsOnItem(navController: NavController) {
     Button(modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()
@@ -93,10 +93,8 @@ fun seeTradeRequestsOnItem() {
         onClick = {
 
             //Send toy to trade request screen and navigate
-
+            navController.navigate(NavScreens.AcceptTradeScreen.route)
         })
-
-
     {
         Text(
             text = "Trade Offers",

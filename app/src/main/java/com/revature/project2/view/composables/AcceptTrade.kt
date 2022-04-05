@@ -2,6 +2,7 @@ package com.revature.project2.ui
 
 import android.content.Context
 import android.hardware.camera2.CameraConstrainedHighSpeedCaptureSession
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.BlendMode.Companion.Screen
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -23,11 +25,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.revature.project2.R
 import com.revature.project2.view.composables.BottomBar
+import com.revature.project2.view.nav.NavScreens
 
 @Composable
 fun AcceptTradeScreen(navController: NavController)
 {
     val scaffoldState = rememberScaffoldState()
+    val context = LocalContext.current
     Scaffold(scaffoldState = scaffoldState, topBar =
     {
         TopAppBar(
@@ -199,7 +203,15 @@ fun AcceptTradeScreen(navController: NavController)
                         modifier = Modifier.padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally)
                     {
-                        Button(onClick = { /*TODO*/ })
+                        Button(onClick = {
+
+                            //Accept trade API call
+
+
+                            Toast.makeText(context,"Trade Accepted",Toast.LENGTH_LONG).show()
+                            navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
+
+                        })
                         {
                             Text(
                                 text = "Accept",
@@ -215,7 +227,16 @@ fun AcceptTradeScreen(navController: NavController)
                         horizontalAlignment = Alignment.CenterHorizontally
                     )
                     {
-                        Button(onClick = { /*TODO*/ })
+                        Button(onClick = {
+
+                            //Decline Trade Api call
+
+
+                            Toast.makeText(context,"Trade Rejected",Toast.LENGTH_LONG).show()
+                            navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
+
+
+                        })
                         {
                             Text(
                                 text = "Decline",
