@@ -34,7 +34,7 @@ fun StartNav(app:MainActivity){
     val navController = rememberNavController()
 
     //val allToysViewModel by lazy { AllToysViewModel() }
-    val userToysViewModel by lazy { UserToysViewModel()}
+    //val userToysViewModel by lazy { UserToysViewModel()}
     //val loginViewModel by lazy { LoginViewModel() }
 
     NavHost(navController = navController,
@@ -56,7 +56,7 @@ fun StartNav(app:MainActivity){
             Register(navController = navController)
         }
         composable(NavScreens.TradeProposalScreen.route){
-            tradeProposalScreen(navController,userToysViewModel)
+            tradeProposalScreen(navController/*,userToysViewModel*/)
         }
 
         composable(NavScreens.FinalizeTradeScreen.route
@@ -74,6 +74,9 @@ fun StartNav(app:MainActivity){
         }
         composable(NavScreens.ProfileScreen.route){
             MyProfileScreen(navController = navController)
+        }
+        composable (NavScreens.ViewPostedToyScreen.route){
+            viewPostedToyScreen(navController)
         }
     }
 }

@@ -37,11 +37,12 @@ import com.revature.project2.viewmodel.TradeViewModel
 import com.revature.project2.viewmodel.UserToysViewModel
 
 @Composable
-fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToysViewModel)
+fun tradeProposalScreen(navController: NavController/*, userToysViewModel: UserToysViewModel*/)
 {
     val context = LocalContext.current
     val viewModel=  ViewModelProvider(context as MainActivity).get(TradeViewModel::class.java)
     val viewVM = ViewModelProvider(context as MainActivity).get(ToyItemViewModel::class.java)
+    val userToysViewModel = ViewModelProvider(context as MainActivity).get(UserToysViewModel::class.java)
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Top) {
         TopAppBar() {
             Text(text = "Trade Proposal")
@@ -94,12 +95,12 @@ fun tradeProposalScreen(navController: NavController, userToysViewModel: UserToy
     }
 }
 
-@Composable
-@Preview
-fun preview() {
-    Project2Theme {
-        val context= LocalContext.current
-        val navController=NavController(context)
-        tradeProposalScreen(navController = navController,UserToysViewModel())
-    }
-}
+//@Composable
+//@Preview
+//fun preview() {
+//    Project2Theme {
+//        val context= LocalContext.current
+//        val navController=NavController(context)
+//        tradeProposalScreen(navController = navController,UserToysViewModel())
+//    }
+//}
