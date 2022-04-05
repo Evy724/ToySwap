@@ -1,9 +1,6 @@
 package com.revature.project2.view.composables
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -90,18 +87,12 @@ fun Header(
 fun MainToyPosterImage()
 {
     Image(
-        painter = painterResource(id = R.drawable.toy_cover_1__1640___550_px_),
+        painter = painterResource(id = R.drawable.toy_cover__1640___450_px_),
         contentDescription = "Main toy poster for whole app",
         modifier = Modifier
-            .fillMaxWidth()
-            .background(
-                brush = Brush.sweepGradient(
-                    listOf(
-                        TealGreen,
-                        Teal200
-                    )
-                )
-            )
+            .wrapContentWidth()
+            .height(108.dp)
+            .background(color = Color.Transparent)
 
     )
 }
@@ -185,7 +176,10 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit)
             .clickable
             {
                 onClick()
-            },
+            }
+            .clip(
+                shape = RoundedCornerShape(10.dp)
+            ),
         shape = MaterialTheme.shapes.medium,
         elevation = 5.dp,
         backgroundColor = MaterialTheme.colors.surface)
@@ -198,8 +192,8 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit)
                 painter = rememberCoilPainter(request = toy.sImagePath,),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(100.dp)
-                    .padding(5.dp)
+                    .size(120.dp)
+                    .padding(horizontal = 20.dp, vertical = 5.dp)
                     .clip(shape = RoundedCornerShape(10.dp)),
                 contentScale = ContentScale.Fit
             )

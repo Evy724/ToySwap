@@ -74,7 +74,8 @@ fun BrowseItemsBody(navController: NavController, toyList:List<ToyItem>)
             )
         )
         {
-            LazyColumn(state = lazyState,
+            LazyColumn(
+                state = lazyState,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(bottom = 50.dp)

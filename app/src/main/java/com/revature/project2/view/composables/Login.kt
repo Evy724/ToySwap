@@ -2,8 +2,11 @@ package com.revature.project2.view.composables
 
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -12,7 +15,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -20,15 +27,20 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.revature.project2.MainActivity
+import com.revature.project2.R
 import com.revature.project2.model.api.allusers.User
+import com.revature.project2.ui.theme.BluishGreen
 import com.revature.project2.ui.theme.Project2Typography
+import com.revature.project2.ui.theme.PurpleVariant
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.AllToysViewModel
 import com.revature.project2.viewmodel.LoginViewModel
 
 @Composable
-fun Login(navController: NavController
-){
+fun Login(
+    navController: NavController
+)
+{
 
     Log.d("Login Screen","Login Screen Start")
 
@@ -40,93 +52,113 @@ fun Login(navController: NavController
         {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Top
+                verticalArrangement = Arrangement.Top,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.horizontalGradient(
+                            colors = listOf(
+                                PurpleVariant,
+                                BluishGreen
+                            )
+                        )
+                    )
             )
             {
                 MainToyPosterImage()
-                LoginBody(
-                    navController = navController
+                Surface(
+                    Modifier
+                        .clip(shape = RoundedCornerShape(10.dp))
+                        .width(400.dp)
+                        .fillMaxHeight()
                 )
+                {
+                    LoginBody(navController = navController)
+                }
             }
-
         }
     )
 }
+
+
+
+
+
 @Composable
-fun LoginBody(navController: NavController)
+fun LoginBody(
+    navController: NavController
+)
 {
 
-    val context = LocalContext.current
-    var loginButtonText by rememberSaveable { mutableStateOf("Loading") }
-    var bEnabled  by rememberSaveable { mutableStateOf(false) }
-    var sName by rememberSaveable { mutableStateOf("") }
-    var sPass by rememberSaveable { mutableStateOf("") }
-    val loginViewModel = ViewModelProvider(context as MainActivity).get(LoginViewModel::class.java)
 
-    val userList = loginViewModel.allUsers
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+        )
+        {
+            val context = LocalContext.current
+            var loginButtonText by rememberSaveable { mutableStateOf("Loading") }
+            var bEnabled by rememberSaveable { mutableStateOf(false) }
+            var sName by rememberSaveable { mutableStateOf("") }
+            var sPass by rememberSaveable { mutableStateOf("") }
+            val loginViewModel =
+                ViewModelProvider(context as MainActivity).get(LoginViewModel::class.java)
 
-    if (userList.isNotEmpty())
-    {
-        loginButtonText = "Log In"
-        bEnabled = true
-        Log.d("Login Screen","All Users Loaded")
-    }
+            val userList = loginViewModel.allUsers
 
-    Log.d("Login Screen","Scaffold Content")
+            if (userList.isNotEmpty()) {
+                loginButtonText = "Log In"
+                bEnabled = true
+                Log.d("Login Screen", "All Users Loaded")
+            }
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
+            Log.d("Login Screen", "Scaffold Content")
 
-    )
-    {
+            Spacer(Modifier.size(10.dp))
 
-        Spacer(Modifier.size(10.dp))
+            ToySwapLogo()
 
-        ToySwapLogo()
+            Spacer(Modifier.size(10.dp))
 
-        Spacer(Modifier.size(10.dp))
+            TextField(
+                value = sName,
+                onValueChange = { sName = it },
+                label = { Text("Username: ") })
 
-        TextField(
-            value = sName,
-            onValueChange = { sName = it},
-            label = {Text("Username: ")})
+            Spacer(modifier = Modifier.size(10.dp))
 
-        Spacer(modifier = Modifier.size(10.dp))
+            TextField(
+                value = sPass,
+                onValueChange = { sPass = it },
+                label = { Text("Password: ") },
+                visualTransformation = PasswordVisualTransformation()
+            )
 
-        TextField(
-            value = sPass,
-            onValueChange = { sPass = it},
-            label = {Text("Password: ")},
-            visualTransformation = PasswordVisualTransformation())
-
-        Spacer(modifier = Modifier.size(40.dp))
+            Spacer(modifier = Modifier.size(40.dp))
 
 
-        universalButton20sp(
-            enabled = bEnabled,
-            text = loginButtonText,
-            onClick =
-            {
-                Log.d("Login Screen","Login Button Clicked")
-
-                //Disable button and change text to Loading
-                loginButtonText = "Loading"
-                bEnabled = false
-
-                //Check if the user exists in our server
-                var user:User? = loginViewModel.existingUserCheck(sName,sPass)
-                if (user != null)
+            universalButton20sp(
+                enabled = bEnabled,
+                text = loginButtonText,
+                onClick =
                 {
+                    Log.d("Login Screen", "Login Button Clicked")
 
-                    val browseVM =
-                        ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
-                    browseVM.currentUser = user
-                    Log.d("Login Screen","Current User Set")
+                    //Disable button and change text to Loading
+                    loginButtonText = "Loading"
+                    bEnabled = false
 
-                    //If it does, log in with that user
-                    loginViewModel.login(sName,sPass)
-                    navController.navigate(NavScreens.BrowseItemsScreen.route)
+                    //Check if the user exists in our server
+                    var user: User? = loginViewModel.existingUserCheck(sName, sPass)
+                    if (user != null) {
+
+                        val browseVM =
+                            ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
+                        browseVM.currentUser = user
+                        Log.d("Login Screen", "Current User Set")
+
+                        //If it does, log in with that user
+                        loginViewModel.login(sName, sPass)
+                        navController.navigate(NavScreens.BrowseItemsScreen.route)
 //                            if (loginViewModel.login(sName,sPass)){
 //
 //                                Log.d("Login Screen","Nav to Browse Screen")
@@ -140,37 +172,39 @@ fun LoginBody(navController: NavController)
 //                                loginButtonText = "Login"
 //                                bEnabled = true
 //                            }
-                }
-                else
-                {
+                    } else {
 
-                    //If it doesnt, reset the Screen
-                    Toast.makeText(
-                        context,
-                        "Invalid Login",
-                        Toast.LENGTH_LONG).show()
-                    bEnabled = true
-                    loginButtonText = "Log In:"
-                    sName = ""
-                    sPass = ""
-                    Log.d("Login Screen","Login Failed")
-                }
+                        //If it doesnt, reset the Screen
+                        Toast.makeText(
+                            context,
+                            "Invalid Login",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        bEnabled = true
+                        loginButtonText = "Log In:"
+                        sName = ""
+                        sPass = ""
+                        Log.d("Login Screen", "Login Failed")
+                    }
 
-            },
-        )
-
-        Spacer(modifier = Modifier.size(15.dp))
-
-        Text(
-            text = "New User? Register",
-            modifier = Modifier
-                .clickable {
-                    Log.d("Login Screen","Register User Clicked")
-
-                    navController.navigate(NavScreens.RegisterScreen.route)
                 },
-            style = Project2Typography.body2
-        )
-    }
+            )
+
+            Spacer(modifier = Modifier.size(15.dp))
+
+            Text(
+                text = "New User? Register",
+                modifier = Modifier
+                    .clickable {
+                        Log.d("Login Screen", "Register User Clicked")
+
+                        navController.navigate(NavScreens.RegisterScreen.route)
+                    },
+                style = Project2Typography.body2
+            )
+
+        }
+
 
 }
+
