@@ -4,8 +4,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -68,9 +70,18 @@ fun Login(
                 MainToyPosterImage()
                 Surface(
                     Modifier
-                        .clip(shape = RoundedCornerShape(10.dp))
+                        .clip(shape = AbsoluteRoundedCornerShape(topLeft = 10.dp, topRight = 10.dp))
                         .width(400.dp)
                         .fillMaxHeight()
+                        .border(
+                            width = 2.dp,
+                            brush = Brush.horizontalGradient(colors = listOf(
+                                PurpleVariant,
+                                BluishGreen
+                            )),
+                            shape = AbsoluteRoundedCornerShape(topLeft = 10.dp, topRight = 10.dp)
+                        )
+
                 )
                 {
                     LoginBody(navController = navController)

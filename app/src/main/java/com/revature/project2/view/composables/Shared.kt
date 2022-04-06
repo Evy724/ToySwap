@@ -99,8 +99,8 @@ fun MainToyPosterImage()
         modifier = Modifier
             .wrapContentWidth()
             .height(108.dp)
-            .background(color = Color.Transparent)
-
+            .background(color = Color.Transparent),
+        contentScale = ContentScale.FillBounds
     )
 }
 
@@ -109,7 +109,7 @@ fun ToySwapLogo()
 {
     Image(
         painter = painterResource(id = R.drawable.toy_swap_logo),
-        contentDescription = "Logo for the Toy Swap app",
+        contentDescription = "Logo for the Toy Swap app"
     )
 }
 
@@ -179,6 +179,16 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit)
             .padding(10.dp)
             .fillMaxWidth()
             .wrapContentHeight()
+            .border(
+                width = 2.dp,
+                brush = Brush.horizontalGradient(
+                    colors = listOf(
+                        Purple200,
+                        PurpleVariant
+                    )
+                ),
+                shape = RoundedCornerShape(10.dp)
+            )
             .clickable
             {
                 onClick()
@@ -203,7 +213,7 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit)
                     .padding(horizontal = 20.dp, vertical = 10.dp)
                     .clip(shape = RoundedCornerShape(20.dp))
                     .border(
-                        width = 3.dp,
+                        width = 2.dp,
                         brush = Brush.horizontalGradient(
                             colors = listOf(
                                 TealGreen,

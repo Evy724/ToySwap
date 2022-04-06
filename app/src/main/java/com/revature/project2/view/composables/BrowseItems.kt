@@ -1,23 +1,33 @@
 package com.revature.project2.view.composables
 
 import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.revature.project2.MainActivity
+import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.ui.theme.*
 import com.revature.project2.view.nav.NavScreens
@@ -44,7 +54,17 @@ fun BrowseItemsScreen(navController: NavController)
         {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.horizontalGradient(
+                            colors = listOf(
+                                PurpleVariant,
+                                BluishGreen
+                            )
+                        )
+                    )
             )
             {
                 Header(text = "Browse Items")
@@ -67,39 +87,91 @@ fun BrowseItemsBody(navController: NavController, toyList:List<ToyItem>)
     {
         Log.d("Browse Screen","Toys Loaded")
 
-        Surface(modifier = Modifier
-
-            .clip(
-                shape = RoundedCornerShape(10.dp)
-            )
+        Surface(
+            modifier = Modifier
+                .border(
+                    width = 2.dp,
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(
+                            PurpleVariant,
+                            BluishGreen
+                        )
+                    ),
+                    shape = AbsoluteRoundedCornerShape(topLeft = 10.dp, topRight = 10.dp)
+                )
+                .clip(
+                    shape = RoundedCornerShape(10.dp)
+                )
         )
         {
-            LazyColumn(
-                state = lazyState,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 50.dp)
-                    .background(
-                        brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                PastelPurple,
-                                BluishGreen
-                            )
-                        )
-                    )
-                ,
-                horizontalAlignment = Alignment.CenterHorizontally)
+            Surface()
             {
+                Image(
+                    painter = painterResource(id = R.drawable.rainbow_toy_blocks_background_3d_3d_kot),
+                    contentDescription = "he",
+                    modifier = Modifier
+                        .height(1000.dp)
+                        .width(700.dp),
+                    contentScale = ContentScale.FillBounds
+                )
+                LazyColumn(
 
-                items(toyList){ toy->
-                    Log.d("Browse Screen","Lazy Column call")
-                    ToyCard(toy = toy){
-                        val viewVM = ViewModelProvider(context as MainActivity).get(ToyItemViewModel::class.java)
-                        viewVM.toy = toy
-                        navController.navigate(NavScreens.ViewItemScreen.route)
+                    state = lazyState,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 50.dp)
+                        .background(
+                            color = Color.Transparent
+//                            brush = Brush.horizontalGradient(
+//                                colors = listOf(
+//                                    PastelPurple,
+//                                    Teal200
+//                                )
+//                            )
+                        )
+                    ,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Top
+                )
+                {
+
+                    items(toyList){ toy->
+                        Log.d("Browse Screen","Lazy Column call")
+                        ToyCard(toy = toy){
+                            val viewVM = ViewModelProvider(context as MainActivity).get(ToyItemViewModel::class.java)
+                            viewVM.toy = toy
+                            navController.navigate(NavScreens.ViewItemScreen.route)
+                        }
                     }
                 }
             }
+//            LazyColumn(
+//
+//                state = lazyState,
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(bottom = 50.dp)
+//                    .background(
+//                        brush = Brush.horizontalGradient(
+//                            colors = listOf(
+//                                PastelPurple,
+//                                Teal200
+//                            )
+//                        )
+//                    )
+//                ,
+//                horizontalAlignment = Alignment.CenterHorizontally)
+//            {
+//
+//                items(toyList){ toy->
+//                    Log.d("Browse Screen","Lazy Column call")
+//                    ToyCard(toy = toy){
+//                        val viewVM = ViewModelProvider(context as MainActivity).get(ToyItemViewModel::class.java)
+//                        viewVM.toy = toy
+//                        navController.navigate(NavScreens.ViewItemScreen.route)
+//                    }
+//                }
+//            }
         }
     }
 
