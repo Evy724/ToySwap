@@ -2,6 +2,8 @@ package com.revature.project2.view.composables
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -34,6 +36,8 @@ import com.revature.project2.R
 import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.ui.theme.*
 import com.revature.project2.view.nav.NavScreens
+import androidx.compose.foundation.shape.CircleShape
+import coil.transform.CircleCropTransformation
 
 // Header for all screens
 @Composable
@@ -174,7 +178,6 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit)
         modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth()
-            .height(100.dp)
             .wrapContentHeight()
             .clickable
             {
@@ -195,10 +198,21 @@ fun ToyCard(toy: ToyItem, onClick: () -> Unit)
                 painter = rememberCoilPainter(request = toy.sImagePath,),
                 contentDescription = null,
                 modifier = Modifier
-                    .size(120.dp)
-                    .padding(horizontal = 20.dp, vertical = 5.dp)
-                    .clip(shape = RoundedCornerShape(10.dp)),
-                contentScale = ContentScale.Fit
+                    .width(120.dp)
+                    .height(100.dp)
+                    .padding(horizontal = 20.dp, vertical = 10.dp)
+                    .clip(shape = RoundedCornerShape(20.dp))
+                    .border(
+                        width = 3.dp,
+                        brush = Brush.horizontalGradient(
+                            colors = listOf(
+                                TealGreen,
+                                BluishGreen
+                            )
+                        ),
+                        shape = RoundedCornerShape(20.dp)
+                    ),
+                contentScale = ContentScale.FillBounds
             )
 
             Spacer(Modifier.size(5.dp))
@@ -313,8 +327,9 @@ fun ToyCardWithButton(toy: ToyItem,buttonText:String, onClick:()->Unit)
 
         Row(verticalAlignment = Alignment.Top) {
 
-            Image(painter = rememberCoilPainter(
-                request = toy.sImagePath),
+            Image(
+                painter = rememberCoilPainter(
+                    request = toy.sImagePath),
                 contentDescription = null,
                 modifier = Modifier
                     .size(100.dp)
