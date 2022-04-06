@@ -1,16 +1,14 @@
 package com.revature.project2.view.composables
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
@@ -19,6 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.revature.project2.R
+import com.revature.project2.ui.theme.BluishGreen
+import com.revature.project2.ui.theme.PurpleVariant
 
 //Creates the column for the entire page and populates with profile features
 @Preview(showBackground = true)
@@ -40,7 +40,8 @@ fun ProfileScreen()
 }
 //Populates the ProfileScreen column with the user's profile picture as well as their ProfileInfo
 @Composable
-fun ProfileSection(modifier: Modifier = Modifier) {
+fun ProfileSection(modifier: Modifier = Modifier)
+{
 
     Column(modifier = modifier.fillMaxWidth())
     {
