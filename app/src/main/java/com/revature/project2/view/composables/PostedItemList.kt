@@ -54,6 +54,9 @@ fun PostedItemsScreen(navController: NavController)
         floatingActionButton = {
            FloatingActionButton(onClick = {
                navController.navigate(NavScreens.NewToyPostScreen.route)
+           }){
+                Icon(Icons.Filled.Add,"")
+           }},
 
 //        floatingActionButton =
 //        {

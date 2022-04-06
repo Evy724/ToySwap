@@ -37,6 +37,8 @@ import com.revature.project2.ui.theme.PurpleVariant
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.AllToysViewModel
 import com.revature.project2.viewmodel.LoginViewModel
+import com.revature.project2.viewmodel.UserToysViewModel
+import com.revature.project2.viewmodel.UserToysViewModelFactory
 
 @Composable
 fun Login(
@@ -113,7 +115,7 @@ fun LoginBody(navController: NavController){
 
             val userList = loginViewModel.allUsers
 
-            var postUserVMFactory:UserToysViewModelFactory
+            var postUserVMFactory: UserToysViewModelFactory
 
 
     if (userList.isNotEmpty()){

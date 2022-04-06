@@ -107,6 +107,8 @@ fun seeTradeRequestsOnItem(navController: NavController) {
             textAlign = TextAlign.Center
         )
     }
+}
+    @Composable
 fun seeTradeRequestsOnItem()
 {
     universalButton20sp(

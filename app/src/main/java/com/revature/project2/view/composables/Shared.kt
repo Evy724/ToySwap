@@ -37,6 +37,7 @@ import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.ui.theme.*
 import com.revature.project2.view.nav.NavScreens
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.filled.Info
 import coil.transform.CircleCropTransformation
 
 // Header for all screens
@@ -123,6 +124,7 @@ fun universalButton20sp(
 {
     Button(
         onClick = onClick,
+        enabled = enabled,
         border = BorderStroke(
             5.dp,
             brush = Brush.horizontalGradient(
@@ -201,7 +203,10 @@ fun ToyCard(toy: ToyItem,bNotification:Boolean = false, onClick: () -> Unit)
         backgroundColor = MaterialTheme.colors.surface)
     {
 
-        Row(verticalAlignment = Alignment.Top)
+        Row(
+            verticalAlignment = Alignment.Top,
+            modifier = Modifier.fillMaxWidth()
+        )
         {
 
             Image(
@@ -248,6 +253,8 @@ fun ToyCard(toy: ToyItem,bNotification:Boolean = false, onClick: () -> Unit)
                 )
             }
 
+        }
+        Box(){
             if (bNotification)
             {
                 Row(
@@ -262,9 +269,7 @@ fun ToyCard(toy: ToyItem,bNotification:Boolean = false, onClick: () -> Unit)
                     )
                 }
             }
-
         }
-
     }
 }
 
