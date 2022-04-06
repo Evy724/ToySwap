@@ -176,12 +176,14 @@ fun MyProfileScreen(
                                     {
                                         MyUserReviews()
                                     }
+                                }
                             }
                         }
                     }
                 }
             }
         },
+
         bottomBar = { BottomBar(navController) }
     )
 }
@@ -193,7 +195,7 @@ fun MyProfileSection(modifier: Modifier = Modifier)
     val context = LocalContext.current
     Column(modifier = modifier.fillMaxWidth())
     {
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(5.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -219,7 +221,7 @@ fun MyProfileSection(modifier: Modifier = Modifier)
             email = "${browseViewModel.currentUser!!.sEmail}",
             phoneNumber = "(123) 456 789"
         )
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(20.dp))
     }
 }
 //Creates a round profile picture for the user
@@ -336,7 +338,7 @@ fun MyPostHistory()
                 //Clicked code
             }
         }
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 //        LazyColumn(
 //            modifier = Modifier.fillMaxWidth(),
 //            horizontalAlignment = Alignment.CenterHorizontally
@@ -350,7 +352,8 @@ fun MyPostHistory()
     }
 }
 @Composable
-fun MyUserReviews() {
+fun MyUserReviews() 
+{
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -361,7 +364,8 @@ fun MyUserReviews() {
         Box(
             modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.Center
-        ) {
+        ) 
+        {
             Text(
                 text = "User Reviews",
                 fontWeight = FontWeight.Bold,
@@ -392,24 +396,27 @@ fun MyUserReviews() {
             )
         )
 
-        reviewList.forEach { review ->
-                //dummy code
-                Card(
-                    modifier = Modifier
-                        .padding(10.dp)
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .clickable {
-
-                        },
-                    shape = MaterialTheme.shapes.medium,
-                    elevation = 5.dp,
-                    backgroundColor = MaterialTheme.colors.surface
-                ) {
-                    Row(){
-                        Text(text = " User Rating: ${review.rating}", style = MaterialTheme.typography.h3)
-                    }
+        reviewList.forEach{ review -> 
+            //dummy code
+            Card(
+                modifier = Modifier
+                    .padding(10.dp)
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .clickable {
+                    }, 
+                shape = MaterialTheme.shapes.medium,
+                elevation = 5.dp,
+                backgroundColor = MaterialTheme.colors.surface
+            ) 
+            {
+                Row()
+                {
+                    Text(text = " User Rating: ${review.rating}", style = MaterialTheme.typography.h3)
                 }
+            }
+            
+            Spacer(modifier = Modifier.height(20.dp))
 
         }
 //        LazyColumn(
