@@ -2,11 +2,15 @@ package com.revature.project2.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
@@ -17,6 +21,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
 import com.revature.project2.MainActivity
+import com.revature.project2.ui.theme.Purple200
+import com.revature.project2.ui.theme.PurpleVariant
 
 import com.revature.project2.view.composables.BottomBar
 import com.revature.project2.view.composables.Header
@@ -65,6 +71,17 @@ fun ViewItemScreen(
                     painter = rememberCoilPainter(request = viewVM.toy!!.sImagePath,),
                     contentDescription = null,
                     Modifier.size(250.dp)
+                        .clip(shape = RoundedCornerShape(10.dp))
+                        .border(
+                            width = 4.dp,
+                            brush = Brush.horizontalGradient(
+                                colors = listOf(
+                                    Purple200,
+                                    PurpleVariant
+                                )
+                            ),
+                            shape = RoundedCornerShape(10.dp)
+                        )
                 )
 
                 Spacer(modifier = Modifier.height(20.dp))

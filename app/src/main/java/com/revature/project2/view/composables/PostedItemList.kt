@@ -98,7 +98,7 @@ fun PostedItemsScreen(navController: NavController)
                         Surface()
                         {
                             Image(
-                                painter = painterResource(id = R.drawable.rainbow_toy_blocks_background_3d_3d_kot),
+                                painter = painterResource(id = R.drawable.minimal_blue_toy_background),
                                 contentDescription = "he",
                                 modifier = Modifier
                                     .height(1000.dp)
