@@ -49,8 +49,6 @@ fun PostedItemsScreen(navController: NavController)
     val offerlist = userToysViewModel.userTradeOffers
 
     Scaffold(scaffoldState = scaffoldState,
-        topBar = { TopAppBar( title = { Text("Posted Items: ") },
-            backgroundColor = MaterialTheme.colors.secondary) },
         floatingActionButton = {
            FloatingActionButton(onClick = {
                navController.navigate(NavScreens.NewToyPostScreen.route)
@@ -86,7 +84,7 @@ fun PostedItemsScreen(navController: NavController)
                 horizontalAlignment = Alignment.CenterHorizontally,
             )
             {
-                Header(text = "Posted Items")
+                Header(text = "Posted Toys")
 
                 if (userToysViewModel.userToys.isNotEmpty())
                 {

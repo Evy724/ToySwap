@@ -54,7 +54,7 @@ fun ViewItemScreen(
                     .fillMaxWidth()
             )
             {
-                Header(text = "View Item")
+                Header(text = viewVM.toy!!.sName)
 
                 Spacer(modifier = Modifier.height(20.dp))
 
