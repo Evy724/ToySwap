@@ -14,9 +14,9 @@ private val DarkColorPalette = darkColors(
 )
 
 private val LightColorPalette = lightColors(
-    primary = PinkishRed,
+    primary = Purple200,
     primaryVariant = DeepRed,
-    secondary = TealGreen
+    secondary = BluishGreen
 
     /* Other default colors to override
     background = Color.White,
@@ -36,7 +36,8 @@ fun Project2Theme(
     val colors = if (darkTheme)
     {
         DarkColorPalette
-    } else
+    }
+    else
     {
         LightColorPalette
     }

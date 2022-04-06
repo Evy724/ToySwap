@@ -7,12 +7,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
@@ -26,6 +29,8 @@ import com.revature.project2.MainActivity
 import com.revature.project2.R
 import com.revature.project2.model.api.user.Review
 import com.revature.project2.model.api.user.User
+import com.revature.project2.ui.theme.BluishGreen
+import com.revature.project2.ui.theme.PurpleVariant
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.*
 
@@ -39,46 +44,165 @@ fun MyProfileScreen(
     )
 
     Scaffold(scaffoldState = scaffoldState,
-        topBar = { TopAppBar( title = {Text("My Profile: ")},
-            backgroundColor = MaterialTheme.colors.secondary) },
-        content = {
 
-            val scrollState = rememberLazyListState()
+        content =
+        {
 
-            LazyColumn(
-                state = scrollState,
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(bottom = 50.dp),
+                    .background(
+                        brush = Brush.horizontalGradient(
+                            colors = listOf(
+                                PurpleVariant,
+                                BluishGreen
+                            )
+                        )
+                    )
+            )
+            {
+                Header(text = "My Profile")
+
+                Surface(
+                    modifier = Modifier
+                        .border(
+                            width = 2.dp,
+                            brush = Brush.horizontalGradient(
+                                colors = listOf(
+                                    PurpleVariant,
+                                    BluishGreen
+                                )
+                            ),
+                            shape = AbsoluteRoundedCornerShape(topLeft = 10.dp, topRight = 10.dp)
+                        )
+                        .clip(
+                            shape = RoundedCornerShape(10.dp)
+                        )
+                )
+                {
+                    Surface()
+                    {
+                        val scrollState = rememberLazyListState()
+
+                        LazyColumn(
+                            state = scrollState,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .padding(bottom = 50.dp),
 //                    .verticalScroll(state = scrollState)
-            ) {
-                item{
-                    MyProfileSection()
-                }
-                item{
-                    MyPostHistory()
-                }
-                item {
-                    MyUserReviews()
+                        )
+                        {
+                            item()
+                            {
+                                MyProfileSection()
+                            }
+                            item()
+                            {
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .background(
+                                            brush = Brush.horizontalGradient(
+                                                colors = listOf(
+                                                    PurpleVariant,
+                                                    BluishGreen
+                                                )
+                                            )
+                                        )
+                                )
+                                {
+                                    Surface(
+                                        modifier = Modifier
+                                            .border(
+                                                width = 2.dp,
+                                                brush = Brush.horizontalGradient(
+                                                    colors = listOf(
+                                                        PurpleVariant,
+                                                        BluishGreen
+                                                    )
+                                                ),
+                                                shape = AbsoluteRoundedCornerShape(
+                                                    topLeft = 10.dp,
+                                                    topRight = 10.dp
+                                                )
+                                            )
+                                            .clip(
+                                                shape = RoundedCornerShape(10.dp)
+                                            )
+                                    )
+                                    {
+                                        MyPostHistory()
+                                    }
+
+                                }
+
+                            }
+                            item()
+                            {
+                                Column(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .background(
+                                            brush = Brush.horizontalGradient(
+                                                colors = listOf(
+                                                    PurpleVariant,
+                                                    BluishGreen
+                                                )
+                                            )
+                                        )
+                                )
+                                {
+                                    Surface(
+                                        modifier = Modifier
+                                            .border(
+                                                width = 2.dp,
+                                                brush = Brush.horizontalGradient(
+                                                    colors = listOf(
+                                                        PurpleVariant,
+                                                        BluishGreen
+                                                    )
+                                                ),
+                                                shape = AbsoluteRoundedCornerShape(
+                                                    topLeft = 10.dp,
+                                                    topRight = 10.dp
+                                                )
+                                            )
+                                            .clip(
+                                                shape = RoundedCornerShape(10.dp)
+                                            )
+                                    )
+                                    {
+                                        MyUserReviews()
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         },
-            bottomBar = { BottomBar(navController) }
-        )
+
+        bottomBar = { BottomBar(navController) }
+    )
 }
 //Populates the ProfileScreen column with the user's profile picture as well as their ProfileInfo
 @Composable
-fun MyProfileSection(modifier: Modifier = Modifier) {
+fun MyProfileSection(modifier: Modifier = Modifier)
+{
 
     val context = LocalContext.current
-    Column(modifier = modifier.fillMaxWidth()) {
-        Spacer(modifier = Modifier.height(20.dp))
+    Column(modifier = modifier.fillMaxWidth())
+    {
+        Spacer(modifier = Modifier.height(5.dp))
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 40.dp, vertical = 20.dp)
-        ) {
+        )
+        {
             MyRoundImage(
                 image = painterResource(R.drawable.selfie),
                 modifier = Modifier
@@ -97,6 +221,7 @@ fun MyProfileSection(modifier: Modifier = Modifier) {
             email = "${browseViewModel.currentUser!!.sEmail}",
             phoneNumber = "(123) 456 789"
         )
+        Spacer(modifier = Modifier.height(20.dp))
     }
 }
 //Creates a round profile picture for the user
@@ -183,17 +308,20 @@ fun MyProfileDescription(name: String, email: String, phoneNumber: String) {
 }
 //Displays the account's currently posted items
 @Composable
-fun MyPostHistory() {
+fun MyPostHistory()
+{
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
-    ) {
+    )
+    {
         Spacer(modifier = Modifier.height(10.dp))
         Box(
             modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.Center
-        ) {
+        )
+        {
             Text(
                 text = "Post History",
                 fontWeight = FontWeight.Bold,
@@ -210,6 +338,7 @@ fun MyPostHistory() {
                 //Clicked code
             }
         }
+        Spacer(modifier = Modifier.height(20.dp))
 //        LazyColumn(
 //            modifier = Modifier.fillMaxWidth(),
 //            horizontalAlignment = Alignment.CenterHorizontally
@@ -223,7 +352,8 @@ fun MyPostHistory() {
     }
 }
 @Composable
-fun MyUserReviews() {
+fun MyUserReviews() 
+{
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -234,7 +364,8 @@ fun MyUserReviews() {
         Box(
             modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.Center
-        ) {
+        ) 
+        {
             Text(
                 text = "User Reviews",
                 fontWeight = FontWeight.Bold,
@@ -265,24 +396,27 @@ fun MyUserReviews() {
             )
         )
 
-        reviewList.forEach { review ->
-                //dummy code
-                Card(
-                    modifier = Modifier
-                        .padding(10.dp)
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .clickable {
-
-                        },
-                    shape = MaterialTheme.shapes.medium,
-                    elevation = 5.dp,
-                    backgroundColor = MaterialTheme.colors.surface
-                ) {
-                    Row(){
-                        Text(text = " User Rating: ${review.rating}", style = MaterialTheme.typography.h3)
-                    }
+        reviewList.forEach{ review -> 
+            //dummy code
+            Card(
+                modifier = Modifier
+                    .padding(10.dp)
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .clickable {
+                    }, 
+                shape = MaterialTheme.shapes.medium,
+                elevation = 5.dp,
+                backgroundColor = MaterialTheme.colors.surface
+            ) 
+            {
+                Row()
+                {
+                    Text(text = " User Rating: ${review.rating}", style = MaterialTheme.typography.h3)
                 }
+            }
+            
+            Spacer(modifier = Modifier.height(20.dp))
 
         }
 //        LazyColumn(

@@ -1,5 +1,9 @@
 package com.revature.project2.view.composables
 
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -12,6 +16,7 @@ import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -102,18 +107,31 @@ fun seeTradeRequestsOnItem(navController: NavController) {
             textAlign = TextAlign.Center
         )
     }
+fun seeTradeRequestsOnItem()
+{
+    universalButton20sp(
+        modifier = Modifier
+            .padding(10.dp)
+            .fillMaxWidth()
+            .height(100.dp)
+            .wrapContentHeight(),
+        enabled = true,
+        text ="Trade Offers",
+        onClick = { /*TODO*/ }
+    )
 }
 
 @Composable
 fun removePost(navController: NavController) {
 
     val context = LocalContext.current
-    Button(modifier = Modifier
+    universalButton20sp(modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()
         .height(100.dp)
         .wrapContentHeight(),
-        shape = RoundedCornerShape(25),
+        text = "Remove Post",
+        enabled = true,
         onClick = {
             //Code to remove toy from api here
 
@@ -125,14 +143,5 @@ fun removePost(navController: NavController) {
             )
 
         })
-
-
-    {
-        Text(
-            text = "Remove Post",
-            fontSize = 15.sp,
-            textAlign = TextAlign.Center
-        )
-    }
 }
 

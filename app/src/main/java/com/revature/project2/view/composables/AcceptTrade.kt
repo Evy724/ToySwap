@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,6 +26,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.revature.project2.R
 import com.revature.project2.view.composables.BottomBar
+import com.revature.project2.view.composables.Header
+import com.revature.project2.view.composables.universalButton20sp
 import com.revature.project2.view.nav.NavScreens
 
 @Composable
@@ -32,15 +35,11 @@ fun AcceptTradeScreen(navController: NavController)
 {
     val scaffoldState = rememberScaffoldState()
     val context = LocalContext.current
-    Scaffold(scaffoldState = scaffoldState, topBar =
-    {
-        TopAppBar(
-            title = { Text(text = "View Item") },
-            backgroundColor = MaterialTheme.colors.secondary
-        )
-    },
+    Scaffold(
+        scaffoldState = scaffoldState,
         content =
         {
+            Header(text = "Accept Trade")
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top,
@@ -203,22 +202,19 @@ fun AcceptTradeScreen(navController: NavController)
                         modifier = Modifier.padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally)
                     {
-                        Button(onClick = {
+                        universalButton20sp(
+                            enabled = true,
+                            text = "Accept",
+                            onClick = {
 
-                            //Accept trade API call
+                                //Accept trade API call
 
 
-                            Toast.makeText(context,"Trade Accepted",Toast.LENGTH_LONG).show()
-                            navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
+                                Toast.makeText(context,"Trade Accepted",Toast.LENGTH_LONG).show()
+                                navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
 
-                        })
-                        {
-                            Text(
-                                text = "Accept",
-                                fontSize = 15.sp,
-                                textAlign = TextAlign.Center
-                            )
-                        }
+                            },
+                        )
                     }
 
                     // Right decline button
@@ -227,23 +223,20 @@ fun AcceptTradeScreen(navController: NavController)
                         horizontalAlignment = Alignment.CenterHorizontally
                     )
                     {
-                        Button(onClick = {
+                        universalButton20sp(
+                            enabled = true,
+                            text = "Decline",
+                            onClick = {
 
-                            //Decline Trade Api call
+                                //Decline Trade Api call
 
 
-                            Toast.makeText(context,"Trade Rejected",Toast.LENGTH_LONG).show()
-                            navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
+                                Toast.makeText(context,"Trade Rejected",Toast.LENGTH_LONG).show()
+                                navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
 
 
-                        })
-                        {
-                            Text(
-                                text = "Decline",
-                                fontSize = 15.sp,
-                                textAlign = TextAlign.Center
-                            )
-                        }
+                            },
+                        )
                     }
                 }
             }

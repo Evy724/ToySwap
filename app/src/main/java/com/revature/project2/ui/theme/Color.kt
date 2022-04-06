@@ -14,3 +14,9 @@ val BubblegumPink = Color(0xFFAEF14697)
 val BrightYellow = Color(0xFFF3E03A)
 val DeepRed = Color(0xFFD1392E)
 val TealGreen = Color(0xFF43C5A8)
+val MediumDarkRed = Color(0xFFd1544b)
+
+// Addition colors need for background + gradients
+val Transparent = Color(0xFF0000ffff)
+val PastelPurple = Color(0xFFEAD6EE)
+val PurpleVariant = Color(0xFFB57EDC)
