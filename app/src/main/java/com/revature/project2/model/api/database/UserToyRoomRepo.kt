@@ -22,4 +22,8 @@ class UserToyRoomRepo(app:Application) {
     suspend fun insertCustomer(toy:ToyItem){
         userToyDao.insertUserToy(toy)
     }
+
+    suspend fun deleteUserToys(){
+        userToyDao.deleteUserToys()
+    }
 }

@@ -18,4 +18,7 @@ interface UserToysDAO {
 
     @Query("DELETE FROM usertoys WHERE id=:id")
     suspend fun deleteUserToyById(id: Int)
+
+    @Query("DELETE FROM usertoys")
+    suspend fun deleteUserToys()
 }

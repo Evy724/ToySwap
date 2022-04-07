@@ -164,7 +164,7 @@ fun LoginBody(navController: NavController){
                     var user: User? = loginViewModel.existingUserCheck(sName, sPass)
                     if (user != null) {
 
-                    postUserVMFactory = UserToysViewModelFactory(user)
+                    postUserVMFactory = UserToysViewModelFactory(user, context.application)
 
                     val browseVM =
                         ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
