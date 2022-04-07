@@ -39,6 +39,7 @@ import com.revature.project2.view.nav.NavScreens
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.filled.Info
 import coil.transform.CircleCropTransformation
+import com.revature.project2.model.AppManager
 
 // Header for all screens
 @Composable
@@ -247,8 +248,10 @@ fun ToyCard(toy: ToyItem,bNotification:Boolean = false, onClick: () -> Unit)
 
                 Spacer(Modifier.size(5.dp))
 
+                var poster = AppManager.getUserNameByID(toy.posterId) //toy.posterId
+
                 Text(
-                    text = "Added By: ${toy.posterId}",
+                    text = "Added By: $poster",
                     style = MaterialTheme.typography.body1
                 )
             }
