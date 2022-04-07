@@ -1,21 +1,16 @@
 package com.revature.project2.view.nav
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavArgument
-import androidx.navigation.NavDeepLinkSaveStateControl
-import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.revature.project2.MainActivity
-import androidx.navigation.navArgument
 import com.revature.project2.ui.jc.tradeFinalizeScreen
-import com.revature.project2.ui.jc.tradeProposalScreen
+import com.revature.project2.view.composables.tradeProposalScreen
 import com.revature.project2.ui.AcceptTradeScreen
 import com.revature.project2.ui.ViewItemScreen
 import com.revature.project2.view.composables.*
 import com.revature.project2.view.composables.Register
-import com.revature.project2.viewmodel.UserToysViewModel
 
 /**
  * Starts navigation for the app
