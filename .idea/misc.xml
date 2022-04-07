@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/sarahkorrin/AndroidStudioProjects/Project2/app/src/main/res/font/chewy.xml" value="0.1" />
+        <entry key="..\:/Project2/app/src/main/res/drawable/toy_swap_logo.xml" value="0.1165" />
+        <entry key="..\:/Project2/app/src/main/res/drawable/toy_swap_splash_background.xml" value="0.1" />
+        <entry key="..\:/Project2/app/src/main/res/font/chewy.xml" value="0.1" />
+        <entry key="..\:/Project2/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/Project2/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/Project2/app/src/main/res/mipmap-anydpi-v26/toy_swap_splash.xml" value="0.1" />
+        <entry key="..\:/Project2/app/src/main/res/mipmap-anydpi-v26/toy_swap_splash_round.xml" value="0.1" />
       </map>
     </option>
   </component>

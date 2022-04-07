@@ -67,7 +67,7 @@ fun BrowseItemsScreen(navController: NavController)
                     )
             )
             {
-                Header(text = "Browse Items")
+                Header(text = "Browse Toys")
                 BrowseItemsBody(navController, browseViewModel.allToys )
             }
         },
