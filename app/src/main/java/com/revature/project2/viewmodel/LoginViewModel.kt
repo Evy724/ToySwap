@@ -13,6 +13,7 @@ import java.lang.Exception
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.*
+import com.revature.project2.model.AppManager
 
 class LoginViewModel():ViewModel() {
 
@@ -31,12 +32,15 @@ class LoginViewModel():ViewModel() {
 
     init {
         Log.d("Login ViewModel","Initialization")
-        viewModelScope.launch(Dispatchers.IO) {
-            getAllUsers()
-        }
+        allUsers = AppManager.users
+//        viewModelScope.launch(Dispatchers.IO) {
+//            getAllUsers()
+//        }
     }
 
-    //Logic Functions
+    fun setCurrentUser(user:User){
+        AppManager.currentUser = user
+    }
 
     //Checks the passed in user against the list of users
     fun existingUserCheck(sName:String,sPass:String):User?{
@@ -59,20 +63,20 @@ class LoginViewModel():ViewModel() {
 
     private suspend fun getAllUsers(){
 
-        userRepo = AllUsersRepository(apiService)
-        when (val response = userRepo.fetchAllUsers()){
-
-            is AllUsersRepository.Result.Success->{
-
-                Log.d("Login ViewModel","Load Users Successful")
-                allUsers = response.userList
-            }
-
-            is AllUsersRepository.Result.Failure->{
-
-                Log.d("Login ViewModel","Load Users Failed")
-            }
-        }
+//        userRepo = AllUsersRepository(apiService)
+//        when (val response = userRepo.fetchAllUsers()){
+//
+//            is AllUsersRepository.Result.Success->{
+//
+//                Log.d("Login ViewModel","Load Users Successful")
+//                allUsers = response.userList
+//            }
+//
+//            is AllUsersRepository.Result.Failure->{
+//
+//                Log.d("Login ViewModel","Load Users Failed")
+//            }
+//        }
 
 
     }

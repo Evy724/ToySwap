@@ -30,6 +30,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.revature.project2.MainActivity
 import com.revature.project2.R
+import com.revature.project2.model.AppManager
 import com.revature.project2.model.api.allusers.User
 import com.revature.project2.ui.theme.BluishGreen
 import com.revature.project2.ui.theme.Project2Typography
@@ -163,6 +164,9 @@ fun LoginBody(navController: NavController){
                     //Check if the user exists in our server
                     var user: User? = loginViewModel.existingUserCheck(sName, sPass)
                     if (user != null) {
+
+                        //Set Current user in AppManager
+                            loginViewModel.setCurrentUser(user)
 
                     postUserVMFactory = UserToysViewModelFactory(user, context.application)
 

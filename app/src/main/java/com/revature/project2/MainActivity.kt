@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import com.revature.project2.model.AppManager
 import com.revature.project2.ui.theme.Project2Theme
 import com.revature.project2.view.nav.StartNav
 
@@ -19,7 +20,9 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val app = this
+        //val app = this.application
+        val appManager = AppManager
+        appManager.setApplication(this.application)
 
         setContent {
             Project2Theme {
@@ -31,7 +34,7 @@ class MainActivity : ComponentActivity() {
                     Log.d("MainActivity","Main activity Set Content")
 
 //                    Start our app's navigation
-                    StartNav(app)
+                    StartNav(this)
 
                 }
             }
