@@ -114,7 +114,7 @@ fun LoginBody(navController: NavController){
             val loginViewModel =
                 ViewModelProvider(context as MainActivity).get(LoginViewModel::class.java)
 
-            val userList = loginViewModel.allUsers
+            val userList = AppManager.users
 
             var postUserVMFactory: UserToysViewModelFactory
 

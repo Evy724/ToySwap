@@ -2,6 +2,9 @@ package com.revature.project2.model
 
 import android.app.Application
 import android.util.Log
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import com.revature.project2.model.api.RetrofitHelper
 import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.model.api.allusers.AllUsersRepository
@@ -15,8 +18,9 @@ object AppManager {
     private lateinit var app:Application
     private val apiService = RetrofitHelper.getAllToysService()
 
-    lateinit var allToys:List<ToyItem>
-    lateinit var users:List<User>
+    //lateinit var allToys:List<ToyItem>
+    var users:List<User> by mutableStateOf(listOf())
+//    var users:List<User> = listOf()
 
     lateinit var currentUser:User
 
