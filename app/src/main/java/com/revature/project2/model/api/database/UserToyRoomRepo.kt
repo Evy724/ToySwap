@@ -12,6 +12,13 @@ class UserToyRoomRepo(app:Application) {
         userToyDao = database.userToysDao()
     }
 
+    suspend fun updateUserToys(list:List<ToyItem>){
+        userToyDao.deleteUserToys()
+        list.forEach {  toy->
+            userToyDao.insertUserToy(toy)
+        }
+    }
+
     val readAllUserToys: List<ToyItem> =
         userToyDao.fetchAllUserToys()
 

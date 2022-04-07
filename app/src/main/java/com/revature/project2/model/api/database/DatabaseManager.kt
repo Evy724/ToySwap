@@ -52,6 +52,7 @@ class DatabaseManager(app:Application) {
                         is UserToysRepository.Result.Success-> {
                             Log.d("ViewModel", "Load Successful")
                             userToys = response.toyList
+                            userToyRepo.updateUserToys(userToys)
                         }
                         //If failed, log and continue
                         is UserToysRepository.Result.Failure-> {
