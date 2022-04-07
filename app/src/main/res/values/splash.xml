@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#FF03DAC5</item>
+
+        <item name="windowSplashScreenAnimatedIcon"> @mipmap/toy_swap_splash_foreground</item>
+
+        <item name="postSplashScreenTheme"> @style/Theme.Project2</item>
+    </style>
+</resources>
