@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.revature.project2"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -47,6 +47,7 @@ android {
 }
 
 dependencies {
+
 
     def room_version = "2.3.0"
     implementation "androidx.room:room-ktx:$room_version"
