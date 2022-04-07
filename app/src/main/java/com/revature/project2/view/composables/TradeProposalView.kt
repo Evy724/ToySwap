@@ -1,4 +1,4 @@
-package com.revature.project2.ui.jc
+package com.revature.project2.view.composables
 
 
 import androidx.compose.foundation.*
@@ -7,20 +7,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,18 +25,11 @@ import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
 import com.revature.project2.MainActivity
 
-import com.revature.project2.R
-import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.ui.theme.Project2Theme
 import com.revature.project2.ui.theme.Purple200
 import com.revature.project2.ui.theme.PurpleVariant
 import com.revature.project2.ui.theme.Teal200
-import com.revature.project2.view.composables.BottomBar
-import com.revature.project2.view.composables.Header
-import com.revature.project2.view.composables.ToyCard
-import com.revature.project2.view.composables.ToyCardWithButton
 import com.revature.project2.view.nav.NavScreens
-import com.revature.project2.viewmodel.AllToysViewModel
 import com.revature.project2.viewmodel.ToyItemViewModel
 import com.revature.project2.viewmodel.TradeViewModel
 import com.revature.project2.viewmodel.UserToysViewModel
