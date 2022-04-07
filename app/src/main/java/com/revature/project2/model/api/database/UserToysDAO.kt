@@ -11,7 +11,7 @@ import com.revature.project2.model.api.alltoys.ToyItem
 interface UserToysDAO {
 
     @Query("SELECT * FROM usertoys")
-    fun fetchAllCustomers(): List<ToyItem>
+    fun fetchAllUserToys(): List<ToyItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUserToy(toy: ToyItem)

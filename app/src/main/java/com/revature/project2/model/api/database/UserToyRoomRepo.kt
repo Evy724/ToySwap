@@ -13,7 +13,7 @@ class UserToyRoomRepo(app:Application) {
     }
 
     val readAllUserToys: List<ToyItem> =
-        userToyDao.fetchAllCustomers()
+        userToyDao.fetchAllUserToys()
 
     suspend fun deleteUserToyById(id:Int){
         userToyDao.deleteUserToyById(id)
