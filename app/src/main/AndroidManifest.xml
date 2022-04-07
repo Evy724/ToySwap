@@ -3,6 +3,7 @@
     package="com.revature.project2">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,11 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project2">
-        <activity
-            android:name=".ui.ViewItem"
-            android:exported="false"
-            android:label="@string/title_activity_view_item"
-            android:theme="@style/Theme.Project2" />
+<!--        <activity-->
+<!--            android:name=".ui.ViewItem"-->
+<!--            android:exported="false"-->
+<!--            android:label="@string/title_activity_view_item"-->
+<!--            android:theme="@style/Theme.Project2" />-->
         <activity
             android:name=".MainActivity"
             android:exported="true"
