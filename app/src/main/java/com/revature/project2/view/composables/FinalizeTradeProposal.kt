@@ -2,9 +2,7 @@ package com.revature.project2.ui.jc
 
 
 import android.widget.Toast
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 
@@ -19,6 +17,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,7 +27,7 @@ import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
 import com.revature.project2.MainActivity
 import com.revature.project2.R
-import com.revature.project2.ui.theme.Project2Theme
+import com.revature.project2.ui.theme.*
 import com.revature.project2.view.composables.BottomBar
 import com.revature.project2.view.composables.Header
 import com.revature.project2.view.composables.universalButton20sp
@@ -47,74 +47,73 @@ fun tradeFinalizeScreen(navController: NavController)
     var finalMessage=""
 //    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Top)
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Top)
-    {
+   Scaffold(bottomBar = {BottomBar(navController = navController)},
+       topBar = {Header(text = "Finalize Trade")}) {
+       Column(
+           modifier = Modifier
+               .fillMaxSize()
+               .verticalScroll(ScrollState(0)),
+           horizontalAlignment = Alignment.CenterHorizontally,
+           verticalArrangement = Arrangement.Top
+           )
+       {
+           Spacer(modifier = Modifier.size(10.dp))
+           Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center){
+               Column() {
+                   Image(
+                       painter = rememberCoilPainter(request = theirviewModel.theirToy!!.sImagePath), contentDescription = "",
+                       modifier = Modifier
+                           .size(260.dp)
+                           .border(width = 4.dp, color = Purple200)
 
-        Header(text = "Finalize Trade")
+                   )
+                    Spacer(modifier = Modifier.size(10.dp))
+                   Image(
+                       painter = rememberCoilPainter(request = myviewModel.toy!!.sImagePath), contentDescription = "",
+                       modifier = Modifier
+                           .size(260.dp)
+                           .border(width = 4.dp, color = Purple200)
 
-        Spacer(modifier = Modifier.height(20.dp))
+                   )
+               }
+           }
+           Spacer(modifier = Modifier.height(10.dp))
+           Card(backgroundColor = Teal200 , modifier = Modifier.fillMaxSize(),elevation = 100.dp) {
+               Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                   Spacer(modifier = Modifier.height(5.dp))
+                   Card(modifier = Modifier.fillMaxWidth().height(24.dp),
+                       elevation = 10.dp, backgroundColor = Purple200) {
+                       Text(text = "Message ", textAlign= TextAlign.Center, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color.White)
+                   }
+                   Spacer(modifier = Modifier.height(10.dp))
+                   Card(modifier = Modifier.fillMaxWidth()) {
 
-        Image(
-            painter = rememberCoilPainter(request = theirviewModel.theirToy!!.sImagePath), contentDescription = "",
-            modifier = Modifier
-                .size(100.dp)
-                .border(width = 1.dp, color = Color.Black)
-        )
-        Spacer(modifier = Modifier.height(50.dp))
-        Row(horizontalArrangement = Arrangement.Center)
-        {
-            Image(
-                painter = painterResource(id = R.drawable._4603),
-                contentDescription = "",
-                modifier = Modifier.size(70.dp)
-            )
-            Spacer(modifier = Modifier.width(100.dp))
-            Image(
-                painter = painterResource(id = R.drawable._4603reverse),
-                contentDescription = "",
-                modifier = Modifier.size(70.dp)
-            )
+                       TextField(
+                           value = message,
+                           onValueChange =
+                           { message = it },
+                           placeholder = { Text(text = "Send message to user here") })
+                   }
 
-        }
-        Spacer(modifier = Modifier.height(50.dp))
-        Image(
-            painter = rememberCoilPainter(request = myviewModel.toy!!.sImagePath), contentDescription = "",
-            modifier = Modifier
-                .size(100.dp)
-                .border(width = 1.dp, color = Color.Black)
-        )
-        Spacer(modifier = Modifier.height(50.dp))
-        Card(modifier = Modifier.fillMaxWidth(), border = BorderStroke(1.dp, Color.Black)) {
-
-            TextField(
-                value = message,
-                onValueChange =
-                { message = it },
-                placeholder = { Text(text = "Send message to user here") })
-        }
-
-        Spacer(modifier = Modifier.height(20.dp))
-        universalButton20sp(
-            enabled = true,
-            text = "Send",
-            onClick =
-            {
-                finalMessage=message
-                theirviewModel.getSendTrade_msg("TO-${myviewModel.toy!!.id}-${theirviewModel.theirToy!!.id}",finalMessage)
-                Toast.makeText(context, "Proposal Request Sent",Toast.LENGTH_LONG).show()
+                   Spacer(modifier = Modifier.height(10.dp))
+                   universalButton20sp(
+                       enabled = true,
+                       text = "Send",
+                       onClick =
+                       {
+                           finalMessage=message
+                           theirviewModel.getSendTrade_msg("TO-${myviewModel.toy!!.id}-${theirviewModel.theirToy!!.id}",finalMessage)
+                           Toast.makeText(context, "Proposal Request Sent",Toast.LENGTH_LONG).show()
 
 
-                navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
-            }
-        )
-        Spacer(modifier = Modifier.height(50.dp))
-
-        BottomBar(navController = navController)
-
-    }
+                           navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
+                       }
+                   )
+                   Spacer(modifier = Modifier.height(100.dp))
+               }
+           }
+       }
+   }
 
 
 
