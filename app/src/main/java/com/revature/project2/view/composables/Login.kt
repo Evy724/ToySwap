@@ -150,37 +150,44 @@ fun LoginBody(navController: NavController){
 
             Spacer(modifier = Modifier.size(40.dp))
 
+            if(!bEnabled) {
+                CircularProgressIndicator()
+            } else {
 
-            universalButton20sp(
-                enabled = bEnabled,
-                text = loginButtonText,
-                onClick =
-                {
-                    Log.d("Login Screen", "Login Button Clicked")
 
-                    //Disable button and change text to Loading
-                    loginButtonText = "Loading"
-                    bEnabled = false
+                universalButton20sp(
+                    enabled = bEnabled,
+                    text = loginButtonText,
+                    onClick =
+                    {
+                        Log.d("Login Screen", "Login Button Clicked")
 
-                    //Check if the user exists in our server
-                    var user: User? = loginViewModel.existingUserCheck(sName, sPass)
-                    if (user != null) {
+                        //Disable button and change text to Loading
+                        loginButtonText = "Loading"
+                        bEnabled = false
 
-                        //Set Current user in AppManager
+                        //Check if the user exists in our server
+                        var user: User? = loginViewModel.existingUserCheck(sName, sPass)
+                        if (user != null) {
+
+                            //Set Current user in AppManager
                             loginViewModel.setCurrentUser(user)
 
-                    postUserVMFactory = UserToysViewModelFactory(user, context.application)
+                            postUserVMFactory = UserToysViewModelFactory(user, context.application)
 
-                    val browseVM =
-                        ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
-                    val userVM =
-                        ViewModelProvider(context,postUserVMFactory).get(UserToysViewModel::class.java)
-                    browseVM.currentUser = user
-                    Log.d("Login Screen","Current User Set")
+                            val browseVM =
+                                ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
+                            val userVM =
+                                ViewModelProvider(
+                                    context,
+                                    postUserVMFactory
+                                ).get(UserToysViewModel::class.java)
+                            browseVM.currentUser = user
+                            Log.d("Login Screen", "Current User Set")
 
-                        //If it does, log in with that user
-                        loginViewModel.login(sName, sPass)
-                        navController.navigate(NavScreens.BrowseItemsScreen.route)
+                            //If it does, log in with that user
+                            loginViewModel.login(sName, sPass)
+                            navController.navigate(NavScreens.BrowseItemsScreen.route)
 //                            if (loginViewModel.login(sName,sPass)){
 //
 //                                Log.d("Login Screen","Nav to Browse Screen")
@@ -194,36 +201,37 @@ fun LoginBody(navController: NavController){
 //                                loginButtonText = "Login"
 //                                bEnabled = true
 //                            }
-                    } else {
+                        } else {
 
-                        //If it doesnt, reset the Screen
-                        Toast.makeText(
-                            context,
-                            "Invalid Login",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        bEnabled = true
-                        loginButtonText = "Log In:"
-                        sName = ""
-                        sPass = ""
-                        Log.d("Login Screen", "Login Failed")
-                    }
+                            //If it doesnt, reset the Screen
+                            Toast.makeText(
+                                context,
+                                "Invalid Login",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            bEnabled = true
+                            loginButtonText = "Log In:"
+                            sName = ""
+                            sPass = ""
+                            Log.d("Login Screen", "Login Failed")
+                        }
 
-                },
-            )
-
-            Spacer(modifier = Modifier.size(15.dp))
-
-            Text(
-                text = "New User? Register",
-                modifier = Modifier
-                    .clickable {
-                        Log.d("Login Screen", "Register User Clicked")
-
-                        navController.navigate(NavScreens.RegisterScreen.route)
                     },
-                style = Project2Typography.body2
-            )
+                )
+
+                Spacer(modifier = Modifier.size(15.dp))
+
+                Text(
+                    text = "New User? Register",
+                    modifier = Modifier
+                        .clickable {
+                            Log.d("Login Screen", "Register User Clicked")
+
+                            navController.navigate(NavScreens.RegisterScreen.route)
+                        },
+                    style = Project2Typography.body2
+                )
+            }
 
         }
 

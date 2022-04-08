@@ -182,7 +182,7 @@ fun BrowseItemsBody(navController: NavController, toyList:List<ToyItem>)
             verticalArrangement = Arrangement.Center
         )
         {
-            Text("Loading", style = MaterialTheme.typography.h3)
+            CircularProgressIndicator()
             Log.d("Browse Screen","Loading Screen")
 
         }
