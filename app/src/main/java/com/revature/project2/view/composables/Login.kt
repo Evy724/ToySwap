@@ -112,7 +112,7 @@ fun LoginBody(navController: NavController){
             var sPass by rememberSaveable { mutableStateOf("") }
             val loginViewModel =
                 ViewModelProvider(context as MainActivity).get(LoginViewModel::class.java)
-            var userList by remember{ mutableStateOf(AppManager.users)}
+            var userList = remember{ AppManager.users}
             //userList = AppManager.users
 
             //val userList = AppManager.users
@@ -120,8 +120,8 @@ fun LoginBody(navController: NavController){
             var postUserVMFactory: UserToysViewModelFactory
 
 
-    if (userList.isNotEmpty()){
-        loginButtonText = "Log In"
+            if (loginViewModel.bUsersLoaded.value){
+                loginButtonText = "Log In"
                 bEnabled = true
                 Log.d("Login Screen", "All Users Loaded")
             }

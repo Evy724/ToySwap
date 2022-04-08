@@ -33,6 +33,7 @@ class MainActivity : ComponentActivity() {
         //val app = this.application
         val appManager = AppManager
         appManager.setApplication(this.application)
+        appManager.setActivity(this)
 
         //Constructor for the Splash screen
         installSplashScreen().apply {

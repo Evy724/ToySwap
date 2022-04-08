@@ -2,6 +2,7 @@ package com.revature.project2.viewmodel
 
 import android.util.Log
 import android.util.MutableBoolean
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.revature.project2.model.api.RetrofitHelper
 import com.revature.project2.model.api.allusers.AllUsersRepository
@@ -28,6 +29,8 @@ class LoginViewModel():ViewModel() {
 
     //For sending user info to server
     val loginRequestLiveData = MutableLiveData<Boolean>()
+
+    var bUsersLoaded = mutableStateOf<Boolean>(false)
 
 
     init {
