@@ -45,66 +45,83 @@ fun ViewItemScreen(
         {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
                 modifier = Modifier
                     .background(
                         MaterialTheme.colors.surface,
                         RectangleShape
                     )
-                    .fillMaxWidth()
+                    .fillMaxSize()
             )
             {
-                Header(text = viewVM.toy!!.sName)
+                Column(verticalArrangement = Arrangement.Top)
+                {
+                    Header(text = viewVM.toy!!.sName)
 
-                Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(30.dp))
+                }
 
-                Text(
-                    viewVM.toy!!.sName,
-                    fontSize = 30.sp,
-                    textAlign = TextAlign.Center
+                Column(
+                    verticalArrangement = Arrangement.SpaceEvenly,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 )
+                {
+                    Text(
+                        viewVM.toy!!.sName,
+                        fontSize = 30.sp,
+                        textAlign = TextAlign.Center
+                    )
 
-                Spacer(modifier = Modifier.height(10.dp))
+                    Spacer(modifier = Modifier.height(25.dp))
 
-                // Toy image
-                Image(
-                    painter = rememberCoilPainter(request = viewVM.toy!!.sImagePath,),
-                    contentDescription = null,
-                    Modifier.size(250.dp)
-                        .clip(shape = RoundedCornerShape(10.dp))
-                        .border(
-                            width = 4.dp,
-                            brush = Brush.horizontalGradient(
-                                colors = listOf(
-                                    Purple200,
-                                    PurpleVariant
-                                )
-                            ),
-                            shape = RoundedCornerShape(10.dp)
-                        )
+                    // Toy image
+                    Image(
+                        painter = rememberCoilPainter(request = viewVM.toy!!.sImagePath,),
+                        contentDescription = null,
+                        Modifier
+                            .size(250.dp)
+                            .clip(shape = RoundedCornerShape(10.dp))
+                            .border(
+                                width = 4.dp,
+                                brush = Brush.horizontalGradient(
+                                    colors = listOf(
+                                        Purple200,
+                                        PurpleVariant
+                                    )
+                                ),
+                                shape = RoundedCornerShape(10.dp)
+                            )
+                    )
+
+                    Spacer(modifier = Modifier.height(25.dp))
+
+                    Text(
+                        text = viewVM.toy!!.sDescription,
+                        fontSize = 17.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(horizontal = 15.dp)
+                    )
+
+                    Spacer(modifier = Modifier.height(25.dp))
+                }
+
+
+                Column(
+//                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Bottom
                 )
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                Text(
-                    text = viewVM.toy!!.sDescription,
-                    fontSize = 17.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(horizontal = 15.dp)
-                )
-
-                Spacer(modifier = Modifier.height(20.dp))
-
-                // To trade proposal screen
-                universalButton20sp(
-                    enabled = true,
-                    text = "Request Trade",
-                    onClick =
-                    {
-                        navController.navigate(NavScreens.TradeProposalScreen.route)
-                    },
-                )
+                {
+                    // To trade proposal screen
+                    universalButton20sp(
+                        enabled = true,
+                        text = "Request Trade",
+                        onClick =
+                        {
+                            navController.navigate(NavScreens.TradeProposalScreen.route)
+                        },
+                    )
+                }
             }
+
         },
         bottomBar = {BottomBar(navController = navController)}
     )
