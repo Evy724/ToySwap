@@ -24,6 +24,10 @@ class MainActivity : ComponentActivity() {
     private val viewModel: SplashViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val window = this.window
+        window.statusBarColor = this.resources.getColor(R.color.teal_200)
+
         super.onCreate(savedInstanceState)
 
         //val app = this.application
