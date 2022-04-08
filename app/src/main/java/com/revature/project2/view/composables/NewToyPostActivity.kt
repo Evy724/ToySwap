@@ -10,10 +10,12 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-
+import com.revature.project2.ui.theme.BluishGreen
+import com.revature.project2.ui.theme.PurpleVariant
 
 
 @Composable
@@ -25,12 +27,16 @@ Scaffold(bottomBar = {BottomBar(navController)})
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
-            .background(
-                MaterialTheme.colors.surface,
-                RectangleShape
-            )
             .fillMaxWidth()
-    )
+            .background(
+                brush = Brush.horizontalGradient(
+                    colors = listOf(
+                        PurpleVariant,
+                        BluishGreen
+                    )
+                )
+            )
+         )
     {
 
         screenTitle()
