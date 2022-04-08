@@ -27,9 +27,11 @@ import com.revature.project2.R
 import com.revature.project2.view.nav.NavScreens
 
 @Composable
-fun viewPostedToyScreen(navController: NavController) {
+fun viewPostedToyScreen(navController: NavController)
+{
 
-    Scaffold(bottomBar = { BottomBar(navController) }) {
+    Scaffold(bottomBar = { BottomBar(navController) })
+    {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
@@ -42,7 +44,8 @@ fun viewPostedToyScreen(navController: NavController) {
             postedToyDescription()
 
             //Temp if, should check if trades are available for this toy
-            if(true) {
+            if(true)
+            {
                 seeTradeRequestsOnItem(navController)
             }
             removePost(navController)
@@ -71,7 +74,7 @@ fun postedToyImage() {
             .height(100.dp)
             .wrapContentHeight(),
         painter = painterResource(
-            id = R.drawable.pokemon_legends_arceus_nintendo_switch_in_box),
+            id = R.drawable.sleeping_waddle_dee_plushie),
         contentDescription = null)
 }
 @Composable

@@ -49,12 +49,14 @@ fun PostedItemsScreen(navController: NavController)
     val offerlist = userToysViewModel.userTradeOffers
 
     Scaffold(scaffoldState = scaffoldState,
-        floatingActionButton = {
-           FloatingActionButton(onClick = {
-               navController.navigate(NavScreens.NewToyPostScreen.route)
-           }){
+        floatingActionButton =
+        {
+            FloatingActionButton(
+                onClick = { navController.navigate(NavScreens.NewToyPostScreen.route)
+                })
+            {
                 Icon(Icons.Filled.Add,"")
-           }},
+            }},
 
 //        floatingActionButton =
 //        {

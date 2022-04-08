@@ -17,8 +17,10 @@ import androidx.navigation.NavController
 
 
 @Composable
-fun NewToyPostScreen(navController: NavController){
-Scaffold(bottomBar = {BottomBar(navController)}) {
+fun NewToyPostScreen(navController: NavController)
+{
+Scaffold(bottomBar = {BottomBar(navController)})
+{
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
