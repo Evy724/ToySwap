@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         val window = this.window
-        window.statusBarColor = this.resources.getColor(R.color.teal_200)
+        window.statusBarColor = this.resources.getColor(R.color.purple_200)
 
         super.onCreate(savedInstanceState)
 

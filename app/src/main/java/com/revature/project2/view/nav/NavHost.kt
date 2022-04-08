@@ -5,12 +5,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.revature.project2.MainActivity
-import com.revature.project2.ui.jc.tradeFinalizeScreen
-import com.revature.project2.view.composables.tradeProposalScreen
 import com.revature.project2.ui.AcceptTradeScreen
 import com.revature.project2.ui.ViewItemScreen
+import com.revature.project2.ui.jc.tradeFinalizeScreen
 import com.revature.project2.view.composables.*
-import com.revature.project2.view.composables.Register
 
 /**
  * Starts navigation for the app
@@ -58,6 +56,9 @@ fun StartNav(app:MainActivity){
         ){
             tradeFinalizeScreen(
                 navController = navController)
+        }
+        composable(NavScreens.EditProfileScreen.route) {
+            EditProfileScreen(navController = navController)
         }
 
         // View Item Screen

@@ -1,11 +1,11 @@
 package com.revature.project2.view.composables
 
-import android.util.Log
-import androidx.compose.foundation.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.shape.CircleShape
@@ -32,22 +32,21 @@ import com.revature.project2.model.api.user.User
 import com.revature.project2.ui.theme.BluishGreen
 import com.revature.project2.ui.theme.PurpleVariant
 import com.revature.project2.view.nav.NavScreens
-import com.revature.project2.viewmodel.*
+import com.revature.project2.viewmodel.AllToysViewModel
+import com.revature.project2.viewmodel.ProfileViewModel
+import com.revature.project2.viewmodel.ReviewViewModel
+import com.revature.project2.viewmodel.UserToysViewModel
 
 //Creates the column for the entire page and populates with profile features
 @Composable
-fun MyProfileScreen(
-    navController: NavController
-) {
+fun MyProfileScreen(navController: NavController) {
     val scaffoldState = rememberScaffoldState(
         rememberDrawerState(DrawerValue.Closed)
     )
 
     Scaffold(scaffoldState = scaffoldState,
 
-        content =
-        {
-
+        content = {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
@@ -96,7 +95,7 @@ fun MyProfileScreen(
                         {
                             item()
                             {
-                                MyProfileSection()
+                                MyProfileSection(navController = navController)
                             }
                             item()
                             {
@@ -189,7 +188,7 @@ fun MyProfileScreen(
 }
 //Populates the ProfileScreen column with the user's profile picture as well as their ProfileInfo
 @Composable
-fun MyProfileSection(modifier: Modifier = Modifier)
+fun MyProfileSection(modifier: Modifier = Modifier, navController: NavController)
 {
 
     val context = LocalContext.current
@@ -214,12 +213,13 @@ fun MyProfileSection(modifier: Modifier = Modifier)
         }
 
         //val profileViewModel = ProfileViewModel()
-        val profileViewModel = ViewModelProvider(context as MainActivity).get(ProfileViewModel::class.java)
-        val browseViewModel = ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
+        ViewModelProvider(context as MainActivity).get(ProfileViewModel::class.java)
+        val browseViewModel = ViewModelProvider(context).get(AllToysViewModel::class.java)
         MyProfileDescription(
             name = "${browseViewModel.currentUser!!.sName} ",
-            email = "${browseViewModel.currentUser!!.sEmail}",
-            phoneNumber = "(123) 456 789"
+            email = browseViewModel.currentUser!!.sEmail,
+            phoneNumber = "(123) 456 789",
+            navController = navController
         )
         Spacer(modifier = Modifier.height(20.dp))
     }
@@ -250,9 +250,9 @@ fun MyStatSection(modifier: Modifier = Modifier) {
         horizontalArrangement = Arrangement.SpaceAround,
         modifier = modifier
     ) {
-        MyProfileStat(numberText = "10", text = "Posts")
-        MyProfileStat(numberText = "15", text = "Trades")
-        MyProfileStat(numberText = "8.5/10", text = "Rating")
+        MyProfileStat(numberText = "2", text = "Posts")
+        MyProfileStat(numberText = "2", text = "Trades")
+        MyProfileStat(numberText = "3/5", text = "Rating")
     }
 }
 //Creates the Profile Stat (hard coded for now)
@@ -278,32 +278,37 @@ fun MyProfileStat(
 }
 //Populates the user's Profile Description
 @Composable
-fun MyProfileDescription(name: String, email: String, phoneNumber: String) {
+fun MyProfileDescription(name: String, email: String, phoneNumber: String, navController: NavController) {
     val letterSpacing = 0.5.sp
     val lineHeight = 20.sp
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 40.dp)
-    ) {
-        Text(
-            text = name,
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            letterSpacing = letterSpacing,
-            lineHeight = lineHeight
-        )
-        Text(
-            text = email,
-            color = Color(0xFF3D3D91),
-            letterSpacing = letterSpacing,
-            lineHeight = lineHeight
-        )
-        Text(
-            text = phoneNumber,
-            letterSpacing = letterSpacing,
-            lineHeight = lineHeight
-        )
+    Row(modifier = Modifier.fillMaxWidth()) {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 40.dp)
+        ) {
+            Text(
+                text = name,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                letterSpacing = letterSpacing,
+                lineHeight = lineHeight
+            )
+            Text(
+                text = email,
+                color = Color(0xFF3D3D91),
+                letterSpacing = letterSpacing,
+                lineHeight = lineHeight
+            )
+            Text(
+                text = phoneNumber,
+                letterSpacing = letterSpacing,
+                lineHeight = lineHeight
+            )
+        }
+        universalButton20sp(
+            enabled = true,
+            text = "Edit Profile",
+            onClick = { navController.navigate(NavScreens.EditProfileScreen.route) })
     }
 }
 //Displays the account's currently posted items
@@ -374,13 +379,12 @@ fun MyUserReviews()
         }
         val context = LocalContext.current
         val reviewViewModel = ViewModelProvider(context as MainActivity).get(ReviewViewModel::class.java)
-        val browseViewModel = ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
+        val browseViewModel = ViewModelProvider(context).get(AllToysViewModel::class.java)
         //Implementation of Ryan's LazyColumn list of ReviewCards
         reviewViewModel.getReviews(User(browseViewModel.currentUser!!.nUserId))
-        var reviewList:List<Review> = reviewViewModel.userReviews
 
         //Dummy reviewlist
-        reviewList = listOf(
+        val reviewList: List<Review> = listOf(
 
             Review(
                 review_id = 0,
