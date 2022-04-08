@@ -10,13 +10,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Brush
@@ -78,10 +75,12 @@ fun Login(
                         .fillMaxHeight()
                         .border(
                             width = 2.dp,
-                            brush = Brush.horizontalGradient(colors = listOf(
-                                PurpleVariant,
-                                BluishGreen
-                            )),
+                            brush = Brush.horizontalGradient(
+                                colors = listOf(
+                                    PurpleVariant,
+                                    BluishGreen
+                                )
+                            ),
                             shape = AbsoluteRoundedCornerShape(topLeft = 10.dp, topRight = 10.dp)
                         )
 
@@ -113,8 +112,10 @@ fun LoginBody(navController: NavController){
             var sPass by rememberSaveable { mutableStateOf("") }
             val loginViewModel =
                 ViewModelProvider(context as MainActivity).get(LoginViewModel::class.java)
+            var userList by remember{ mutableStateOf(AppManager.users)}
+            //userList = AppManager.users
 
-            val userList = AppManager.users
+            //val userList = AppManager.users
 
             var postUserVMFactory: UserToysViewModelFactory
 
