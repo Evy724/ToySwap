@@ -112,6 +112,7 @@ fun BrowseItemsBody(navController: NavController, toyList:List<ToyItem>)
                     modifier = Modifier
                         .height(1000.dp)
                         .width(700.dp),
+                    alpha=0.2F,
                     contentScale = ContentScale.FillBounds
                 )
                 LazyColumn(
