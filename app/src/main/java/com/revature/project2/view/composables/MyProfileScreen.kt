@@ -45,7 +45,6 @@ fun MyProfileScreen(navController: NavController) {
     )
 
     Scaffold(scaffoldState = scaffoldState,
-
         content = {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -54,51 +53,32 @@ fun MyProfileScreen(navController: NavController) {
                     .fillMaxSize()
                     .background(
                         brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                PurpleVariant,
-                                BluishGreen
-                            )
+                            colors = listOf(PurpleVariant, BluishGreen)
                         )
                     )
-            )
-            {
+            ) {
                 Header(text = "My Profile")
-
                 Surface(
                     modifier = Modifier
                         .border(
                             width = 2.dp,
                             brush = Brush.horizontalGradient(
-                                colors = listOf(
-                                    PurpleVariant,
-                                    BluishGreen
-                                )
+                                colors = listOf(PurpleVariant, BluishGreen)
                             ),
-                            shape = AbsoluteRoundedCornerShape(topLeft = 10.dp, topRight = 10.dp)
-                        )
-                        .clip(
-                            shape = RoundedCornerShape(10.dp)
-                        )
-                )
-                {
-                    Surface()
-                    {
+                            shape = AbsoluteRoundedCornerShape(topLeft = 10.dp, topRight = 10.dp))
+                        .clip(shape = RoundedCornerShape(10.dp))
+                ) {
+                    Surface() {
                         val scrollState = rememberLazyListState()
-
-                        LazyColumn(
-                            state = scrollState,
-                            modifier = Modifier
+                        LazyColumn(state = scrollState, modifier = Modifier
                                 .fillMaxSize()
                                 .padding(bottom = 50.dp),
 //                    .verticalScroll(state = scrollState)
-                        )
-                        {
-                            item()
-                            {
+                        ) {
+                            item() {
                                 MyProfileSection(navController = navController)
                             }
-                            item()
-                            {
+                            item() {
                                 Column(
                                     modifier = Modifier
                                         .fillMaxSize()
@@ -110,8 +90,7 @@ fun MyProfileScreen(navController: NavController) {
                                                 )
                                             )
                                         )
-                                )
-                                {
+                                ) {
                                     Surface(
                                         modifier = Modifier
                                             .border(
@@ -127,19 +106,13 @@ fun MyProfileScreen(navController: NavController) {
                                                     topRight = 10.dp
                                                 )
                                             )
-                                            .clip(
-                                                shape = RoundedCornerShape(10.dp)
-                                            )
-                                    )
-                                    {
+                                            .clip(shape = RoundedCornerShape(10.dp))
+                                    ) {
                                         MyPostHistory()
                                     }
-
                                 }
-
                             }
-                            item()
-                            {
+                            item() {
                                 Column(
                                     modifier = Modifier
                                         .fillMaxSize()
@@ -168,11 +141,8 @@ fun MyProfileScreen(navController: NavController) {
                                                     topRight = 10.dp
                                                 )
                                             )
-                                            .clip(
-                                                shape = RoundedCornerShape(10.dp)
-                                            )
-                                    )
-                                    {
+                                            .clip(shape = RoundedCornerShape(10.dp))
+                                    ) {
                                         MyUserReviews()
                                     }
                                 }
@@ -182,7 +152,6 @@ fun MyProfileScreen(navController: NavController) {
                 }
             }
         },
-
         bottomBar = { BottomBar(navController) }
     )
 }
