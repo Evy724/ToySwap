@@ -5,6 +5,6 @@ import com.google.gson.annotations.SerializedName
 data class SendTrade_Response_API (
 
 
-    @SerializedName("SendTradeOffer_Request_success")
+    @SerializedName("SendTrade_Request_msg")
     val finalizeTradeOffer_Request_success: String
 )

@@ -14,9 +14,10 @@ import com.revature.project2.model.api.finalizetradeoffer.SendTrade_Response_API
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
-var msgFromTVM:String=""
+
 class TradeViewModel: ViewModel(){
     var theirToy:ToyItem?=null
+    var msgFromTVM:String=""
 
     fun getSendTrade_msg(_tradeRequestID:String,_tradeRequest_msg:String){
         viewModelScope.launch(Dispatchers.IO) {
@@ -30,6 +31,8 @@ class TradeViewModel: ViewModel(){
                    responseService.body()?.let {
 
                        msgFromTVM=it.finalizeTradeOffer_Request_success
+                       Log.d("MessageReceived","$msgFromTVM")
+
 
                    }
 

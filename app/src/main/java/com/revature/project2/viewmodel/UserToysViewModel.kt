@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 class UserToysViewModel(val user:User, val app:Application): ViewModel() {
 
     private val toyService = RetrofitHelper.getAllToysService()
-
+    var toy:ToyItem?=null
     private lateinit var toyRepo:UserToysRepository
     private lateinit var userOfferRepo:UserTradeOfferRepo
 

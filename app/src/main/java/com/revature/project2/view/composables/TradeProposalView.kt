@@ -72,9 +72,6 @@ fun tradeProposalScreen(navController: NavController)
             }
             Spacer(modifier = Modifier.size(10.dp))
 
-
-
-
             Card(modifier = Modifier
                 .fillMaxWidth()
                 .height(25.dp),

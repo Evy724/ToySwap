@@ -43,8 +43,6 @@ fun PostedItemsScreen(navController: NavController)
 
     userToysViewModel.getUserOffers()
 
-    val itemViewModel =
-        ViewModelProvider(context).get(ToyItemViewModel::class.java)
 
     val offerlist = userToysViewModel.userTradeOffers
 
@@ -141,7 +139,7 @@ fun PostedItemsScreen(navController: NavController)
                             }
 
                             ToyCard(toy = item, bNotification = bNotice){
-                                itemViewModel.toy = item
+                                userToysViewModel.toy = item
                                         navController.navigate((NavScreens.ViewPostedToyScreen.route))
                                 //navController.navigate(NavScreens.ViewItemScreen.route)
                             }
