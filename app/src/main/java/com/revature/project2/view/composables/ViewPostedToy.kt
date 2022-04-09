@@ -107,14 +107,10 @@ fun postedToyImage(userToysViewModel:UserToysViewModel) {
 }
 @Composable
 fun postedToyDescription(userToysViewModel:UserToysViewModel) {
-    var value by remember { mutableStateOf(" \n \n \n ") }
 
-    TextField(
-        value = value,
-        onValueChange = { value = it },
-        label = { Text(userToysViewModel.toy?.sDescription?:"My Toy") },
-        maxLines = 4,
-        modifier = Modifier.padding(10.dp)
+
+    Text(
+        text= userToysViewModel.toy?.sDescription?:"Toy Description"
     )
 }
 

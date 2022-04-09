@@ -120,7 +120,16 @@ fun universalButton20sp(
     enabled: Boolean,
     text: String,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier,
+    modifier: Modifier = Modifier
+        .background(
+            brush = Brush.horizontalGradient(
+                listOf(
+                    TealGreen,
+                    Teal200
+                )
+            ),
+            shape = RoundedCornerShape(5.dp)
+        ),
 )
 {
     Button(
@@ -138,16 +147,7 @@ fun universalButton20sp(
         colors = ButtonDefaults.buttonColors(
             backgroundColor = colorResource(id = R.color.transparent),
         ),
-        modifier = Modifier
-            .background(
-                brush = Brush.horizontalGradient(
-                    listOf(
-                        TealGreen,
-                        Teal200
-                    )
-                ),
-                shape = RoundedCornerShape(5.dp)
-            )
+        modifier = modifier
     )
     {
         Text(

@@ -55,6 +55,7 @@ dependencies {
 //    implementation 'androidx.room:room-ktx:2.4.2'
 
     //Splash Screen
+    //
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
     //Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")

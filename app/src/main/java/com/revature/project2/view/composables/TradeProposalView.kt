@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 
 import androidx.compose.runtime.Composable
@@ -51,60 +52,60 @@ fun tradeProposalScreen(navController: NavController)
             verticalArrangement = Arrangement.Top
         )
         {
-            Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-                Image(
-                    painter = rememberCoilPainter(request = viewVM.toy!!.sImagePath),
-                    contentDescription = "",
+            Spacer(modifier = Modifier.size(10.dp))
+            Card(modifier = Modifier.fillMaxSize(0.90F), elevation = 20.dp,shape= RoundedCornerShape(25.dp)) {
+                Column() {
+                Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+                    Image(
+                        painter = rememberCoilPainter(request = viewVM.toy!!.sImagePath),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .fillMaxWidth()
+
+                    )
+
+                }
+                Spacer(modifier = Modifier.size(10.dp))
+
+                Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .border(
-                            width = 4.dp,
-                            brush = Brush.horizontalGradient(
-                                colors = listOf(
-                                    Purple200,
-                                    PurpleVariant
-                                )
-                            ),
-                            shape = CutCornerShape(0.dp)
-                        )
-                )
+                        .height(25.dp),
+                    backgroundColor = Purple200,
+                    elevation = 10.dp
+                ) {
+                    Text(
+                        text = "MY TOYS ", textAlign = TextAlign.Center,
+                        fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = Color.White
+                    )
+                }
+                val lazyState = rememberLazyListState()
+                val toyList = userToysViewModel.userToys
 
+                Card(modifier = Modifier.fillMaxSize(), backgroundColor = Teal200) {
+                    LazyColumn(
+                        state = lazyState,
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+
+                        itemsIndexed(toyList) { _, item ->
+                            ToyCard(toy = item) {
+                                viewModel.theirToy = item
+                                navController
+                                    .navigate(
+                                        NavScreens.FinalizeTradeScreen
+                                            .route
+                                    )
+                            }
+                        }
+                        item() {
+                            Spacer(modifier = Modifier.size(50.dp))
+                        }
+                    }
+                }
             }
-            Spacer(modifier = Modifier.size(10.dp))
-
-            Card(modifier = Modifier
-                .fillMaxWidth()
-                .height(25.dp),
-                backgroundColor = Purple200,
-                elevation = 10.dp) {
-                Text(text = "MY TOYS ", textAlign= TextAlign.Center,
-                    fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = Color.White)
             }
-            val lazyState = rememberLazyListState()
-            val toyList = userToysViewModel.userToys
-
-         Card(modifier = Modifier.fillMaxSize(), backgroundColor = Teal200) {
-               LazyColumn(
-                   state = lazyState,
-                   modifier = Modifier.fillMaxWidth(),
-                   horizontalAlignment = Alignment.CenterHorizontally
-               ) {
-
-                   itemsIndexed(toyList) { _, item ->
-                       ToyCard(toy = item){
-                           viewModel.theirToy=item
-                           navController
-                               .navigate(
-                                   NavScreens.FinalizeTradeScreen
-                                       .route
-                               )
-                       }
-                   }
-                   item(){
-                       Spacer(modifier = Modifier.size(50.dp))
-                   }
-               }
-           }
         }
 
     }
