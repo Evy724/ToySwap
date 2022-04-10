@@ -77,7 +77,7 @@ fun EditProfileScreen(navController: NavController){
                                 color = Purple200
                             )
                             TextField(
-                                value = "${browseViewModel.currentUser!!.sName} ",
+                                value = browseViewModel.currentUser!!.sName,
                                 onValueChange = { sName = it },
                                 colors = TextFieldDefaults.textFieldColors(
                                     backgroundColor = Color.Transparent,
@@ -99,7 +99,7 @@ fun EditProfileScreen(navController: NavController){
                                 color = Purple200
                             )
                             TextField(
-                                value = "${browseViewModel.currentUser!!.sPass} ",
+                                value = browseViewModel.currentUser!!.sPass,
                                 onValueChange = { sPass = it },
                                 colors = TextFieldDefaults.textFieldColors(
                                     backgroundColor = Color.Transparent,
@@ -143,7 +143,7 @@ fun EditProfileScreen(navController: NavController){
                                 color = Purple200
                             )
                             TextField(
-                                value = "${browseViewModel.currentUser!!.sEmail} ",
+                                value = browseViewModel.currentUser!!.sEmail,
                                 onValueChange = { sEmail = it },
                                 colors = TextFieldDefaults.textFieldColors(
                                     backgroundColor = Color.Transparent,
@@ -158,9 +158,9 @@ fun EditProfileScreen(navController: NavController){
                                 enabled = true,
                                 text = "Save",
                                 onClick = {
-                                    if (checkCredentials(sName,sPass,sPassConfirm,sEmail)) {
+//                                    if (checkCredentials(sName,sPass,sPassConfirm,sEmail)) {
                                         Toast.makeText(context, "Credentials saved.", Toast.LENGTH_LONG).show()
-                                    }
+//                                    }
                                 }
                             )
                         }
@@ -172,9 +172,9 @@ fun EditProfileScreen(navController: NavController){
     )
 }
 
-fun checkCredentials(sName: String, sPass: String, sPassConfirm: String, sEmail: String): Boolean {
-    return sName.isNotEmpty() && sPass.isNotEmpty() && sPassConfirm.isNotEmpty() && sEmail.isNotEmpty()
-}
+//fun checkCredentials(sName: String, sPass: String, sPassConfirm: String, sEmail: String): Boolean {
+//    return sName.isNotEmpty() && sPass.isNotEmpty() && sPassConfirm.isNotEmpty() && sEmail.isNotEmpty()
+//}
 
 @coil.annotation.ExperimentalCoilApi
 @Composable
