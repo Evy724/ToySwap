@@ -20,6 +20,7 @@ import androidx.lifecycle.*
 import androidx.navigation.NavController
 import com.revature.project2.MainActivity
 import com.revature.project2.model.AppManager
+import com.revature.project2.model.DataManager
 import com.revature.project2.model.DataStore
 import com.revature.project2.view.nav.NavScreens
 
@@ -110,6 +111,11 @@ class LoginViewModel():ViewModel() {
             val browseVM =
                 ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
             browseVM.currentUser = user
+
+            //Start loading of user toys
+            viewModelScope.launch {
+                DataManager.loadUserToys(context)
+            }
             Log.d("Login Screen", "Current User Set")
 
             //If it does, log in with that user
