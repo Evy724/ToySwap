@@ -77,7 +77,7 @@ fun EditProfileScreen(navController: NavController){
                                 color = Purple200
                             )
                             TextField(
-                                value = sName,
+                                value = "${browseViewModel.currentUser!!.sName} ",
                                 onValueChange = { sName = it },
                                 colors = TextFieldDefaults.textFieldColors(
                                     backgroundColor = Color.Transparent,
@@ -99,7 +99,7 @@ fun EditProfileScreen(navController: NavController){
                                 color = Purple200
                             )
                             TextField(
-                                value = sPass,
+                                value = "${browseViewModel.currentUser!!.sPass} ",
                                 onValueChange = { sPass = it },
                                 colors = TextFieldDefaults.textFieldColors(
                                     backgroundColor = Color.Transparent,
@@ -143,7 +143,7 @@ fun EditProfileScreen(navController: NavController){
                                 color = Purple200
                             )
                             TextField(
-                                value = sEmail,
+                                value = "${browseViewModel.currentUser!!.sEmail} ",
                                 onValueChange = { sEmail = it },
                                 colors = TextFieldDefaults.textFieldColors(
                                     backgroundColor = Color.Transparent,
@@ -212,6 +212,6 @@ fun ChangeImage() {
 
         }
     }
-    Text(text = "Change Profile Picture")
+    Text(text = "Change Profile Picture", color = Purple200)
 }
 
