@@ -94,7 +94,10 @@ fun EditProfileScreen(navController: NavController){
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "Password:", modifier = Modifier.width(100.dp))
+                                text = "Password:",
+                                modifier = Modifier.width(100.dp),
+                                color = Purple200
+                            )
                             TextField(
                                 value = sPass,
                                 onValueChange = { sPass = it },
@@ -112,7 +115,11 @@ fun EditProfileScreen(navController: NavController){
                                 .padding(start = 4.dp, end = 4.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(text = "Confirm Password:", modifier = Modifier.width(100.dp))
+                            Text(
+                                text = "Confirm Password:",
+                                modifier = Modifier.width(100.dp),
+                                color = Purple200
+                            )
                             TextField(
                                 value = sPassConfirm,
                                 onValueChange = { sPassConfirm = it },
@@ -130,7 +137,11 @@ fun EditProfileScreen(navController: NavController){
                                 .padding(start = 4.dp, end = 4.dp),
                             verticalAlignment = Alignment.CenterVertically
                         ) {
-                            Text(text = "Email:", modifier = Modifier.width(100.dp))
+                            Text(
+                                text = "Email:",
+                                modifier = Modifier.width(100.dp),
+                                color = Purple200
+                            )
                             TextField(
                                 value = sEmail,
                                 onValueChange = { sEmail = it },
