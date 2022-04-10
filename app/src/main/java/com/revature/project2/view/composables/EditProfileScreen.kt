@@ -48,7 +48,7 @@ fun EditProfileScreen(navController: NavController){
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally)
             {
-                Spacer(Modifier.size(60.dp))
+                Spacer(Modifier.size(10.dp))
                 Card(shape = RoundedCornerShape(25.dp), elevation = 20.dp) {
                     Column(
                         modifier = Modifier.fillMaxSize(fraction = 0.9F),

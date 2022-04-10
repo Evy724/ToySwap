@@ -31,6 +31,7 @@ import com.revature.project2.model.DataManager
 import com.revature.project2.model.api.user.Review
 import com.revature.project2.model.api.user.User
 import com.revature.project2.ui.theme.BluishGreen
+import com.revature.project2.ui.theme.Purple200
 import com.revature.project2.ui.theme.PurpleVariant
 import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.AllToysViewModel
@@ -66,20 +67,21 @@ fun MyProfileScreen(navController: NavController) {
                             brush = Brush.horizontalGradient(
                                 colors = listOf(PurpleVariant, BluishGreen)
                             ),
-                            shape = AbsoluteRoundedCornerShape(topLeft = 10.dp, topRight = 10.dp))
+                            shape = AbsoluteRoundedCornerShape(topLeft = 10.dp, topRight = 10.dp)
+                        )
                         .clip(shape = RoundedCornerShape(10.dp))
                 ) {
-                    Surface() {
+                    Surface {
                         val scrollState = rememberLazyListState()
                         LazyColumn(state = scrollState, modifier = Modifier
-                                .fillMaxSize()
-                                .padding(bottom = 50.dp),
+                            .fillMaxSize()
+                            .padding(bottom = 50.dp),
 //                    .verticalScroll(state = scrollState)
                         ) {
-                            item() {
+                            item {
                                 MyProfileSection(navController = navController)
                             }
-                            item() {
+                            item {
                                 Column(
                                     modifier = Modifier
                                         .fillMaxSize()
@@ -113,7 +115,7 @@ fun MyProfileScreen(navController: NavController) {
                                     }
                                 }
                             }
-                            item() {
+                            item {
                                 Column(
                                     modifier = Modifier
                                         .fillMaxSize()
@@ -304,7 +306,7 @@ fun MyPostHistory()
         }
         val context = LocalContext.current
         //Implementation of Ryan's LazyColumn list of ToyCards
-        val userToysViewModel = ViewModelProvider(context as MainActivity).get(UserToysViewModel::class.java)
+        ViewModelProvider(context as MainActivity).get(UserToysViewModel::class.java)
         val toyList = DataManager.userToys
 
         toyList.forEach { toy->
@@ -381,11 +383,31 @@ fun MyUserReviews()
                 shape = MaterialTheme.shapes.medium,
                 elevation = 5.dp,
                 backgroundColor = MaterialTheme.colors.surface
-            ) 
-            {
+            ) {
                 Row()
                 {
-                    Text(text = " User Rating: ${review.rating}", style = MaterialTheme.typography.h3)
+                    Text(text = "User rating: ${review.rating}/5", style = MaterialTheme.typography.h5)
+                    for (i in 1..5) {
+                        if (review.rating >= i) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_round_star_24),
+                                contentDescription = "rating star",
+                                modifier = Modifier
+                                    .width(30.dp)
+                                    .height(30.dp),
+                                tint = Purple200
+                            )
+                        } else {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_round_star_24),
+                                contentDescription = "rating star",
+                                modifier = Modifier
+                                    .width(30.dp)
+                                    .height(30.dp),
+                                tint = Color(0xFFA2ADB1)
+                            )
+                        }
+                    }
                 }
             }
             
