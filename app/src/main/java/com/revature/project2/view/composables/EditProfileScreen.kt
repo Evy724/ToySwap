@@ -158,11 +158,10 @@ fun EditProfileScreen(navController: NavController){
                                 enabled = true,
                                 text = "Save",
                                 onClick = {
-                                    Toast.makeText(context, "Credentials saved.", Toast.LENGTH_LONG).show()
-                                },
-                                modifier = Modifier
-                                    .padding(5.dp)
-                                    .fillMaxWidth(.5f)
+                                    if (checkCredentials(sName,sPass,sPassConfirm,sEmail)) {
+                                        Toast.makeText(context, "Credentials saved.", Toast.LENGTH_LONG).show()
+                                    }
+                                }
                             )
                         }
                     }
@@ -173,9 +172,9 @@ fun EditProfileScreen(navController: NavController){
     )
 }
 
-//fun checkCredentials(sName: String ,sPass: String, sPassConfirm: String): Boolean {
-//    return sName.isNotEmpty() && sPass.isNotEmpty() && sPassConfirm.isNotEmpty()
-//}
+fun checkCredentials(sName: String, sPass: String, sPassConfirm: String, sEmail: String): Boolean {
+    return sName.isNotEmpty() && sPass.isNotEmpty() && sPassConfirm.isNotEmpty() && sEmail.isNotEmpty()
+}
 
 @coil.annotation.ExperimentalCoilApi
 @Composable
