@@ -1,5 +1,6 @@
 package com.revature.project2.view.composables
 
+import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
@@ -38,9 +39,14 @@ import com.revature.project2.ui.theme.*
 import com.revature.project2.view.nav.NavScreens
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.ViewModelProvider
 import coil.transform.CircleCropTransformation
+import com.revature.project2.MainActivity
 import com.revature.project2.model.AppManager
 import com.revature.project2.model.DataManager
+import com.revature.project2.model.api.tradeoffers.TradeOffer
+import com.revature.project2.viewmodel.AllToysViewModel
 
 // Header for all screens
 @Composable
@@ -377,9 +383,11 @@ fun ToyCardWithButton(toy: ToyItem,buttonText:String, onClick:()->Unit)
         .clickable { },
         shape = MaterialTheme.shapes.medium,
         elevation = 5.dp,
-        backgroundColor = MaterialTheme.colors.surface){
+        backgroundColor = MaterialTheme.colors.surface)
+    {
 
-        Row(verticalAlignment = Alignment.Top) {
+        Row(verticalAlignment = Alignment.Top)
+        {
 
             Image(
                 painter = rememberCoilPainter(
@@ -392,9 +400,9 @@ fun ToyCardWithButton(toy: ToyItem,buttonText:String, onClick:()->Unit)
 
             Spacer(Modifier.size(5.dp))
 
-            Column( modifier = Modifier
-                .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally) {
+            Column( modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally)
+            {
 
                 Text(toy.sName,
                     style = MaterialTheme.typography.h5,
@@ -405,10 +413,85 @@ fun ToyCardWithButton(toy: ToyItem,buttonText:String, onClick:()->Unit)
                 Text(text = toy.sDescription,
                     style = MaterialTheme.typography.body1)
             }
-            Button(onClick = onClick) {
+            Button(onClick = onClick)
+            {
                 Text(text = buttonText)
             }
         }
 
+    }
+}
+
+
+@Composable
+fun AcceptOrDeclineTradeOffersToyCard(
+    navController: NavController,
+    offer: TradeOffer
+)
+{
+    val context = LocalContext.current
+    val allToysVM = ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
+
+    Card(modifier = Modifier
+        .padding(10.dp)
+        .fillMaxWidth()
+        .height(100.dp)
+        .wrapContentHeight()
+        .clickable { },
+        shape = MaterialTheme.shapes.medium,
+        elevation = 5.dp,
+        backgroundColor = MaterialTheme.colors.surface)
+    {
+
+        Row(verticalAlignment = Alignment.Top)
+        {
+            val theirToy = allToysVM.getToyByID(id = offer.nOfferToyId)!!
+
+            // Their toy
+            Image(
+                painter = rememberCoilPainter(
+                    request = theirToy.sImagePath),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(100.dp)
+                    .padding(5.dp),
+                contentScale = ContentScale.Fit)
+
+            val yourToy = allToysVM.getToyByID(id = offer.nUserToyId)!!
+            // Your toy
+            Image(
+                painter = rememberCoilPainter(
+                    request = yourToy.sImagePath),
+                contentDescription = null,
+                modifier = Modifier
+                    .size(100.dp)
+                    .padding(5.dp),
+                contentScale = ContentScale.Fit)
+
+            Spacer(Modifier.size(5.dp))
+
+            Row()
+            {
+                universalButton20sp(
+                    onClick =
+                    {
+
+                        Toast.makeText(context,"Trade accepted",Toast.LENGTH_LONG).show()
+                        navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
+                    },
+                    enabled = true,
+                    text = "Accept",
+                )
+                universalButton20sp(
+                    onClick =
+                    {
+                        Toast.makeText(context,"Trade declined",Toast.LENGTH_LONG).show()
+                        navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
+                    },
+                    enabled = true,
+                    text = "Decline"
+                )
+            }
+        }
     }
 }

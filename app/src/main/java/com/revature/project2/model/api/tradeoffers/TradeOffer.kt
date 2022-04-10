@@ -6,8 +6,10 @@ data class TradeOffer(
 
     @SerializedName("offer_id")
     val id:Int,
+
     @SerializedName("user_toy")
     val nUserToyId:Int,
+
     @SerializedName("offered_toy")
     val nOfferToyId:Int
 )
