@@ -27,6 +27,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.revature.project2.MainActivity
 import com.revature.project2.R
+import com.revature.project2.model.DataManager
 import com.revature.project2.model.api.user.Review
 import com.revature.project2.model.api.user.User
 import com.revature.project2.ui.theme.BluishGreen
@@ -305,7 +306,7 @@ fun MyPostHistory()
         val context = LocalContext.current
         //Implementation of Ryan's LazyColumn list of ToyCards
         val userToysViewModel = ViewModelProvider(context as MainActivity).get(UserToysViewModel::class.java)
-        val toyList = userToysViewModel.userToys
+        val toyList = DataManager.userToys
 
         toyList.forEach { toy->
             ToyCard(toy = toy) {

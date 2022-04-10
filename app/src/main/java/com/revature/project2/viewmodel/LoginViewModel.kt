@@ -32,7 +32,7 @@ class LoginViewModel():ViewModel() {
     private lateinit var userRepo:AllUsersRepository
 
     //var allUsers:LiveData<List<User>> = MutableLiveData()
-    var allUsers:List<User> by mutableStateOf(listOf())
+    //var allUsers:List<User> by mutableStateOf(listOf())
 
     //For sending user info to server
     val loginRequestLiveData = MutableLiveData<Boolean>()
@@ -40,10 +40,10 @@ class LoginViewModel():ViewModel() {
     var bUsersLoaded = mutableStateOf<Boolean>(false)
 
 
-    init {
-        Log.d("Login ViewModel","Initialization")
-        allUsers = AppManager.users
-    }
+//    init {
+//        Log.d("Login ViewModel","Initialization")
+//        //allUsers = AppManager.users
+//    }
 
     fun setCurrentUser(user:User){
         AppManager.currentUser = user
@@ -55,7 +55,7 @@ class LoginViewModel():ViewModel() {
 
         Log.d("Login Screen", "$sName - $sPass")
 
-        allUsers.forEach {
+        AppManager.users.forEach {
             Log.d("Login Screen", "User: ${it.sName} - ${it.sPass}")
             if (sName.equals(it.sUserName) && sPass.equals(it.sPass)) {
                 user = it

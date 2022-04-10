@@ -25,6 +25,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.google.accompanist.coil.rememberCoilPainter
 import com.revature.project2.MainActivity
+import com.revature.project2.model.AppManager
+import com.revature.project2.model.DataManager
 
 import com.revature.project2.ui.theme.Project2Theme
 import com.revature.project2.ui.theme.Purple200
@@ -80,7 +82,7 @@ fun tradeProposalScreen(navController: NavController)
                     )
                 }
                 val lazyState = rememberLazyListState()
-                val toyList = userToysViewModel.userToys
+                val toyList = DataManager.userToys//userToysViewModel.userToys
 
                 Card(modifier = Modifier.fillMaxSize(), backgroundColor = Teal200) {
                     LazyColumn(

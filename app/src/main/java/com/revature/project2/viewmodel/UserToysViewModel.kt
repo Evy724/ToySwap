@@ -26,7 +26,7 @@ class UserToysViewModel(/*val user:User, val app:Application*/): ViewModel() {
     private lateinit var toyRepo:UserToysRepository
     private lateinit var userOfferRepo:UserTradeOfferRepo
 
-    var userToys:List<ToyItem> by mutableStateOf(listOf())
+    //var userToys:List<ToyItem> by mutableStateOf(listOf())
     var userTradeOffers:List<TradeOffer> by mutableStateOf(listOf())
 
     //var user: User? = null
@@ -36,6 +36,9 @@ class UserToysViewModel(/*val user:User, val app:Application*/): ViewModel() {
         if(user!= null)
             getUserOffers()
     }*/
+//    init {
+//        userToys = DataManager.userToys
+//    }
 
     fun getUserOffers(){
 
@@ -69,7 +72,7 @@ class UserToysViewModel(/*val user:User, val app:Application*/): ViewModel() {
         viewModelScope.launch {
 
             DataManager.loadUserToys(context)
-            userToys = DataManager.userToys
+            //userToys = DataManager.userToys
             //userToys = DatabaseManager(app).fetchAllUserToys()
         }
 

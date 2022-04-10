@@ -89,7 +89,7 @@ fun PostedItemsScreen(navController: NavController)
             {
                 Header(text = "Posted Toys")
 
-                if (userToysViewModel.userToys.isNotEmpty())
+                if ( DataManager.userToys.isNotEmpty())//userToysViewModel.userToys.isNotEmpty())
                 {
                     Surface(
                         modifier = Modifier
@@ -122,7 +122,7 @@ fun PostedItemsScreen(navController: NavController)
                                 contentScale = ContentScale.FillBounds
                             )
                             val lazyState = rememberLazyListState()
-                            val toyList = userToysViewModel.userToys
+                            val toyList = DataManager.userToys
 
                             LazyColumn(
                                 state = lazyState,
