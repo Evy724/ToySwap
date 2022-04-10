@@ -125,8 +125,7 @@ fun MyProfileScreen(navController: NavController) {
                                                 )
                                             )
                                         )
-                                )
-                                {
+                                ) {
                                     Surface(
                                         modifier = Modifier
                                             .border(
