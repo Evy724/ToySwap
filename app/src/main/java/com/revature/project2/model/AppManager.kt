@@ -1,5 +1,6 @@
 package com.revature.project2.model
 
+import android.app.Activity
 import android.app.Application
 import android.util.Log
 import androidx.compose.runtime.getValue
@@ -18,27 +19,27 @@ import kotlinx.coroutines.launch
 
 object AppManager {
 
-    private lateinit var app:Application
-    private lateinit var activity:MainActivity
+    lateinit var app:Application
+    lateinit var activity:MainActivity
     private val apiService = RetrofitHelper.getAllToysService()
 
-    //lateinit var allToys:List<ToyItem>
     var users by mutableStateOf(listOf<User>())
-//    var users:List<User> = listOf()
 
     lateinit var currentUser:User
 
-    init {
-        CoroutineScope(Dispatchers.IO).launch {
-            loadUsers()
-        }
-    }
-    fun setApplication(application:Application){
-        app=application
-    }
-    fun setActivity(act: MainActivity){
-        activity = act
-    }
+//    init {
+//        if (DataManager.checkNetAccess(activity)) {
+//            CoroutineScope(Dispatchers.IO).launch {
+//                loadUsers()
+//            }
+//        }
+//    }
+//    fun setApplication(application:Application){
+//        app=application
+//    }
+//    fun setActivity(act: MainActivity){
+//        activity = act
+//    }
 
     fun getUserNameByID(id:Int):String?{
         users.forEach { user->
@@ -47,25 +48,35 @@ object AppManager {
         return null
     }
 
+    fun Factory(act:MainActivity){
+        activity = act
+        app = activity.application
 
-    private suspend fun loadUsers(){
-        var userRepo = AllUsersRepository(apiService)
+    }
 
-        when (val response = userRepo.fetchAllUsers()){
 
-            is AllUsersRepository.Result.Success->{
+    suspend fun loadUsers() {
 
-                Log.d("Login ViewModel","Load Users Successful")
-                users = response.userList
-                var loginVM =
-                    ViewModelProvider(activity)
-                        .get(LoginViewModel::class.java)
-                loginVM.bUsersLoaded.value = true
-            }
+        if (DataManager.checkNetAccess(activity)) {
 
-            is AllUsersRepository.Result.Failure->{
+            var userRepo = AllUsersRepository(apiService)
 
-                Log.d("Login ViewModel","Load Users Failed")
+            when (val response = userRepo.fetchAllUsers()) {
+
+                is AllUsersRepository.Result.Success -> {
+
+                    Log.d("Login ViewModel", "Load Users Successful")
+                    users = response.userList
+                    var loginVM =
+                        ViewModelProvider(activity)
+                            .get(LoginViewModel::class.java)
+                    loginVM.bUsersLoaded.value = true
+                }
+
+                is AllUsersRepository.Result.Failure -> {
+
+                    Log.d("Login ViewModel", "Load Users Failed")
+                }
             }
         }
     }

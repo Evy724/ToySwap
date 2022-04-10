@@ -1,7 +1,10 @@
 package com.revature.project2.viewmodel
 
+import android.app.Application
+import android.content.Context
 import android.util.Log
 import android.util.MutableBoolean
+import android.widget.Toast
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.revature.project2.model.api.RetrofitHelper
@@ -14,7 +17,11 @@ import java.lang.Exception
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.*
+import androidx.navigation.NavController
+import com.revature.project2.MainActivity
 import com.revature.project2.model.AppManager
+import com.revature.project2.model.DataStore
+import com.revature.project2.view.nav.NavScreens
 
 class LoginViewModel():ViewModel() {
 
@@ -36,9 +43,6 @@ class LoginViewModel():ViewModel() {
     init {
         Log.d("Login ViewModel","Initialization")
         allUsers = AppManager.users
-//        viewModelScope.launch(Dispatchers.IO) {
-//            getAllUsers()
-//        }
     }
 
     fun setCurrentUser(user:User){
@@ -55,33 +59,10 @@ class LoginViewModel():ViewModel() {
             Log.d("Login Screen", "User: ${it.sName} - ${it.sPass}")
             if (sName.equals(it.sUserName) && sPass.equals(it.sPass)) {
                 user = it
-
             }
         }
 
         return user
-    }
-
-    // API Loading Functions
-
-    private suspend fun getAllUsers(){
-
-//        userRepo = AllUsersRepository(apiService)
-//        when (val response = userRepo.fetchAllUsers()){
-//
-//            is AllUsersRepository.Result.Success->{
-//
-//                Log.d("Login ViewModel","Load Users Successful")
-//                allUsers = response.userList
-//            }
-//
-//            is AllUsersRepository.Result.Failure->{
-//
-//                Log.d("Login ViewModel","Load Users Failed")
-//            }
-//        }
-
-
     }
 
     fun login(username:String, password:String) {
@@ -112,9 +93,40 @@ class LoginViewModel():ViewModel() {
 
             } catch (e:Exception) {
                 Log.d("Network Exception","Exception: $e")
-
             }
         }
     }
 
+    fun loginWithNet(sName: String,sPass: String, context:Context, navController: NavController) : Boolean{
+
+        //Check if the user exists in our server
+        var user: User? = existingUserCheck(sName, sPass)
+        if (user != null) {
+
+            //Set Current user in AppManager
+            setCurrentUser(user)
+
+            //Set up user in Browse VM
+            val browseVM =
+                ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
+            browseVM.currentUser = user
+            Log.d("Login Screen", "Current User Set")
+
+            //If it does, log in with that user
+            login(sName, sPass)
+
+            //Save to dataStore
+            viewModelScope.launch {
+                val dataStore = DataStore(context)
+                dataStore.saveUsername(sName)
+                dataStore.savePassword(sPass)
+            }
+            navController.navigate(NavScreens.BrowseItemsScreen.route)
+
+            return true
+        } else {
+            return false
+        }
+
+    }
 }

@@ -1,5 +1,6 @@
 package com.revature.project2.view.composables
 
+import android.app.Application
 import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -17,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -28,6 +30,8 @@ import androidx.navigation.NavController
 import com.revature.project2.MainActivity
 import com.revature.project2.R
 import com.revature.project2.model.AppManager
+import com.revature.project2.model.DataManager
+import com.revature.project2.model.DataStore
 import com.revature.project2.model.api.allusers.User
 import com.revature.project2.ui.theme.BluishGreen
 import com.revature.project2.ui.theme.Project2Typography
@@ -36,7 +40,8 @@ import com.revature.project2.view.nav.NavScreens
 import com.revature.project2.viewmodel.AllToysViewModel
 import com.revature.project2.viewmodel.LoginViewModel
 import com.revature.project2.viewmodel.UserToysViewModel
-import com.revature.project2.viewmodel.UserToysViewModelFactory
+//import com.revature.project2.viewmodel.UserToysViewModelFactory
+import kotlinx.coroutines.flow.collect
 
 @Composable
 fun Login(
@@ -101,109 +106,78 @@ fun Login(
 fun LoginBody(navController: NavController){
 
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
+    val context = LocalContext.current
+    val dataStore = DataStore(context)
+    var loginButtonText by rememberSaveable { mutableStateOf("Loading") }
+    var bEnabled by rememberSaveable { mutableStateOf(false) }
+    var sName by rememberSaveable { mutableStateOf("") }
+    var sStoredName = dataStore.getUsername.collectAsState(initial = "")
+    var sPass by rememberSaveable { mutableStateOf("") }
+    var sStoredPass = dataStore.getPassword.collectAsState(initial = "")
+    val loginViewModel =
+        ViewModelProvider(context as MainActivity).get(LoginViewModel::class.java)
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+    )
+    {
+
+
+
+
+        if (loginViewModel.bUsersLoaded.value || !DataManager.checkNetAccess(context)){
+            loginButtonText = "Log In"
+            bEnabled = true
+            Log.d("Login Screen", "All Users Loaded")
+        }
+
+        Log.d("Login Screen", "Scaffold Content")
+
+        Spacer(Modifier.size(10.dp))
+
+        ToySwapLogo()
+
+        Spacer(Modifier.size(10.dp))
+
+        TextField(
+            value = sName,
+            onValueChange = { sName = it },
+            label = { Text("Username: ") },
+            placeholder = {Text(sStoredName.value!!)})
+
+        Spacer(modifier = Modifier.size(10.dp))
+
+        TextField(
+            value = sPass,
+            onValueChange = { sPass = it },
+            label = { Text("Password: ") },
+            visualTransformation = PasswordVisualTransformation()
         )
-        {
-            val context = LocalContext.current
-            var loginButtonText by rememberSaveable { mutableStateOf("Loading") }
-            var bEnabled by rememberSaveable { mutableStateOf(false) }
-            var sName by rememberSaveable { mutableStateOf("") }
-            var sPass by rememberSaveable { mutableStateOf("") }
-            val loginViewModel =
-                ViewModelProvider(context as MainActivity).get(LoginViewModel::class.java)
-            var userList = remember{ AppManager.users}
-            //userList = AppManager.users
 
-            //val userList = AppManager.users
+        Spacer(modifier = Modifier.size(40.dp))
 
-            var postUserVMFactory: UserToysViewModelFactory
+        if(!bEnabled) {
+            CircularProgressIndicator()
+        } else {
 
 
-            if (loginViewModel.bUsersLoaded.value){
-                loginButtonText = "Log In"
-                bEnabled = true
-                Log.d("Login Screen", "All Users Loaded")
-            }
+            universalButton20sp(
+                enabled = bEnabled,
+                text = loginButtonText,
+                onClick =
+                {
+                    Log.d("Login Screen", "Login Button Clicked")
 
-            Log.d("Login Screen", "Scaffold Content")
+                    //Disable button and change text to Loading
+                    loginButtonText = "Loading"
+                    bEnabled = false
 
-            Spacer(Modifier.size(10.dp))
+                    //check if network connected
+                    if (DataManager.checkNetAccess(context)){
+                        //If connected to internet try to log in
+                        if (!loginViewModel.loginWithNet(sName,sPass,context,navController)){
 
-            ToySwapLogo()
-
-            Spacer(Modifier.size(10.dp))
-
-            TextField(
-                value = sName,
-                onValueChange = { sName = it },
-                label = { Text("Username: ") })
-
-            Spacer(modifier = Modifier.size(10.dp))
-
-            TextField(
-                value = sPass,
-                onValueChange = { sPass = it },
-                label = { Text("Password: ") },
-                visualTransformation = PasswordVisualTransformation()
-            )
-
-            Spacer(modifier = Modifier.size(40.dp))
-
-            if(!bEnabled) {
-                CircularProgressIndicator()
-            } else {
-
-
-                universalButton20sp(
-                    enabled = bEnabled,
-                    text = loginButtonText,
-                    onClick =
-                    {
-                        Log.d("Login Screen", "Login Button Clicked")
-
-                        //Disable button and change text to Loading
-                        loginButtonText = "Loading"
-                        bEnabled = false
-
-                        //Check if the user exists in our server
-                        var user: User? = loginViewModel.existingUserCheck(sName, sPass)
-                        if (user != null) {
-
-                            //Set Current user in AppManager
-                            loginViewModel.setCurrentUser(user)
-
-                            postUserVMFactory = UserToysViewModelFactory(user, context.application)
-
-                            val browseVM =
-                                ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
-                            val userVM =
-                                ViewModelProvider(
-                                    context,
-                                    postUserVMFactory
-                                ).get(UserToysViewModel::class.java)
-                            browseVM.currentUser = user
-                            Log.d("Login Screen", "Current User Set")
-
-                            //If it does, log in with that user
-                            loginViewModel.login(sName, sPass)
-                            navController.navigate(NavScreens.BrowseItemsScreen.route)
-//                            if (loginViewModel.login(sName,sPass)){
-//
-//                                Log.d("Login Screen","Nav to Browse Screen")
-//                                navController.navigate(NavScreens.BrowseItemsScreen.route)
-//                            } else {
-//
-//                                Toast.makeText(
-//                                    context,
-//                                    "Invalid Login",
-//                                    Toast.LENGTH_LONG).show()
-//                                loginButtonText = "Login"
-//                                bEnabled = true
-//                            }
-                        } else {
-
-                            //If it doesnt, reset the Screen
+                            //If we dont log in, reset screen
                             Toast.makeText(
                                 context,
                                 "Invalid Login",
@@ -216,23 +190,51 @@ fun LoginBody(navController: NavController){
                             Log.d("Login Screen", "Login Failed")
                         }
 
-                    },
+                    } else {
+                        //if not connected, use data store
+
+                        //Check if we had a stored value
+                        if(sStoredName.value != ""){
+
+                            //if the username and pass match the stored values
+                            if (sName == sStoredName.value && sPass == sStoredPass.value){
+
+                                //var postUserVMFactory = UserToysViewModelFactory(user, context.applicationContext as Application)
+
+                                navController.navigate(NavScreens.PostedItemListScreen.route)
+
+                            }
+                        }
+
+
+                    }
+                },
+            )
+
+            Spacer(modifier = Modifier.size(15.dp))
+
+            //Register row
+            Row {
+                Text (
+                    text = "New User? ",
+                    style = Project2Typography.body2
                 )
 
-                Spacer(modifier = Modifier.size(15.dp))
-
                 Text(
-                    text = "New User? Register",
+                    text = "Register",
                     modifier = Modifier
                         .clickable {
                             Log.d("Login Screen", "Register User Clicked")
 
                             navController.navigate(NavScreens.RegisterScreen.route)
                         },
-                    style = Project2Typography.body2
+                    style = Project2Typography.body2,
+                    color = Color.Blue
                 )
-            }
 
+            }
         }
+
+    }
 
 }

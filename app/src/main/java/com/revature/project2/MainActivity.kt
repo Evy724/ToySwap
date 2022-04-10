@@ -14,6 +14,10 @@ import com.revature.project2.model.AppManager
 import com.revature.project2.ui.theme.Project2Theme
 import com.revature.project2.view.nav.StartNav
 import com.revature.project2.viewmodel.SplashViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 //import com.revature.project2.view.nav.StartNav
 
@@ -31,9 +35,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         //val app = this.application
-        val appManager = AppManager
-        appManager.setApplication(this.application)
-        appManager.setActivity(this)
+        AppManager.Factory(this)
+        CoroutineScope(Dispatchers.IO).launch {
+            AppManager.loadUsers()
+        }
+//        appManager.setApplication(this.application)
+//        appManager.setActivity(this)
 
         //Constructor for the Splash screen
         installSplashScreen().apply {

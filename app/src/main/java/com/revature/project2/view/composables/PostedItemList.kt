@@ -1,5 +1,6 @@
 package com.revature.project2.view.composables
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -25,6 +26,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.revature.project2.MainActivity
 import com.revature.project2.R
+import com.revature.project2.model.AppManager
+import com.revature.project2.model.DataManager
 import com.revature.project2.ui.theme.BluishGreen
 import com.revature.project2.ui.theme.PurpleVariant
 import com.revature.project2.view.nav.NavScreens
@@ -38,10 +41,17 @@ fun PostedItemsScreen(navController: NavController)
 
     val scaffoldState = rememberScaffoldState()
     val context = LocalContext.current
+
+    var bConnected = DataManager.checkNetAccess(context)
+
     val userToysViewModel =
         ViewModelProvider(context as MainActivity).get(UserToysViewModel::class.java)
 
-    userToysViewModel.getUserOffers()
+    userToysViewModel.getUserToys(context)
+
+    if (DataManager.checkNetAccess(context)) {
+        userToysViewModel.getUserOffers()
+    }
 
 
     val offerlist = userToysViewModel.userTradeOffers
@@ -50,23 +60,16 @@ fun PostedItemsScreen(navController: NavController)
         floatingActionButton =
         {
             FloatingActionButton(
-                onClick = { navController.navigate(NavScreens.NewToyPostScreen.route)
+                onClick = {
+                    if (bConnected) {
+                        navController.navigate(NavScreens.NewToyPostScreen.route)
+                    } else {
+                        Toast.makeText(context,"Requires Net Connection",Toast.LENGTH_LONG).show()
+                    }
                 })
             {
                 Icon(Icons.Filled.Add,"")
             }},
-
-//        floatingActionButton =
-//        {
-//            FloatingActionButton(onClick =
-//            {
-//
-//            }
-//            )
-//            {
-//                Icon(Icons.Filled.Add,"")
-//            }
-//        },
         content =
         {
 
@@ -139,9 +142,11 @@ fun PostedItemsScreen(navController: NavController)
                             }
 
                             ToyCard(toy = item, bNotification = bNotice){
-                                userToysViewModel.toy = item
-                                        navController.navigate((NavScreens.ViewPostedToyScreen.route))
-                                //navController.navigate(NavScreens.ViewItemScreen.route)
+
+                                if(bConnected) {
+                                    userToysViewModel.toy = item
+                                    navController.navigate((NavScreens.ViewPostedToyScreen.route))
+                                }
                             }
                         }
                     }
@@ -178,6 +183,6 @@ fun PostedItemsScreen(navController: NavController)
                 
             }
         },
-        bottomBar = {BottomBar(navController = navController)}
+        bottomBar = {BottomBar(navController = navController, bConnected)}
     )
 }

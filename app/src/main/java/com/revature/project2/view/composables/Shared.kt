@@ -40,6 +40,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.filled.Info
 import coil.transform.CircleCropTransformation
 import com.revature.project2.model.AppManager
+import com.revature.project2.model.DataManager
 
 // Header for all screens
 @Composable
@@ -282,9 +283,8 @@ fun ToyCard(toy: ToyItem,bNotification:Boolean = false, onClick: () -> Unit)
  * button functionality not created yet
  */
 @Composable
-fun BottomBar(navController: NavController)
+fun BottomBar(navController: NavController, bConnected:Boolean = true)
 {
-    
     val selectedIndex = rememberSaveable { mutableStateOf(0) }
     BottomNavigation(
         elevation = 5.dp,
@@ -304,8 +304,10 @@ fun BottomBar(navController: NavController)
             selected = selectedIndex.value == 0,
             onClick = {
 
-                selectedIndex.value = 0
-                navController.navigate(NavScreens.BrowseItemsScreen.route)
+                if(bConnected) {
+                    selectedIndex.value = 0
+                    navController.navigate(NavScreens.BrowseItemsScreen.route)
+                }
             },
             icon = { Icon(
                 imageVector = Icons.Default.Search,
@@ -317,8 +319,10 @@ fun BottomBar(navController: NavController)
             selected = selectedIndex.value == 1,
             onClick = {
 
-                selectedIndex.value = 1
-                navController.navigate(NavScreens.PostedItemListScreen.route)
+                if(bConnected) {
+                    selectedIndex.value = 1
+                    navController.navigate(NavScreens.PostedItemListScreen.route)
+                }
             },
             icon = { Icon(
                 imageVector = Icons.Default.Add,
@@ -329,8 +333,10 @@ fun BottomBar(navController: NavController)
         BottomNavigationItem(
             selected = selectedIndex.value == 2,
             onClick = {
-                selectedIndex.value = 2
-                navController.navigate(NavScreens.ProfileScreen.route)
+                if(bConnected) {
+                    selectedIndex.value = 2
+                    navController.navigate(NavScreens.ProfileScreen.route)
+                }
             },
             icon = { Icon(
                 imageVector = Icons.Default.Person,
