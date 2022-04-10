@@ -23,18 +23,23 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import com.revature.project2.MainActivity
 import com.revature.project2.R
 import com.revature.project2.view.composables.BottomBar
 import com.revature.project2.view.composables.Header
 import com.revature.project2.view.composables.universalButton20sp
 import com.revature.project2.view.nav.NavScreens
+import com.revature.project2.viewmodel.ToyItemViewModel
+import com.revature.project2.viewmodel.TradeOffersViewModel
 
 @Composable
 fun AcceptTradeScreen(navController: NavController)
 {
     val scaffoldState = rememberScaffoldState()
     val context = LocalContext.current
+    val viewTradeVM = ViewModelProvider(context as MainActivity).get(TradeOffersViewModel::class.java)
     Scaffold(
         scaffoldState = scaffoldState,
         content =
