@@ -47,20 +47,13 @@ fun AcceptTradeScreen(navController: NavController)
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(
-                        brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                PurpleVariant,
-                                BluishGreen
-                            )
-                        )
-                    )
             )
             {
                 Header(text = "View Trade Offers")
                 ViewTradeOffersBody(navController = navController, userToysViewModel.userTradeOffers)
             }
+
+
         },
         bottomBar =
         {
@@ -97,7 +90,7 @@ fun ViewTradeOffersBody(navController: NavController, offerList:List<TradeOffer>
                 state = lazyState,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 50.dp),
+                    .absolutePadding(top = 10.dp, bottom = 55.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Top
             )

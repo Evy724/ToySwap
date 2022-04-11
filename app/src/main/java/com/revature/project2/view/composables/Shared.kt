@@ -39,6 +39,7 @@ import com.revature.project2.ui.theme.*
 import com.revature.project2.view.nav.NavScreens
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModelProvider
@@ -378,11 +379,11 @@ fun ToyCardWithButton(toy: ToyItem,buttonText:String, onClick:()->Unit)
 
     Card(
         modifier = Modifier
-        .padding(10.dp)
-        .fillMaxWidth()
-        .height(100.dp)
-        .wrapContentHeight()
-        .clickable { },
+            .padding(10.dp)
+            .fillMaxWidth()
+            .height(100.dp)
+            .wrapContentHeight()
+            .clickable { },
         shape = MaterialTheme.shapes.medium,
         elevation = 5.dp,
         backgroundColor = MaterialTheme.colors.surface)
@@ -437,10 +438,23 @@ fun AcceptOrDeclineTradeOffersToyCard(
     Card(
         modifier =
         Modifier
-            .height(550.dp)
+            .height(535.dp)
             .fillMaxWidth()
             .absolutePadding(bottom = 10.dp)
-            .clip(RoundedCornerShape(20.dp))
+            .padding(horizontal = 5.dp)
+            .border(
+                BorderStroke(
+                    3.dp,
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(
+                            PurpleVariant,
+                            BluishGreen
+                        )
+                    )
+                ),
+                shape = RoundedCornerShape(25.dp)
+            ),
+        shape = RoundedCornerShape(25.dp)
     )
     {
         Scaffold(
@@ -473,19 +487,23 @@ fun AcceptOrDeclineTradeOffersToyCard(
 
                         Spacer(modifier = Modifier.height(40.dp))
                         // Down arrow
+
                         Image(
                             painter = painterResource(id = R.drawable.down_arrow),
                             contentDescription = "Down arrow",
                             modifier = Modifier.size(70.dp),
-                            alignment = Alignment.BottomCenter
+                            alignment = Alignment.BottomCenter,
+
                         )
 
                         Spacer(modifier = Modifier.height(100.dp))
 
+                        Spacer(modifier = Modifier.height(20.dp))
+
                         // What you are trading box
                         Surface(
                             modifier = Modifier
-                                .height(70.dp)
+                                .height(60.dp)
                                 .width(100.dp),
                             border = BorderStroke(
                                 width = 2.dp,
@@ -494,14 +512,14 @@ fun AcceptOrDeclineTradeOffersToyCard(
                         )
                         {
                             Text(
-                                text = "What you \nare trading\n->",
+                                text = "Toy you \nare trading\n->",
                                 textAlign = TextAlign.Center,
                                 fontSize = 17.sp
                             )
                         }
 
 
-                        Spacer(modifier = Modifier.height(64.dp))
+                        Spacer(modifier = Modifier.height(60.dp))
                     }
 
                     // Middle column
@@ -519,10 +537,24 @@ fun AcceptOrDeclineTradeOffersToyCard(
                                     request = theirToy.sImagePath
                                 ),
                                 contentDescription = "Toy pic from the other user",
-                                modifier = Modifier.size(150.dp),
+                                modifier = Modifier
+                                    .size(150.dp)
+                                    .clip(shape = RoundedCornerShape(20.dp))
+                                    .border(
+                                        width = 3.dp,
+                                        brush = Brush.horizontalGradient(
+                                            colors = listOf(
+                                                TealGreen,
+                                                BluishGreen
+                                            )
+                                        ),
+                                        shape = RoundedCornerShape(20.dp)
+                                    ),
                                 alignment = Alignment.TopCenter
                             )
                         }
+
+                        Spacer(modifier = Modifier.height(20.dp))
 
                         // Toy pic for what you are trading
                         Surface()
@@ -530,8 +562,20 @@ fun AcceptOrDeclineTradeOffersToyCard(
                             Image(
                                 painter = rememberCoilPainter(request = yourToy.sImagePath),
                                 contentDescription = "Toy pic from you",
-                                modifier = Modifier.size(150.dp),
-                                alignment = Alignment.BottomCenter
+                                modifier = Modifier
+                                    .size(150.dp)
+                                    .clip(shape = RoundedCornerShape(20.dp))
+                                    .border(
+                                        width = 3.dp,
+                                        brush = Brush.horizontalGradient(
+                                            colors = listOf(
+                                                TealGreen,
+                                                BluishGreen
+                                            )
+                                        ),
+                                        shape = RoundedCornerShape(20.dp)
+                                    ),
+                                alignment = Alignment.BottomCenter,
                             )
                         }
                     }
@@ -556,13 +600,15 @@ fun AcceptOrDeclineTradeOffersToyCard(
                         )
                         {
                             Text(
-                                text = "What the \nother user \nis trading \n<-",
+                                text = "Toy being\noffered\nto you\n<-",
                                 textAlign = TextAlign.Center,
                                 fontSize = 17.sp
                             )
                         }
 
-                        Spacer(modifier = Modifier.height(70.dp))
+                        Spacer(modifier = Modifier.height(60.dp))
+
+                        Spacer(modifier = Modifier.height(20.dp))
 
                         // Up arrow
                         Image(
