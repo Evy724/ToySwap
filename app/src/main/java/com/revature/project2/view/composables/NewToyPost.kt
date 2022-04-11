@@ -29,7 +29,8 @@ import com.revature.project2.view.nav.NavScreens
 
 @Composable
 fun newToyPostScreen(navController: NavController){
-    Scaffold(bottomBar = {BottomBar(navController)}) {
+    Scaffold(bottomBar = {BottomBar(navController)},
+            topBar = {Header(text = "New Toy")}) {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
@@ -37,10 +38,10 @@ fun newToyPostScreen(navController: NavController){
         )
         {
 
-            screenTitle()
+            //screenTitle()
             inputToyName()
             toyDescription()
-            ageOfToy()
+            //ageOfToy()
             postToy(navController)
         }
     }
