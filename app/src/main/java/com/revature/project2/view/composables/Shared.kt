@@ -39,6 +39,7 @@ import com.revature.project2.ui.theme.*
 import com.revature.project2.view.nav.NavScreens
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.filled.Info
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModelProvider
 import coil.transform.CircleCropTransformation
@@ -375,7 +376,8 @@ fun ToyScaffold(sTitle:String,navController: NavController,  content:@Composable
 fun ToyCardWithButton(toy: ToyItem,buttonText:String, onClick:()->Unit)
 {
 
-    Card(modifier = Modifier
+    Card(
+        modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()
         .height(100.dp)
@@ -432,66 +434,408 @@ fun AcceptOrDeclineTradeOffersToyCard(
     val context = LocalContext.current
     val allToysVM = ViewModelProvider(context as MainActivity).get(AllToysViewModel::class.java)
 
-    Card(modifier = Modifier
-        .padding(10.dp)
-        .fillMaxWidth()
-        .height(100.dp)
-        .wrapContentHeight()
-        .clickable { },
-        shape = MaterialTheme.shapes.medium,
-        elevation = 5.dp,
-        backgroundColor = MaterialTheme.colors.surface)
+    Card(
+        modifier =
+        Modifier
+            .height(550.dp)
+            .fillMaxWidth()
+            .absolutePadding(bottom = 10.dp)
+            .clip(RoundedCornerShape(20.dp))
+    )
     {
-
-        Row(verticalAlignment = Alignment.Top)
-        {
-            val theirToy = allToysVM.getToyByID(id = offer.nOfferToyId)!!
-
-            // Their toy
-            Image(
-                painter = rememberCoilPainter(
-                    request = theirToy.sImagePath),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(100.dp)
-                    .padding(5.dp),
-                contentScale = ContentScale.Fit)
-
-            val yourToy = allToysVM.getToyByID(id = offer.nUserToyId)!!
-            // Your toy
-            Image(
-                painter = rememberCoilPainter(
-                    request = yourToy.sImagePath),
-                contentDescription = null,
-                modifier = Modifier
-                    .size(100.dp)
-                    .padding(5.dp),
-                contentScale = ContentScale.Fit)
-
-            Spacer(Modifier.size(5.dp))
-
-            Row()
+        Scaffold(
+            content =
             {
-                universalButton20sp(
-                    onClick =
+                val theirToy = allToysVM.getToyByID(id = offer.nOfferToyId)!!
+                val yourToy = allToysVM.getToyByID(id = offer.nUserToyId)!!
+
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Top,
+                )
+                {
+                    Spacer(modifier = Modifier.height(20.dp))
+
+                    Row(
+                        modifier =
+                        Modifier.padding(5.dp),
+                        verticalAlignment = Alignment.Top,
+                        horizontalArrangement = Arrangement.Center,
+                    )
                     {
 
-                        Toast.makeText(context,"Trade accepted",Toast.LENGTH_LONG).show()
-                        navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
-                    },
-                    enabled = true,
-                    text = "Accept",
-                )
-                universalButton20sp(
-                    onClick =
+                    // Left column
+                    Column(
+                        modifier = Modifier.padding(5.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    )
                     {
-                        Toast.makeText(context,"Trade declined",Toast.LENGTH_LONG).show()
-                        navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
-                    },
-                    enabled = true,
-                    text = "Decline"
+
+                        Spacer(modifier = Modifier.height(40.dp))
+                        // Down arrow
+                        Image(
+                            painter = painterResource(id = R.drawable.down_arrow),
+                            contentDescription = "Down arrow",
+                            modifier = Modifier.size(70.dp),
+                            alignment = Alignment.BottomCenter
+                        )
+
+                        Spacer(modifier = Modifier.height(100.dp))
+
+                        // What you are trading box
+                        Surface(
+                            modifier = Modifier
+                                .height(70.dp)
+                                .width(100.dp),
+                            border = BorderStroke(
+                                width = 2.dp,
+                                color = Color.White
+                            )
+                        )
+                        {
+                            Text(
+                                text = "What you \nare trading\n->",
+                                textAlign = TextAlign.Center,
+                                fontSize = 17.sp
+                            )
+                        }
+
+
+                        Spacer(modifier = Modifier.height(64.dp))
+                    }
+
+                    // Middle column
+                    Column(
+                        modifier = Modifier.padding(5.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    )
+                    {
+
+                        // Toy pic for what the other user is trading
+                        Surface()
+                        {
+                            Image(
+                                painter = rememberCoilPainter(
+                                    request = theirToy.sImagePath
+                                ),
+                                contentDescription = "Toy pic from the other user",
+                                modifier = Modifier.size(150.dp),
+                                alignment = Alignment.TopCenter
+                            )
+                        }
+
+                        // Toy pic for what you are trading
+                        Surface()
+                        {
+                            Image(
+                                painter = rememberCoilPainter(request = yourToy.sImagePath),
+                                contentDescription = "Toy pic from you",
+                                modifier = Modifier.size(150.dp),
+                                alignment = Alignment.BottomCenter
+                            )
+                        }
+                    }
+
+                    // Right column
+                    Column(
+                        modifier = Modifier.padding(5.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    )
+                    {
+                        Spacer(modifier = Modifier.height(40.dp))
+
+                        // What the other user is trading box
+                        Surface(
+                            modifier = Modifier
+                                .height(100.dp)
+                                .width(100.dp),
+                            border = BorderStroke(
+                                width = 2.dp,
+                                color = Color.White
+                            )
+                        )
+                        {
+                            Text(
+                                text = "What the \nother user \nis trading \n<-",
+                                textAlign = TextAlign.Center,
+                                fontSize = 17.sp
+                            )
+                        }
+
+                        Spacer(modifier = Modifier.height(70.dp))
+
+                        // Up arrow
+                        Image(
+                            painter = painterResource(id = R.drawable.up_arrow),
+                            contentDescription = "Up arrow",
+                            modifier = Modifier.size(70.dp),
+                            alignment = Alignment.TopCenter
+                        )
+                    }
+                }
+
+                Text(
+                    text = "Will you accept this trade?",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
                 )
+
+                Row(
+                    modifier = Modifier.padding(5.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                )
+                {
+                    // Left accept button
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally)
+                    {
+                        universalButton20sp(
+                            enabled = true,
+                            text = "Accept",
+                            onClick = {
+
+                                //Accept trade API call
+
+
+                                Toast.makeText(context,"Trade Accepted",Toast.LENGTH_LONG).show()
+                                navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
+
+                            },
+                        )
+                    }
+
+                    // Right decline button
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    )
+                    {
+                        universalButton20sp(
+                            enabled = true,
+                            text = "Decline",
+                            onClick = {
+
+                                //Decline Trade Api call
+
+
+                                Toast.makeText(context,"Trade Rejected",Toast.LENGTH_LONG).show()
+                                navController.popBackStack(NavScreens.BrowseItemsScreen.route,false)
+
+
+                            },
+                        )
+                    }
+                }
             }
-        }
-    }
+        },
+    )
 }
+
+
+
+
+
+//    Card(
+//        modifier = Modifier
+//            .padding(10.dp)
+////        .fillMaxWidth()
+////        .height(200.dp)
+//            .fillMaxSize()
+//            .wrapContentHeight(),
+//        shape = MaterialTheme.shapes.medium,
+//        elevation = 5.dp,
+//        backgroundColor = MaterialTheme.colors.surface
+//    )
+//    {
+//        Column(
+//            horizontalAlignment = Alignment.CenterHorizontally,
+//            verticalArrangement = Arrangement.Top,
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .background(
+//                    MaterialTheme.colors.surface,
+//                    RectangleShape
+//                )
+//        )
+//
+//        {
+//            Spacer(modifier = Modifier.height(20.dp))
+//
+//            Row(
+//                verticalAlignment = Alignment.Top
+//            )
+//            {
+//                Column(
+//                    horizontalAlignment = Alignment.CenterHorizontally,
+//                    verticalArrangement = Arrangement.Top,
+//                    modifier = Modifier
+//                        .fillMaxSize()
+//                        .background(
+//                            MaterialTheme.colors.surface,
+//                            RectangleShape
+//                        )
+//                )
+//                {
+//
+//                    Spacer(modifier = Modifier.height(20.dp))
+//
+//                    val theirToy = allToysVM.getToyByID(id = offer.nOfferToyId)!!
+//                    val yourToy = allToysVM.getToyByID(id = offer.nUserToyId)!!
+//
+//                    Row(
+//                        modifier =
+//                        Modifier.padding(5.dp),
+//                        verticalAlignment = Alignment.Top,
+//                        horizontalArrangement = Arrangement.Center,
+//                    )
+//                    {
+//                        // Left Column
+//
+//                        Spacer(modifier = Modifier.height(40.dp))
+//                        // Down arrow
+//                        Image(
+//                            painter = painterResource(id = R.drawable.down_arrow),
+//                            contentDescription = "Down arrow",
+//                            modifier = Modifier.size(70.dp),
+//                            alignment = Alignment.BottomCenter
+//                        )
+//
+//                        Spacer(modifier = Modifier.height(100.dp))
+//
+//                        // What you are trading box
+//                        Surface(
+//                            modifier = Modifier
+//                                .height(70.dp)
+//                                .width(100.dp),
+//                            border = BorderStroke(
+//                                width = 2.dp,
+//                                color = Color.White
+//                            )
+//                        )
+//                        {
+//                            Text(
+//                                text = "What you \nare trading\n->",
+//                                textAlign = TextAlign.Center,
+//                                fontSize = 17.sp
+//                            )
+//                        }
+//                    }
+//
+//                    // Middle column
+//                    Column(
+//                        modifier = Modifier.padding(5.dp),
+//                        horizontalAlignment = Alignment.CenterHorizontally
+//                    )
+//                    {
+//
+//                        // Toy pic for what the other user is trading
+//                        Surface()
+//                        {
+//                            // Their toy
+//                            Image(
+//                                painter = rememberCoilPainter(
+//                                    request = theirToy.sImagePath
+//                                ),
+//                                contentDescription = null,
+//                                modifier = Modifier
+//                                    .size(100.dp)
+//                                    .padding(5.dp),
+//                                contentScale = ContentScale.Fit
+//                            )
+//                        }
+//
+//                        // Toy pic for what you are trading
+//                        Surface()
+//                        {
+//                            val yourToy = allToysVM.getToyByID(id = offer.nUserToyId)!!
+//                            // Your toy
+//                            Image(
+//                                painter = rememberCoilPainter(
+//                                    request = yourToy.sImagePath
+//                                ),
+//                                contentDescription = null,
+//                                modifier = Modifier
+//                                    .size(100.dp)
+//                                    .padding(5.dp),
+//                                contentScale = ContentScale.Fit
+//                            )
+//                        }
+//                    }
+//
+//                    // Right column
+//                    Column(
+//                        modifier = Modifier.padding(5.dp),
+//                        horizontalAlignment = Alignment.CenterHorizontally
+//                    )
+//                    {
+//                        Spacer(modifier = Modifier.height(40.dp))
+//
+//                        // What the other user is trading box
+//                        Surface(
+//                            modifier = Modifier
+//                                .height(100.dp)
+//                                .width(100.dp),
+//                            border = BorderStroke(
+//                                width = 2.dp,
+//                                color = Color.White
+//                            )
+//                        )
+//                        {
+//                            Text(
+//                                text = "What the \nother user \nis trading \n<-",
+//                                textAlign = TextAlign.Center,
+//                                fontSize = 17.sp
+//                            )
+//                        }
+//
+//                        Spacer(modifier = Modifier.height(70.dp))
+//
+//                        // Up arrow
+//                        Image(
+//                            painter = painterResource(id = R.drawable.up_arrow),
+//                            contentDescription = "Up arrow",
+//                            modifier = Modifier.size(70.dp),
+//                            alignment = Alignment.TopCenter
+//                        )
+//                    }
+//
+//                    // Accept + Decline button column
+//                    Column(
+//                        modifier = Modifier.padding(5.dp),
+//                        horizontalAlignment = Alignment.CenterHorizontally
+//                    )
+//                    {
+//                        universalButton20sp(
+//                            onClick =
+//                            {
+//
+//                                Toast.makeText(context, "Trade accepted", Toast.LENGTH_LONG).show()
+//                                navController.popBackStack(
+//                                    NavScreens.BrowseItemsScreen.route,
+//                                    false
+//                                )
+//                            },
+//                            enabled = true,
+//                            text = "Accept",
+//                        )
+//                        universalButton20sp(
+//                            onClick =
+//                            {
+//                                Toast.makeText(context, "Trade declined", Toast.LENGTH_LONG).show()
+//                                navController.popBackStack(
+//                                    NavScreens.BrowseItemsScreen.route,
+//                                    false
+//                                )
+//                            },
+//                            enabled = true,
+//                            text = "Decline"
+//                        )
+//                    }
+//                }
+//            }
+//        }
+//    }
+}
+
