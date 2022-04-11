@@ -17,7 +17,8 @@ import java.util.concurrent.TimeUnit
  *
  * Contains call functions for our api
  */
-object RetrofitHelper {
+object RetrofitHelper
+{
 
     private val retrofit: Retrofit
 
@@ -63,6 +64,13 @@ object RetrofitHelper {
      * Retrieves the Toy service API for use in the API's repository
      */
     fun getAllToysService():ToysApiService{
+        return retrofit.create(ToysApiService::class.java)
+    }
+
+    /**
+     * Retrieves the User offers service API
+     */
+    fun getUserOffers(): ToysApiService{
         return retrofit.create(ToysApiService::class.java)
     }
 

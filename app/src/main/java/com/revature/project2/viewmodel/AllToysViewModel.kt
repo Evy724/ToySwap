@@ -40,6 +40,18 @@ class AllToysViewModel(): ViewModel()
     }
 
 
+    fun getToyByID(id: Int):ToyItem?
+    {
+        allToys.forEach()
+        {
+            if (it.id == id)
+            {
+                return it
+            }
+
+        }
+        return null
+    }
 
     /**
      * Function that loads all toys in from API
@@ -55,8 +67,8 @@ class AllToysViewModel(): ViewModel()
         //call the loading function from the repository and save to a variable
 
         //Check for type of response
-        when (val response = toyRepo.fetchAllToys()) {
-
+        when (val response = toyRepo.fetchAllToys())
+        {
             //When the response was Successful, Log it and store the retrieved
             //toys into our toy list
             is AllToysRepository.Result.Success-> {
@@ -64,7 +76,7 @@ class AllToysViewModel(): ViewModel()
                 Log.d("ViewModel", "Load Successful")
 
                 //allToys.addAll(response.toyList)
-                allToys = removeUserToys(response.toyList)
+                allToys = response.toyList //removeUserToys(response.toyList)
             }
             //If failed, log and continue
             is AllToysRepository.Result.Failure-> {

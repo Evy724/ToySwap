@@ -6,7 +6,8 @@ import com.revature.project2.model.api.ToysApiService
 /**
  * Repository for retrieving all toys from server
  */
-class AllToysRepository(val toyServiceApi: ToysApiService) {
+class AllToysRepository(val toyServiceApi: ToysApiService)
+{
 
     /**
      * Sealed class to determine the result of the api call
@@ -26,7 +27,8 @@ class AllToysRepository(val toyServiceApi: ToysApiService) {
      * Failed Result containing and exception
      *
      */
-    suspend fun fetchAllToys():Result{
+    suspend fun fetchAllToys():Result
+    {
 
         return try {
 

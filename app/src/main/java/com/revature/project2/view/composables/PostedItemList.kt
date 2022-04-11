@@ -49,7 +49,8 @@ fun PostedItemsScreen(navController: NavController)
 
     userToysViewModel.getUserToys(context)
 
-    if (DataManager.checkNetAccess(context)) {
+    if (DataManager.checkNetAccess(context))
+    {
         userToysViewModel.getUserOffers()
     }
 
