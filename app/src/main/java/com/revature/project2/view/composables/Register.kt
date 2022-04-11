@@ -32,7 +32,7 @@ fun Register(navController: NavController){
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally)
             {
-                Spacer(Modifier.size(60.dp))
+                Spacer(Modifier.size(30.dp))
                 Card(shape = RoundedCornerShape(25.dp), elevation = 20.dp) {
                     Column(
                         modifier = Modifier.fillMaxSize(fraction = 0.9F),
@@ -43,10 +43,10 @@ fun Register(navController: NavController){
                         var sPassConfirm by rememberSaveable { mutableStateOf("") }
                         var sEmail by rememberSaveable { mutableStateOf("") }
 
-                        Spacer(Modifier.size(60.dp))
+                        Spacer(Modifier.size(30.dp))
                         Text(text = "Create New Account", fontSize = 30.sp,
                             fontWeight = FontWeight.Medium,color=Purple200)
-                        Spacer(Modifier.size(60.dp))
+                        Spacer(Modifier.size(30.dp))
 
                         TextField(
                             modifier=Modifier.padding(10.dp) ,
