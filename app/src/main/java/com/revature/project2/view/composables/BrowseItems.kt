@@ -28,6 +28,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import com.revature.project2.MainActivity
 import com.revature.project2.R
+import com.revature.project2.model.AppManager
 import com.revature.project2.model.api.alltoys.ToyItem
 import com.revature.project2.ui.theme.*
 import com.revature.project2.view.nav.NavScreens
@@ -138,10 +139,13 @@ fun BrowseItemsBody(navController: NavController, toyList:List<ToyItem>)
 
                     items(toyList){ toy->
                         Log.d("Browse Screen","Lazy Column call")
-                        ToyCard(toy = toy){
-                            val viewVM = ViewModelProvider(context as MainActivity).get(ToyItemViewModel::class.java)
-                            viewVM.toy = toy
-                            navController.navigate(NavScreens.ViewItemScreen.route)
+                        if(toy.posterId != AppManager.currentUser.nUserId) {
+                            ToyCard(toy = toy) {
+                                val viewVM =
+                                    ViewModelProvider(context as MainActivity).get(ToyItemViewModel::class.java)
+                                viewVM.toy = toy
+                                navController.navigate(NavScreens.ViewItemScreen.route)
+                            }
                         }
                     }
                 }
