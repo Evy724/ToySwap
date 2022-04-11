@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -20,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -46,14 +48,23 @@ fun EditProfileScreen(navController: NavController){
         {
             Column(
                 modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally)
+                horizontalAlignment = Alignment.CenterHorizontally,
+            )
             {
-                Spacer(Modifier.size(10.dp))
-                Card(shape = RoundedCornerShape(25.dp), elevation = 20.dp) {
+                Spacer(Modifier.height(10.dp))
+                Card(
+                    shape = RoundedCornerShape(10.dp),
+                    elevation = 20.dp,
+                    modifier = Modifier.padding(horizontal = 10.dp)
+                )
+                {
                     Column(
-                        modifier = Modifier.fillMaxSize(fraction = 0.9F),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
+                        modifier = Modifier
+                            .fillMaxSize(fraction = 0.9F)
+                            .padding(vertical = 20.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    )
+                    {
                         var sName by rememberSaveable { mutableStateOf("") }
                         var sPass by rememberSaveable { mutableStateOf("") }
                         var sPassConfirm by rememberSaveable { mutableStateOf("") }
@@ -63,18 +74,20 @@ fun EditProfileScreen(navController: NavController){
                         val browseViewModel = ViewModelProvider(context).get(AllToysViewModel::class.java)
 
                         ChangeImage()
-
+                        Modifier.height(30.dp)
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(start = 4.dp, end = 4.dp),
                             verticalAlignment = Alignment.CenterVertically
-                        ) {
+                        )
+                        {
                             Text(
                                 text = "Username:",
                                 modifier = Modifier
                                     .width(100.dp),
-                                color = Purple200
+                                color = Purple200,
+                                textAlign = TextAlign.Center
                             )
                             TextField(
                                 value = browseViewModel.currentUser!!.sName,
@@ -82,7 +95,8 @@ fun EditProfileScreen(navController: NavController){
                                 colors = TextFieldDefaults.textFieldColors(
                                     backgroundColor = Color.Transparent,
                                     textColor = Purple200
-                                )
+                                ),
+                                modifier = Modifier.width(210.dp)
                             )
                         }
                         Spacer(modifier = Modifier.size(10.dp))
@@ -96,7 +110,8 @@ fun EditProfileScreen(navController: NavController){
                             Text(
                                 text = "Password:",
                                 modifier = Modifier.width(100.dp),
-                                color = Purple200
+                                color = Purple200,
+                                textAlign = TextAlign.Center
                             )
                             TextField(
                                 value = browseViewModel.currentUser!!.sPass,
@@ -104,7 +119,8 @@ fun EditProfileScreen(navController: NavController){
                                 colors = TextFieldDefaults.textFieldColors(
                                     backgroundColor = Color.Transparent,
                                     textColor = Purple200
-                                )
+                                ),
+                                modifier = Modifier.width(210.dp)
                             )
                         }
                         Spacer(modifier = Modifier.size(10.dp))
@@ -114,11 +130,13 @@ fun EditProfileScreen(navController: NavController){
                                 .fillMaxWidth()
                                 .padding(start = 4.dp, end = 4.dp),
                             verticalAlignment = Alignment.CenterVertically
-                        ) {
+                        )
+                        {
                             Text(
                                 text = "Confirm Password:",
                                 modifier = Modifier.width(100.dp),
-                                color = Purple200
+                                color = Purple200,
+                                textAlign = TextAlign.Center
                             )
                             TextField(
                                 value = sPassConfirm,
@@ -126,7 +144,8 @@ fun EditProfileScreen(navController: NavController){
                                 colors = TextFieldDefaults.textFieldColors(
                                     backgroundColor = Color.Transparent,
                                     textColor = Purple200
-                                )
+                                ),
+                                modifier = Modifier.width(210.dp)
                             )
                         }
                         Spacer(modifier = Modifier.size(10.dp))
@@ -136,11 +155,13 @@ fun EditProfileScreen(navController: NavController){
                                 .fillMaxWidth()
                                 .padding(start = 4.dp, end = 4.dp),
                             verticalAlignment = Alignment.CenterVertically
-                        ) {
+                        )
+                        {
                             Text(
                                 text = "Email:",
                                 modifier = Modifier.width(100.dp),
-                                color = Purple200
+                                color = Purple200,
+                                textAlign = TextAlign.Center
                             )
                             TextField(
                                 value = browseViewModel.currentUser!!.sEmail,
@@ -148,10 +169,12 @@ fun EditProfileScreen(navController: NavController){
                                 colors = TextFieldDefaults.textFieldColors(
                                     backgroundColor = Color.Transparent,
                                     textColor = Purple200
-                                )
+                                ),
+                                modifier = Modifier.width(210.dp)
                             )
                         }
-                        Spacer(modifier = Modifier.size(10.dp))
+
+                        Spacer(modifier = Modifier.size(30.dp))
 
                         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
                             universalButton20sp(
@@ -159,7 +182,7 @@ fun EditProfileScreen(navController: NavController){
                                 text = "Save",
                                 onClick = {
 //                                    if (checkCredentials(sName,sPass,sPassConfirm,sEmail)) {
-                                        Toast.makeText(context, "Credentials saved.", Toast.LENGTH_LONG).show()
+                                    Toast.makeText(context, "Credentials saved.", Toast.LENGTH_LONG).show()
 //                                    }
                                 }
                             )
