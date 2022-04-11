@@ -7,5 +7,5 @@ data class Review(
     @SerializedName("review_id") val review_id: Int,
     @SerializedName("from") val user: User,
     @SerializedName("message") val description: String,
-    @SerializedName("rating") val rating: Int
+    @SerializedName("rating") var rating: Int
 )

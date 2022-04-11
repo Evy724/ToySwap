@@ -15,12 +15,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class TradeViewModel: ViewModel(){
+class TradeViewModel: ViewModel()
+{
     var theirToy:ToyItem?=null
     var msgFromTVM:String=""
 
-    fun getSendTrade_msg(_tradeRequestID:String,_tradeRequest_msg:String){
-        viewModelScope.launch(Dispatchers.IO) {
+    fun getSendTrade_msg(_tradeRequestID:String,_tradeRequest_msg:String)
+    {
+        viewModelScope.launch(Dispatchers.IO)
+        {
            try {
                val sendTradeOfferService=RetrofitHelper.getAllToysService()
                val responseService=sendTradeOfferService.getSendTradeOffer_msg(SendTrade_Request_API(tradeRequestID =_tradeRequestID,

@@ -1,26 +1,20 @@
 package com.revature.project2.view.composables
 
-import android.view.RoundedCorner
 import android.widget.Toast
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.Arrangement.Absolute.Center
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.revature.project2.view.nav.NavScreens
-import com.revature.project2.viewmodel.AllToysViewModel
-import java.time.format.TextStyle
 
 //@Composable
 //fun postNewToy(){
@@ -113,10 +107,5 @@ fun postToy(navController: NavController)
             navController.popBackStack(
                 NavScreens.BrowseItemsScreen.route,false
             ) },
-        modifier = Modifier
-            .padding(10.dp)
-            .fillMaxWidth()
-            .height(100.dp)
-            .wrapContentHeight(),
     )
 }

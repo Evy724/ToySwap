@@ -10,15 +10,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.revature.project2.ui.theme.Project2Typography
 import com.revature.project2.ui.theme.Purple200
-import com.revature.project2.ui.theme.Purple500
-import com.revature.project2.ui.theme.TealGreen
 import com.revature.project2.view.nav.NavScreens
 
 @Composable
@@ -36,7 +32,7 @@ fun Register(navController: NavController){
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally)
             {
-                Spacer(Modifier.size(60.dp))
+                Spacer(Modifier.size(30.dp))
                 Card(shape = RoundedCornerShape(25.dp), elevation = 20.dp) {
                     Column(
                         modifier = Modifier.fillMaxSize(fraction = 0.9F),
@@ -47,10 +43,10 @@ fun Register(navController: NavController){
                         var sPassConfirm by rememberSaveable { mutableStateOf("") }
                         var sEmail by rememberSaveable { mutableStateOf("") }
 
-                        Spacer(Modifier.size(60.dp))
+                        Spacer(Modifier.size(30.dp))
                         Text(text = "Create New Account", fontSize = 30.sp,
                             fontWeight = FontWeight.Medium,color=Purple200)
-                        Spacer(Modifier.size(60.dp))
+                        Spacer(Modifier.size(30.dp))
 
                         TextField(
                             modifier=Modifier.padding(10.dp) ,
@@ -92,10 +88,7 @@ fun Register(navController: NavController){
                                     navController.navigate(NavScreens.LoginScreen.route)
                                 }
 
-                            },
-                            modifier = Modifier
-                                .padding(10.dp)
-                                .fillMaxWidth(.5f)
+                            }
                         )
                     }
                 }
