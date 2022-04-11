@@ -60,7 +60,8 @@ fun ViewItemScreen(
         {
 
             // Toy image
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
+            Box(modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.TopCenter) {
                 Column() {
 //                        Text(
 //                            viewVM.toy!!.sName,

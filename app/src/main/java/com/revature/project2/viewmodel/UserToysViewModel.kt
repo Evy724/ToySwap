@@ -78,4 +78,14 @@ class UserToysViewModel(/*val user:User, val app:Application*/): ViewModel() {
 
     }
 
+    fun checkToyHasOfferById(id:Int):Boolean{
+
+        for (userTradeOffer in userTradeOffers) {
+            if ( userTradeOffer.nUserToyId == id){
+                return true
+            }
+        }
+        return false
+    }
+
 }

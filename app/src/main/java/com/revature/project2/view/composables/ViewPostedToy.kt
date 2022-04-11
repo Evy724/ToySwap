@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,6 +16,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.platform.LocalContext
@@ -29,6 +31,7 @@ import com.google.accompanist.coil.rememberCoilPainter
 import com.revature.project2.MainActivity
 import com.revature.project2.R
 import com.revature.project2.ui.theme.Purple200
+import com.revature.project2.ui.theme.PurpleVariant
 import com.revature.project2.ui.theme.Teal200
 import com.revature.project2.ui.theme.TealGreen
 import com.revature.project2.view.nav.NavScreens
@@ -42,7 +45,8 @@ fun viewPostedToyScreen(navController: NavController)
     val userToysViewModel = ViewModelProvider(context as MainActivity).get(UserToysViewModel::class.java)
 
 
-    Scaffold(bottomBar = { BottomBar(navController) }, topBar = {Header(text = userToysViewModel.toy?.sName?:"My Toy")})
+    Scaffold(bottomBar = { BottomBar(navController) },
+        topBar = {Header(text = userToysViewModel.toy?.sName?:"My Toy")})
     {
         Column(
             modifier = Modifier
@@ -63,17 +67,20 @@ fun viewPostedToyScreen(navController: NavController)
             Card(modifier = Modifier.fillMaxSize(),
                 shape = RoundedCornerShape(25.dp)) {
                 Column(modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
+                    verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally)
                 {
                     postedToyImage(userToysViewModel)
                     screenTitlePostedToy(userToysViewModel)
                     postedToyDescription(userToysViewModel)
 
+                    Spacer(Modifier.size(10.dp))
+
                     //Temp if, should check if trades are available for this toy
-                    if(true)
+                    if(userToysViewModel.checkToyHasOfferById(userToysViewModel.toy?.id!!))
                     {
                         seeTradeRequestsOnItem(navController,userToysViewModel)
+                        Spacer(Modifier.size(10.dp))
                     }
                     removePost(navController,userToysViewModel)
                 }
@@ -97,13 +104,35 @@ fun screenTitlePostedToy(userToysViewModel:UserToysViewModel) {
 }
 @Composable
 fun postedToyImage(userToysViewModel:UserToysViewModel) {
-    Image(
+
+        Image(
+            painter = rememberCoilPainter(
+                request = userToysViewModel.toy!!.sImagePath),
+            contentDescription = null,
+            Modifier
+                .fillMaxWidth()
+                .clip(shape = RoundedCornerShape(10.dp))
+                .border(
+                    width = 4.dp,
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(
+                            Purple200,
+                            PurpleVariant
+                        )
+                    ),
+                    shape = RoundedCornerShape(10.dp)
+                )
+        )
+
+
+   /* Image(
         modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .clip(shape = RoundedCornerShape(10.dp))
+            *//*.wrapContentHeight()*//*,
         painter = rememberCoilPainter(request = userToysViewModel.toy!!.sImagePath),
-        contentDescription = null)
+        contentDescription = null)*/
 }
 @Composable
 fun postedToyDescription(userToysViewModel:UserToysViewModel) {
@@ -116,26 +145,29 @@ fun postedToyDescription(userToysViewModel:UserToysViewModel) {
 
 @Composable
 fun seeTradeRequestsOnItem(navController: NavController,userToysViewModel:UserToysViewModel) {
-    Button(modifier = Modifier
+    universalButton20sp(/*modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()
         .height(100.dp)
-        .wrapContentHeight(),
-        shape = RoundedCornerShape(25),
+        .wrapContentHeight(),*//*
+        shape = RoundedCornerShape(25),*/
         onClick = {
 
             //Send toy to trade request screen and navigate
             navController.navigate(NavScreens.AcceptTradeScreen.route)
-        })
-    {
+        },
+        text = "Trade Offers",
+        enabled = true
+    )
+  /*  {
         Text(
             text = "Trade Offers",
             fontSize = 15.sp,
             textAlign = TextAlign.Center
         )
-    }
+    }*/
 }
-    @Composable
+/*    @Composable
 fun seeTradeRequestsOnItem(userToysViewModel:UserToysViewModel)
 {
     universalButton20sp(
@@ -146,19 +178,19 @@ fun seeTradeRequestsOnItem(userToysViewModel:UserToysViewModel)
             .wrapContentHeight(),
         enabled = true,
         text ="Trade Offers",
-        onClick = { /*TODO*/ }
+        onClick = { *//*TODO*//* }
     )
-}
+}*/
 
 @Composable
 fun removePost(navController: NavController,userToysViewModel:UserToysViewModel) {
 
     val context = LocalContext.current
-    universalButton20sp(modifier = Modifier
+    universalButton20sp(/*modifier = Modifier
         .padding(10.dp)
         .fillMaxWidth()
         .height(100.dp)
-        .wrapContentHeight(),
+        .wrapContentHeight(),*/
         text = "Remove Post",
         enabled = true,
         onClick = {
