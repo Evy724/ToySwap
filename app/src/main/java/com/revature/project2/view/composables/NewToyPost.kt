@@ -71,7 +71,7 @@ fun newToyPostScreen(navController: NavController) {
             )
             {
 
-                screenTitle()
+                Header(text = "Browse Toys")
                 inputToyName()
                 toyDescription()
                 ageOfToy()
@@ -86,6 +86,7 @@ fun screenTitle() {
     Text("New Toy Post", fontSize = 40.sp,color = Color.White, modifier = Modifier
         .padding(10.dp)
         .wrapContentHeight(), textAlign = TextAlign.Center)
+
 }
 
 @Composable
