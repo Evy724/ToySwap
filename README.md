@@ -1,5 +1,7 @@
 # Toy Swap
 
+![title](https://user-images.githubusercontent.com/92387279/163457119-896440f5-6fb4-4b85-9192-5b48b0524a5c.png)
+
 ## Project Description
 
 Toy Swap is an app for uploading and exchanging unused or unwanted toys. Users make an account, upload their currently owned toys, browse others' toys they have posted, and select which item they would like to trade for as well as which they are wanting to trade. The user can create their own profile with custom statistics, choosing their own picture from their photo gallery, and see their items as well as reviews from previous trades.
